@@ -1,0 +1,24 @@
+{
+  "name": "gob",
+  "version": "1.0.0",
+  "description": "Landing page institucional do programa **BASTA!**, o maior ecossistema de educação, prevenção e formação contra violência doméstica do Brasil. O projeto atua em escolas com livros didáticos, aplicativo de segurança e formação especializada para profissionais da educação.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://eticadeveloper2025@github.com/eticadeveloper2025/Gob.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/eticadeveloper2025/Gob/issues"
+  },
+  "homepage": "https://github.com/eticadeveloper2025/Gob#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.58.2",
+    "http-server": "^14.1.1"
+  }
+}

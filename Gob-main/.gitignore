@@ -1,0 +1,38 @@
+# Dependencies
+node_modules/
+package-lock.json
+
+# Playwright
+test-results/
+playwright-report/
+playwright/.cache/
+*.zip
+
+# Screenshots e snapshots
+tests/**/*-snapshots/
+tests/**/*-actual.png
+tests/**/*-diff.png
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Env / Credenciais
+.env
+.env.local
+env
+zap-backend/.env
+
+# PDFs (design mockups, não fazem parte do site)
+*.pdf

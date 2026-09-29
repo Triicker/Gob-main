@@ -1,0 +1,780 @@
+<script src="https://cdn.amcharts.com/lib/4/core.js"></script>
+<script src="https://cdn.amcharts.com/lib/4/maps.js"></script>
+<script src="https://cdn.amcharts.com/lib/4/geodata/brazilLow.js"></script>
+<script src="https://cdn.amcharts.com/lib/4/geodata/brazilHigh.js"></script>
+<script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
+
+<style>
+  body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background-color: #FFF8EE;
+    font-family: sans-serif;
+  }
+     .title-section {
+            text-align: center;
+            margin-bottom: 0;
+            padding: 1rem 16px;
+            background-color: #FFF8EE;
+        }
+
+        .title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #590061;
+            margin-bottom: 8px;
+        }
+
+        .title-underline {
+            max-width: 29rem;
+            width: 90%;
+            height: 4px;
+            background-color: #590061;
+            margin: 0 auto 12px;
+        }
+
+         .subtitle {
+            color: #590061;
+            font-size: 0.9rem;
+            margin: 0 0 24px 0;
+        }
+  #main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 12px;
+  }
+  #chartdiv {
+    width: 95vw;
+    height: 68vw;
+    min-height: 300px;
+    max-width: 1000px;
+    max-height: 70vh;
+    margin-bottom: 24px;
+  }
+  #infocard {
+    width: 95vw;
+    max-width: 600px;
+    border-radius: 1.5rem;
+    padding: 1.5rem;
+    margin-top: 0;
+    display: none; /* Initially hidden */
+    text-align: center;
+    box-sizing: border-box;
+  }
+
+  .municipal-section-title {
+    font-size: 1.3em;
+    font-weight: bold;
+    margin: 2.5rem 0 1.5rem;
+    color: #590061;
+    text-align: center;
+    border-top: 2px solid #590061;
+    padding-top: 1rem;
+  }
+
+  .municipal-rep-card {
+    margin: 1.5rem auto 2rem;
+    background: #fff;
+    border-radius: 1.5rem;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    padding: 1.5rem;
+    text-align: center;
+    width: 100%;
+    max-width: 600px;
+    box-sizing: border-box;
+  }
+
+  .state-title {
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #590061;
+    text-transform: uppercase;
+    margin-bottom: 0.3rem;
+  }
+
+  .state-name {
+    font-size: 1.3em;
+    font-weight: bold;
+    color: #C1088A;
+    text-transform: uppercase;
+    margin-bottom: 0.8rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 3px solid #590061;
+  }
+
+  .photo-container {
+    display: inline-block;
+    padding: 6px;
+    background: linear-gradient(135deg, #590061, #F5C518);
+    border-radius: 50%;
+    margin: 1.5rem auto;
+  }
+
+  .municipal-photo-img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+    border: 4px solid #fff;
+  }
+
+  .municipal-photo-placeholder {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background-color: #ccc;
+    margin: 1rem auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2em;
+    color: #fff;
+  }
+
+  .municipal-name {
+    font-size: 1em;
+    font-weight: normal;
+    color: #333;
+    margin: 0.5rem 0 0.3rem;
+  }
+
+  .municipal-city {
+    font-size: 0.9em;
+    color: #666;
+    margin-bottom: 0.5rem;
+  }
+
+  .municipal-profile {
+    color: #888;
+    font-size: 0.85em;
+    margin-bottom: 1rem;
+  }
+
+  .municipal-description {
+    font-size: 0.88em;
+    color: #555;
+    padding: 0 1rem;
+    line-height: 1.5;
+    margin-bottom: 1.2rem;
+  }
+
+  .know-more-link {
+    color: #C1088A;
+    font-size: 0.95em;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 1rem;
+    cursor: pointer;
+  }
+
+  .know-more-link:hover {
+    text-decoration: underline;
+  }
+
+
+
+
+
+
+</style>
+
+<div id="main-container">
+
+       <!-- Title Section -->
+        <div class="title-section">
+            <h1 class="title" data-i18n="map.title">Embaixadoras</h1>
+            <div class="title-underline"></div>
+            <p class="subtitle" data-i18n="map.subtitle">embaixadoras do projeto Basta nas cidades:</p>
+        </div>
+
+    <div id="chartdiv"></div>
+    <div id="infocard"></div>
+</div>
+
+
+
+<script>
+ am4core.useTheme(am4themes_animated);
+var chart = am4core.create("chartdiv", am4maps.MapChart);
+chart.geodata = am4geodata_brazilLow;
+
+// Disable zoom and drag for mobile
+chart.maxZoomLevel = 1;
+chart.minZoomLevel = 1;
+chart.chartContainer.wheelable = false;
+chart.chartContainer.draggable = false;
+chart.zoomControl = new am4maps.ZoomControl();
+chart.zoomControl.disabled = true;
+
+var polygonSeries = chart.series.push(new am4maps.MapPolygonSeries());
+
+polygonSeries.useGeodata = true;
+
+// Updated data structure
+polygonSeries.data = [
+  {
+    id: "BR-AC",
+    uf: "Acre",
+    cidade: "Embaixadora Estadual",
+    nome: "Amanda Sena",
+    perfil: "Representante Comercial",
+    foto: "img/portrait-beautiful-woman-1.png",
+    municipais: [
+      {
+        cidade: "Cruzeiro do Sul",
+        nome: "Ana Clara",
+        perfil: "Consultora",
+        foto: "img/portrait-beautiful-brazilian-woman-with-curly-hair-smiling.png"
+      },
+      {
+        cidade: "Sena Madureira",
+        nome: "Joana Lima",
+        perfil: "Distribuidora Local",
+        foto: "img/portrait-beautiful-brazilian-woman-with-curly-hair-smiling.png"
+      }
+    ]
+  },
+  {
+    id: "BR-AL",
+    uf: "Alagoas",
+    cidade: "Embaixador(a) Estadual", // Pode ser "Maceió" se for a sede
+    nome: "", // Preencher nome
+    perfil: "", // Preencher perfil
+    foto: "", // Preencher URL da foto
+    municipais: [
+      {
+        cidade: "Arapiraca",
+        nome: "", // Preencher nome
+        perfil: "", // Preencher perfil
+        foto: "" // Preencher URL da foto
+      },
+      {
+        cidade: "Palmeira dos Índios",
+        nome: "", // Preencher nome
+        perfil: "", // Preencher perfil
+        foto: "" // Preencher URL da foto
+      }
+    ]
+  },
+  {
+    id: "BR-AM",
+    uf: "Amazonas",
+    cidade: "Embaixador(a) Estadual",
+    nome: "",
+    perfil: "",
+    foto: "",
+    municipais: [
+      {
+        cidade: "Manaus",
+        nome: "",
+        perfil: "",
+        foto: ""
+      }
+    ]
+  },
+  {
+    id: "BR-AP",
+    uf: "Amapá",
+    cidade: "Embaixador(a) Estadual",
+    nome: "",
+    perfil: "",
+    foto: "",
+    municipais: [
+      {
+        cidade: "Macapá",
+        nome: "",
+        perfil: "",
+        foto: ""
+      }
+    ]
+  },
+  {
+    id: "BR-BA",
+    uf: "Bahia",
+    cidade: "Embaixadora Estadual",
+    nome: "Carol Silva Andrade",
+    perfil: "@Carol.Silva",
+    foto: "img/portrait-beautiful-brazilian-woman-with-curly-hair-smiling.png",
+    municipais: [
+      {
+        cidade: "Salvador",
+        nome: "Ana Costa",
+        perfil: "@ana.costa",
+        foto: "img/portrait-beautiful-brazilian-woman-with-curly-hair-smiling.png"
+      },
+      {
+        cidade: "Feira de Santana",
+        nome: "Lúcia Mendes",
+        perfil: "@lucia.mendes",
+        foto: "img/portrait-beautiful-brazilian-woman-with-curly-hair-smiling.png"
+      }
+    ]
+  },
+  {
+    id: "BR-CE",
+    uf: "Ceará",
+    cidade: "Embaixador(a) Estadual",
+    nome: "",
+    perfil: "",
+    foto: "img/portrait-beautiful-woman-1.png",
+    municipais: [
+      {
+        cidade: "Fortaleza",
+        nome: "",
+        perfil: "",
+        foto: "img/portrait-beautiful-woman-1.png"
+      }
+    ]
+  },
+  {
+    id: "BR-DF",
+    uf: "Distrito Federal",
+    cidade: "Embaixador(a) Estadual",
+    nome: "",
+    perfil: "",
+    foto: "img/portrait-beautiful-woman-1.png",
+    municipais: [
+      {
+        cidade: "Brasília",
+        nome: "",
+        perfil: "",
+        foto: "img/portrait-beautiful-woman-1.png"
+      }
+    ]
+  },
+  {
+    id: "BR-ES",
+    uf: "Espírito Santo",
+    cidade: "Embaixador(a) Estadual",
+    nome: "",
+    perfil: "",
+    foto: "img/portrait-beautiful-woman-1.png",
+    municipais: [
+      {
+        cidade: "Vitória",
+        nome: "",
+        perfil: "",
+        foto: "img/portrait-beautiful-woman-1.png"
+      }
+    ]
+  },
+  {
+    id: "BR-GO",
+    uf: "Goiás",
+    cidade: "Embaixador(a) Estadual",
+    nome: "",
+    perfil: "",
+    foto: "img/portrait-beautiful-woman-1.png",
+    municipais: [
+      {
+        cidade: "Goiânia",
+        nome: "",
+        perfil: "",
+        foto: "img/portrait-beautiful-woman-1.png"
+      }
+    ]
+  },
+  {
+    id: "BR-MA",
+    uf: "Maranhão",
+    cidade: "Embaixador(a) Estadual",
+    nome: "",
+    perfil: "",
+    foto: "img/portrait-beautiful-woman-1.png",
+    municipais: [
+      {
+        cidade: "São Luís",
+        nome: "",
+        perfil: "",
+        foto: "img/portrait-beautiful-woman-1.png"
+      }
+    ]
+  },
+  {
+    id: "BR-MG",
+    uf: "Minas Gerais",
+    cidade: "Embaixador(a) Estadual",
+    nome: "",
+    perfil: "",
+    foto: "img/portrait-beautiful-woman-1.png",
+    municipais: [
+      {
+        cidade: "Belo Horizonte",
+        nome: "",
+        perfil: "",
+        foto: "img/portrait-beautiful-woman-1.png"
+      }
+    ]
+  },
+  {
+    id: "BR-MS",
+    uf: "Mato Grosso do Sul",
+    cidade: "Embaixador(a) Estadual",
+    nome: "",
+    perfil: "",
+    foto: "img/portrait-beautiful-woman-1.png",
+    municipais: [
+      {
+        cidade: "Campo Grande",
+        nome: "",
+        perfil: "",
+        foto: "img/portrait-beautiful-woman-1.png"
+      }
+    ]
+  },
+  {
+    id: "BR-MT",
+    uf: "Mato Grosso",
+    cidade: "Embaixador(a) Estadual",
+    nome: "",
+    perfil: "",
+    foto: "img/portrait-beautiful-woman-1.png",
+    municipais: [
+      {
+        cidade: "Cuiabá",
+        nome: "",
+        perfil: "",
+        foto: "img/portrait-beautiful-woman-1.png"
+      }
+    ]
+  },
+  {
+    id: "BR-PA",
+    uf: "Pará",
+    cidade: "Embaixador(a) Estadual",
+    nome: "",
+    perfil: "",
+    foto: "img/portrait-beautiful-woman-1.png",
+    municipais: [
+      {
+        cidade: "Belém",
+        nome: "",
+        perfil: "",
+        foto: "img/portrait-beautiful-woman-1.png"
+      }
+    ]
+  },
+  {
+    id: "BR-PB",
+    uf: "Paraíba",
+    cidade: "Embaixador(a) Estadual",
+    nome: "",
+    perfil: "",
+    foto: "img/portrait-beautiful-woman-1.png",
+    municipais: [
+      {
+        cidade: "João Pessoa",
+        nome: "",
+        perfil: "",
+        foto: "img/portrait-beautiful-woman-1.png"
+      }
+    ]
+  },
+  {
+    id: "BR-PE",
+    uf: "Pernambuco",
+    cidade: "Embaixador(a) Estadual",
+    nome: "",
+    perfil: "",
+    foto: "img/portrait-beautiful-woman-1.png",
+    municipais: [
+      {
+        cidade: "Recife",
+        nome: "",
+        perfil: "",
+        foto: "img/portrait-beautiful-woman-1.png"
+      }
+    ]
+  },
+  {
+    id: "BR-PI",
+    uf: "Piauí",
+    cidade: "Embaixador(a) Estadual",
+    nome: "",
+    perfil: "",
+    foto: "img/portrait-beautiful-woman-1.png",
+    municipais: [
+      {
+        cidade: "Teresina",
+        nome: "",
+        perfil: "",
+        foto: "img/portrait-beautiful-woman-1.png"
+      }
+    ]
+  },
+  {
+    id: "BR-PR",
+    uf: "Paraná",
+    cidade: "Embaixador(a) Estadual",
+    nome: "",
+    perfil: "",
+    foto: "img/portrait-beautiful-woman-1.png",
+    municipais: [
+      {
+        cidade: "Curitiba",
+        nome: "",
+        perfil: "",
+        foto: "img/portrait-beautiful-woman-1.png"
+      }
+    ]
+  },
+  {
+    id: "BR-RJ",
+    uf: "Rio de Janeiro",
+    cidade: "Embaixador(a) Estadual",
+    nome: "",
+    perfil: "",
+    foto: "img/portrait-beautiful-woman-1.png",
+    municipais: [
+      {
+        cidade: "Rio de Janeiro",
+        nome: "",
+        perfil: "",
+        foto: "img/portrait-beautiful-woman-1.png"
+      }
+    ]
+  },
+  {
+    id: "BR-RN",
+    uf: "Rio Grande do Norte",
+    cidade: "Embaixador(a) Estadual",
+    nome: "",
+    perfil: "",
+    foto: "img/portrait-beautiful-woman-1.png",
+    municipais: [
+      {
+        cidade: "Natal",
+        nome: "",
+        perfil: "",
+        foto: "img/portrait-beautiful-woman-1.png"
+      }
+    ]
+  },
+  {
+    id: "BR-RO",
+    uf: "Rondônia",
+    cidade: "Embaixador(a) Estadual",
+    nome: "",
+    perfil: "",
+    foto: "img/portrait-beautiful-woman-1.png",
+    municipais: [
+      {
+        cidade: "Porto Velho",
+        nome: "",
+        perfil: "",
+        foto: "img/portrait-beautiful-woman-1.png"
+      }
+    ]
+  },
+  {
+    id: "BR-RR",
+    uf: "Roraima",
+    cidade: "Embaixador(a) Estadual",
+    nome: "",
+    perfil: "",
+    foto: "",
+    municipais: [
+      {
+        cidade: "Boa Vista",
+        nome: "",
+        perfil: "",
+        foto: ""
+      }
+    ]
+  },
+  {
+    id: "BR-RS",
+    uf: "Rio Grande do Sul",
+    cidade: "Embaixador(a) Estadual",
+    nome: "",
+    perfil: "",
+    foto: "",
+    municipais: [
+      {
+        cidade: "Porto Alegre",
+        nome: "",
+        perfil: "",
+        foto: ""
+      }
+    ]
+  },
+  {
+    id: "BR-SC",
+    uf: "Santa Catarina",
+    cidade: "Embaixador(a) Estadual",
+    nome: "",
+    perfil: "",
+    foto: "",
+    municipais: [
+      {
+        cidade: "Florianópolis",
+        nome: "",
+        perfil: "",
+        foto: ""
+      }
+    ]
+  },
+  {
+    id: "BR-SE",
+    uf: "Sergipe",
+    cidade: "Embaixador(a) Estadual",
+    nome: "",
+    perfil: "",
+    foto: "",
+    municipais: [
+      {
+        cidade: "Aracaju",
+        nome: "",
+        perfil: "",
+        foto: ""
+      }
+    ]
+  },
+  {
+    id: "BR-SP",
+    uf: "São Paulo",
+    cidade: "Embaixadora Estadual",
+    nome: "Livânia Alves Sales",
+    perfil: "@Livania.Alves",
+    foto: "img/embaixadoraSP.jpg",
+    municipais: [
+      {
+        cidade: "Barueri",
+        nome: "Livânia Alves Sales",
+        perfil: "@Livania.Alves",
+        foto: "img/embaixadoraSP.jpg",
+        descricao: "Livânia Alves Sales, 32 anos, primeira embaixadora do estado de São Paulo, sou esposa, sou mãe, cristã, com princípios e valores inegociáveis a luz da bíblia, acredito no poder da justiça como instrumento de transformação social. Atuo na área da comunicação há mais de 15 anos. Tive minha primeira filha aos 13 anos de idade, e enfrentei diversos desafios, inclusive, um relacionamento totalmente conturbado, diante disso, tenho respaldo para trazer informações e clareza para outras mulheres. Além disso, minha experiencia de vida e com pessoas me trás uma missão como mulher; almejo ser ainda mais um canal de Deus onde estiver promovendo clareza, dignidade, informação, proteção, e esperança. Defendo com firmeza a valorização da mulher e o enfrentamento de toda forma de violência, sendo voz ativa na promoção de respeito, acolhimento e conscientização."
+      }
+    ]
+  },
+  {
+    id: "BR-TO",
+    uf: "Tocantins",
+    cidade: "Embaixador(a) Estadual",
+    nome: "",
+    perfil: "",
+    foto: "",
+    municipais: [
+      {
+        cidade: "Palmas",
+        nome: "",
+        perfil: "",
+        foto: ""
+      }
+    ]
+  }
+];
+
+var polygonTemplate = polygonSeries.mapPolygons.template;
+polygonTemplate.nonScalingStroke = true;
+polygonTemplate.strokeWidth = 0.5;
+// Cor interna dos estados
+polygonSeries.mapPolygons.template.fill = am4core.color("#C1088A");
+
+// Borda dos estados (as linhas divisórias)
+polygonSeries.mapPolygons.template.stroke = am4core.color("#FFFFFF");
+polygonSeries.mapPolygons.template.strokeWidth = 2;
+
+// Hover
+var hs = polygonTemplate.states.create("hover");
+hs.properties.fill = am4core.color("#590061");
+
+
+
+// Event listener for clicks on map polygons
+polygonTemplate.events.on("hit", function(ev) {
+  const lang = localStorage.getItem('basta-lang') || 'pt';
+  const t = (typeof translations !== 'undefined' && translations[lang]) ? translations[lang] : {};
+  const data = ev.target.dataItem.dataContext;
+  const infoCard = document.getElementById("infocard");
+
+  const nome = data.nome || "";
+  const uf = data.uf || "UF";
+  const foto = data.foto || "";
+  const instagram = data.perfil || "";
+
+  const fotoHTML = foto
+  
+    ? `<div class="photo-container"><img src="${foto}" alt="${nome}" class="municipal-photo-img"></div>`
+    : `<div class="municipal-photo-placeholder">${nome ? nome.charAt(0).toUpperCase() : '?'}</div>`;
+
+  // 📌 Card da Embaixadora Estadual
+  let html = `
+    <div class="municipal-rep-card">
+      <div class="state-title">${t['map.stateAmbassador'] || 'Embaixadora Estadual'}</div>
+      <div class="state-name">${uf}</div>
+      ${fotoHTML}
+      <div class="municipal-name">${nome || (t['map.defaultName'] || 'Nome da pessoa')}</div>
+      <div class="municipal-profile">${instagram.replace('@', '')}</div>
+      <div class="municipal-description">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+      </div>
+      <a href="#" class="know-more-link">${t['map.knowMore'] || 'Conheça todas as embaixadoras'}</a>
+    </div>
+  `;
+
+  // 🏙️ Cards Municipais
+  if (data.municipais && Array.isArray(data.municipais)) {
+    html += `<div class="municipal-section-title">${t['map.municipalSection'] || 'Embaixadoras Municipais'}</div>`;
+
+    data.municipais.forEach(rep => {
+      const repFotoHTML = rep.foto
+        ? `<div class="photo-container"><img src="${rep.foto}" alt="${rep.nome}" class="municipal-photo-img"></div>`
+        : `<div class="municipal-photo-placeholder">${rep.nome ? rep.nome.charAt(0).toUpperCase() : '?'}</div>`;
+
+      html += `
+        <div class="municipal-rep-card">
+          <div class="state-title">${t['map.municipalAmbassador'] || 'Embaixadora Municipal'}</div>
+          <div class="state-name">${rep.cidade}</div>
+          ${repFotoHTML}
+          <div class="municipal-name">${rep.nome || (t['map.defaultName'] || 'Nome da pessoa')}</div>
+          <div class="municipal-profile">${rep.perfil ? rep.perfil.replace('@', '') : '@perfil'}</div>
+          <div class="municipal-description">
+            ${rep.descricao || "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."}
+          </div>
+          <a href="#" class="know-more-link">${t['map.knowMore'] || 'Conheça todas as embaixadoras'}</a>
+        </div>
+      `;
+    });
+  }
+
+
+  infoCard.innerHTML = html;
+  infoCard.style.display = "block";
+});
+// Aguarda o mapa carregar completamente e ativa o clique no estado de São Paulo
+chart.events.on("ready", function () {
+  const spPolygon = polygonSeries.getPolygonById("BR-SP");
+  if (spPolygon) {
+    spPolygon.isActive = true;
+    polygonTemplate.events.dispatchImmediately("hit", {
+      type: "hit",
+      target: spPolygon
+    });
+  }
+});
+
+// Série de imagem para marcadores personalizados
+var imageSeries = chart.series.push(new am4maps.MapImageSeries());
+
+// Adiciona um marcador em São Paulo
+var marker = imageSeries.mapImages.create();
+marker.latitude = -23.55; // Latitude de São Paulo
+marker.longitude = -46.63; // Longitude de São Paulo
+marker.nonScaling = true;
+
+var icon = marker.createChild(am4core.Label);
+icon.text = "📍";
+icon.fontSize = 25;
+icon.horizontalCenter = "middle";
+icon.verticalCenter = "middle";
+icon.tooltipText = "São Paulo - Representante Estadual";
+
+
+</script>
+    <script src="js/translations.js"></script>
+    <script src="js/language-system.js"></script>

@@ -1,0 +1,696 @@
+/* ================================================================
+   responsive.css — Todos os breakpoints e overrides mobile-first
+   Projeto: BASTA! Landing Page
+
+   Breakpoints:
+      ≥ 1800px  —  container máximo expandido
+      ≥ 1400px  —  container médio expandido
+      ≤ 1400px  —  hero ajuste de margem
+      ≤ 1200px  —  hero compactado
+      ≤  992px  —  tablet
+      ≤  768px  —  mobile
+      ≤  480px  —  mobile pequeno
+   ================================================================ */
+
+/* ========== ≥ 1800px ========== */
+@media (min-width: 1800px) {
+    .container { max-width: 1400px; }
+}
+
+/* ========== ≥ 1400px ========== */
+@media (min-width: 1400px) {
+    .container { max-width: 1280px; }
+    .carousel-wrapper { padding: 0 80px; }
+}
+
+/* ========== ≤ 1400px ========== */
+@media (max-width: 1400px) {
+    .hero .container { padding-top: 90px; margin-left: 60px; }
+    .hero-title { font-size: 2.5rem; }
+}
+
+/* ========== ≤ 1200px ========== */
+@media (max-width: 1200px) {
+    .hero .container  { margin-left: 40px; max-width: 550px; }
+    .hero-title { font-size: 2.2rem; }
+    .hero-subtitle { font-size: 1rem; }
+}
+
+/* ========== ≤ 992px — TABLET ========== */
+@media (max-width: 992px) {
+    .hero { min-height: 70vh; }
+    .hero .container {
+        margin-left: 40px;
+        margin-right: auto;
+        max-width: 55%;
+        padding: 100px 0 110px 0;
+        min-height: inherit;
+    }
+    .hero-bg { background-position: right center; background-size: auto 100%; }
+    .hero-content  { padding: 30px 0 20px 0; }
+    .hero-title { font-size: 2rem; }
+    .hero-lower { padding: 30px 40px 30px; }
+    .hero-subtitle { font-size: 0.95rem; color: #444; }
+    .hero-cards { flex-wrap: wrap; justify-content: center; align-items: center; }
+    .hero-card  { min-width: 90px; max-width: 100px; }
+    .hero-card-icon { width: 76px; height: 76px; }
+
+    /* Grids → single column */
+    .project-grid,
+    .colecao-grid,
+    .legal-grid,
+    .contact-area { grid-template-columns: 1fr; }
+    .legal-image { order: -1; }
+
+    /* Seções projeto e aplicativo em tablet — centralizar */
+    #projeto .container,
+    #aplicativo .container { text-align: center; }
+    .project-text-box,
+    .app-text-box  { text-align: left; }
+    .project-images,
+    .app-phones    { justify-content: center; }
+
+    /* O Aplicativo: phones primeiro, texto depois */
+    .app-grid { display: flex; flex-direction: column; }
+    .app-phones   { order: 1; }
+    .app-text-box { order: 2; }
+
+    /* Stats */
+    .stats-grid { grid-template-columns: 1fr; gap: 20px; max-width: 400px; margin: 0 auto; }
+    .stats-bg img {
+        content: url('../img/fundo-numeros-mobile-e1772203022358.png');
+        height: auto;
+        object-fit: contain;
+    }
+    .stat-item h3 { font-size: 2rem; }
+
+    .section-title       { font-size: 2.2rem; }
+    .section-title-image { max-width: 300px; margin-left: auto; margin-right: auto; }
+
+    .app-showcase-card  { padding: 18px; }
+    .carousel-wrapper   { padding: 0 50px; }
+
+    .partners-grid { grid-template-columns: repeat(5, 1fr); gap: 16px; }
+    .clientes-grid { grid-template-columns: repeat(6, 1fr); gap: 16px; }
+
+    .embaixadoras-iframe { min-height: 600px; }
+
+    .testimonials-arrow-prev { left: -6px; }
+    .testimonials-arrow-next { right: -6px; }
+}
+
+/* ========== ≤ 768px — MOBILE ========== */
+@media (max-width: 768px) {
+    .container {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 0 16px;
+    }
+
+    .testimonials-section {
+        padding: 64px 0 70px;
+        background:
+            radial-gradient(circle at 108% 7%, rgba(245,197,24,0.14) 0 120px, transparent 122px),
+            radial-gradient(circle at -8% 100%, rgba(212,56,142,0.08) 0 100px, transparent 102px),
+            #fffaf0;
+    }
+    .testimonials-eyebrow { font-size: 0.68rem; }
+    .testimonials-title { font-size: clamp(2.5rem, 13vw, 4rem); }
+    .testimonials-title-line { height: 6px; margin-bottom: 20px; }
+    .testimonials-subtitle { max-width: 330px; margin-bottom: 30px; font-size: 1.05rem; }
+    .testimonials-decor-heart { top: 12%; left: -8px; font-size: 4.2rem; }
+    .testimonials-decor-star { top: 14%; right: -8px; font-size: 4rem; }
+    .testimonials-carousel { margin-right: -16px; margin-left: -16px; }
+    .testimonials-viewport { padding: 14px 16px 24px; scroll-padding-inline: 16px; }
+    .testimonials-track { gap: 14px; }
+    .testimonial-card { flex-basis: min(78vw, 330px); border-radius: 28px; scroll-snap-align: start; }
+    .testimonials-arrow { display: none; }
+    .testimonials-dots { margin: 4px 0 30px; }
+    .testimonials-cta { min-width: 0; width: 100%; max-width: 400px; padding: 15px 20px; }
+    .partners-clientes-wrapper {
+        width: 100%;
+        box-sizing: border-box;
+        overflow: hidden;
+    }
+
+    /* Centralizar todos os títulos e seções */
+    section {
+        text-align: center;
+    }
+    .section-title,
+    .section-title-image,
+    .section-title-text {
+        display: block !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        text-align: center !important;
+        max-width: 85% !important;
+    }
+    .section-title-text {
+        font-size: 2.5rem !important;
+    }
+    /* Força centralização em containers específicos */
+    .colecao-text,
+    .project-text-box,
+    .app-title-wrap,
+    #projeto .container,
+    #aplicativo .container,
+    #colecao .container {
+        text-align: center !important;
+    }
+    .colecao-text .section-title-image,
+    .colecao-text .section-title-text,
+    #projeto .section-title-image,
+    #projeto .section-title-text,
+    #aplicativo .section-title-image,
+    #aplicativo .section-title-text {
+        display: block !important;
+        margin: 0 auto 20px auto !important;
+    }
+    .stats-subtitle {
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    /* Header */
+    header,
+    header.scrolled { background: #5A0061; }
+
+    /* Menu fullscreen */
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        position: fixed;
+        top: 0; left: 0;
+        width: 100%;
+        height: 100vh;
+        background: #5A0061;
+        padding: 100px 40px 80px;
+        gap: 0;
+        z-index: 1000;
+        overflow-y: auto;
+        justify-content: center;
+        align-items: center;
+    }
+    .nav-links.active { display: flex; }
+
+    .nav-links.active li:first-child a {
+        color: #FF6B5B;
+        font-weight: 700;
+        font-size: 0.95rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        padding: 0;
+        margin-bottom: 25px;
+    }
+    .nav-links li {
+        width: 100%;
+        max-width: 280px;
+        text-align: center;
+        margin-bottom: 25px;
+    }
+    .nav-links li:not(:last-child)::after {
+        content: '';
+        display: block;
+        width: 180px;
+        height: 1px;
+        background: rgba(255,255,255,0.3);
+        margin: 25px auto 0;
+    }
+    .nav-links li:last-child { border-bottom: none; margin-bottom: 0; }
+    .nav-links a {
+        color: #fff;
+        font-weight: 400;
+        font-size: 0.95rem;
+        padding: 0;
+        border-radius: 0;
+        width: 100%;
+        text-align: center;
+        display: block;
+    }
+    .nav-links a:hover         { color: #FF6B5B; background: transparent; }
+    .nav-links a.nav-cta       { color: #fff; background: transparent; border: none; font-weight: 400; }
+
+    /* Language selector mobile */
+    .lang-selector {
+        flex-direction: row;
+        justify-content: center;
+        gap: 12px;
+        margin-left: 0;
+        margin-top: 20px;
+    }
+    .lang-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 0.8rem;
+    }
+
+    .mobile-menu-icon { display: block; }
+
+    /* Logo mobile maior */
+    .logo img { height: 60px; }
+    header.scrolled .logo img { height: 50px; }
+
+    /* Hero — only title inside, woman visible on right */
+    .hero { min-height: 72vh; background: transparent; overflow: hidden; }
+    .hero-bg {
+        position: absolute;
+        top: 5%; left: 0;
+        width: 100%; height: 100%;
+        background-image: url('../img/homeimage.png');
+        background-position: right 30% top 20px;
+        background-size: cover;
+    }
+    .hero .container {
+        position: relative;
+        z-index: 3;
+        justify-content: flex-start;
+        padding: 75px 0 0 20px;
+        margin: 0;
+        max-width: 56%;
+        min-height: inherit;
+        text-align: left;
+    }
+    .hero-content { padding: 0; }
+    .hero-title { font-size: 1.65rem; margin-bottom: 0; line-height: 1.15; }
+    
+    /* Mobile: transição suave curva em vez de triângulo afiado */
+    .hero-triangle {
+        height: 60px;
+        background: #FFFAE9;
+        clip-path: ellipse(75% 100% at 50% 100%);
+    }
+
+    /* Mobile: ocultar subtítulo/checks/cards dentro do hero — aparecem no hero-lower */
+    .hero-subtitle--in, .hero-checks--in, .hero-cards--in { display: none; }
+
+    /* Hero lower — cream section: subtítulo + checks + cards */
+    .hero-lower { display: block; padding: 25px 20px 30px; }
+    /* Subtítulo roxo #66166D, "ecossistema" em rosa via .hero-text-hl */
+    .hero-subtitle--lower { display: block; font-size: 0.95rem; margin-bottom: 20px; color: #66166D; line-height: 1.5; font-weight: 500; }
+    .hero-checks--lower { display: flex; flex-direction: column; margin-bottom: 22px; gap: 10px; }
+    /* Texto dos checks em rosa #FF5BB0 */
+    .hero-checks li { font-size: 0.88rem; color: #FF5BB0; }
+    /* Check icons: sem background, apenas o ícone */
+    .hero-checks--lower .check-icon {
+        width: 22px;
+        height: 22px;
+        background: transparent;
+        padding: 0;
+    }
+    .hero-cards--lower { display: flex; flex-wrap: nowrap; justify-content: space-between; align-items: flex-start; gap: 10px; margin-top: 25px; width: 100%; }
+    .hero-card  { width: calc(33.33% - 7px); max-width: 100px; flex: 0 0 calc(33.33% - 7px); }
+    /* Mobile: usar as imagens originais dos cards, sem fundo artificial */
+    .hero-card-icon {
+        width: 82px;
+        height: 82px;
+        border-radius: 18px;
+        background: transparent;
+        padding: 0;
+        box-shadow: none;
+    }
+    .hero-card-icon img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        filter: none;
+    }
+    /* Labels dos cards em rosa #FF5BB0 */
+    .hero-card-label { font-size: 0.72rem; color: #FF5BB0; font-weight: 600; margin-top: 8px; text-align: center; }
+
+    /* Stats - reduzir tamanhos e centralizar melhor */
+    .stats { text-align: center; }
+    .stats-grid { 
+        grid-template-columns: 1fr; 
+        max-width: 400px; 
+        margin: 0 auto; 
+        text-align: center;
+    }
+    .stat-item {
+        text-align: center;
+        padding: 20px 15px;
+    }
+    .stat-item h3 { 
+        font-size: 2.8rem; 
+        margin: 0 auto;
+    }
+    .stat-item p { 
+        font-size: 0.75rem;
+        text-align: center;
+        margin: 5px auto 0;
+    }
+    .stats-bg img {
+        content: url('../img/fundo-numeros-mobile-e1772203022358.png');
+        height: auto;
+        object-fit: contain;
+    }
+
+    /* Botões - reduzir tamanho no mobile */
+    .btn {
+        padding: 12px 24px;
+        font-size: 0.85rem;
+    }
+    .stats-cta .btn {
+        padding: 12px 28px;
+        font-size: 0.8rem;
+    }
+
+    /* Outras seções */
+    .colecao-images     { grid-template-columns: 1fr; }
+    .colecao-text-content p,
+    .legal-text-content p  { padding: 0 4px; font-size: 0.91rem; }
+    .app-showcase-content { max-width: 650px; }
+    .app-showcase-card  { padding: 18px; }
+    .app-links-bottom   { gap: 40px; }
+    .app-links-bottom a { font-size: 0.95rem; }
+    .carousel-wrapper   { padding: 0 45px; }
+    .carousel-arrow     { width: 40px; height: 40px; }
+
+    /* Cards */
+    .partners-grid,
+    .clientes-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 14px;
+        max-width: 100%;
+        width: 100%;
+        box-sizing: border-box;
+        padding: 0 8px;
+    }
+    .partner-card,
+    .cliente-card {
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+
+    /* ===== O PROJETO – layout editorial, sem caixa ===== */
+    #projeto .section-title-image {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .project-grid {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 28px;
+    }
+    .project-text-box {
+        background: transparent;
+        border-left: none;
+        border-radius: 0;
+        box-shadow: none;
+        padding: 0 20px;
+        max-width: 500px;
+        width: 100%;
+        margin: 0 auto;
+    }
+    .project-text-box img { width: 100%; height: auto; display: block; }
+    .project-images       { max-width: 360px; margin: 0 auto; }
+    .project-images img   { max-width: 80vw; display: block; filter: drop-shadow(0 12px 28px rgba(0,0,0,0.14)); }
+
+    /* ===== O APLICATIVO – phones como hero, card abaixo ===== */
+    #aplicativo .section-title-image {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .app-title-wrap { margin-bottom: 18px; }
+    .app-title-wrap .section-title-image { margin-bottom: 0; }
+
+    /* Efeitos de fundo do #aplicativo — reduzir no mobile (evita “gigante”) */
+    #aplicativo::before {
+        width: 240px;
+        height: 240px;
+        left: -70px;
+        bottom: -70px;
+        opacity: 0.35;
+    }
+    #aplicativo::after {
+        width: 200px;
+        height: 320px;
+        right: -80px;
+        top: 30px;
+        transform: none;
+        opacity: 0.22;
+    }
+    #aplicativo .app-grid {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 24px;
+    }
+    #aplicativo .app-phones {
+        order: 1;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+    #aplicativo .app-phones img {
+        max-width: 82vw;
+        display: block;
+        filter: drop-shadow(0 18px 36px rgba(91,26,110,0.18));
+    }
+    #aplicativo .app-text-box {
+        order: 2;
+        max-width: 500px;
+        width: calc(100% - 40px);
+        margin: 0 auto;
+        background: #fff;
+        border-left: 4px solid var(--purple);
+        border-radius: 20px;
+        padding: 22px 20px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    }
+    #aplicativo .app-text-box img { width: 100%; height: auto; display: block; }
+
+    /* Formulário */
+    .form-row { grid-template-columns: 1fr; }
+    .embaixadoras-iframe { min-height: 500px; }
+
+    /* Footer - centralizar e ajustar tamanhos */
+    footer { 
+        background: #6D2573;
+        text-align: center;
+    }
+    .footer-banner-wrap {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 30px 20px;
+        gap: 18px;
+    }
+    .footer-social-links {
+        position: static;
+        transform: none;
+        margin-bottom: 20px;
+    }
+    .footer-social-links a {
+        width: 44px;
+        height: 44px;
+        font-size: 1.3rem;
+    }
+    .footer-img-left,
+    .footer-img-right {
+        width: 100%;
+        max-width: 90%;
+        max-height: 45px;
+        object-fit: contain;
+    }
+
+    /* Modal cronograma — dark mode */
+    .cron-modal-card {
+        background: #1c1c1c;
+        border-radius: 20px;
+        padding: 28px 22px 24px;
+    }
+    .cron-modal-title { color: #fff; border-bottom-color: rgba(255,255,255,0.5); }
+    .cron-field       { border-color: transparent; border-radius: 50px; padding: 12px 18px; }
+    .cron-loading-wrap { font-size: 2rem; }
+}
+
+/* ========== ≤ 480px — MOBILE PEQUENO ========== */
+@media (max-width: 480px) {
+    /* Títulos ainda menores e centralizados */
+    .section-title-image {
+        max-width: 80% !important;
+        display: block !important;
+        margin: 0 auto 18px auto !important;
+    }
+    .section-title-text {
+        font-size: 2rem !important;
+        max-width: 90% !important;
+        margin: 0 auto 18px auto !important;
+    }
+    
+    .hero { min-height: auto; }
+    .hero-bg { height: 40vh; min-height: 250px; }
+    .hero .container  { padding: 20px 15px 30px; }
+    .hero-title-img   { max-width: 220px; }
+    .hero-subtitle-img { max-width: 100%; }
+    .hero-cards { gap: 8px; justify-content: space-between; align-items: flex-start; flex-wrap: nowrap; }
+    .hero-card { width: calc(33.33% - 6px); max-width: 90px; flex: 0 0 calc(33.33% - 6px); }
+    .hero-card-icon { width: 74px; height: 74px; }
+    .hero-card img { width: 100%; max-width: 100%; height: auto; display: block; }
+
+    /* Stats - mobile pequeno */
+    .stats { text-align: center; }
+    .stats-grid { 
+        grid-template-columns: 1fr; 
+        max-width: 350px; 
+        margin: 0 auto;
+        text-align: center;
+    }
+    .stats-bg img {
+        content: url('../img/fundo-numeros-mobile-e1772203022358.png');
+        height: auto;
+        object-fit: contain;
+    }
+    .stat-item { 
+        clip-path: polygon(8% 0%, 100% 0%, 92% 100%, 0% 100%); 
+        padding: 18px 12px;
+        text-align: center;
+    }
+    .stat-item h3 { 
+        font-size: 2.6rem;
+        margin: 0 auto;
+        text-align: center;
+    }
+    .stat-item p  { 
+        font-size: 0.68rem;
+        text-align: center;
+        margin: 5px auto 0;
+    }
+
+    .app-showcase-content { max-width: 400px; }
+    .app-links-bottom { 
+        flex-direction: column; 
+        gap: 12px; 
+        align-items: center;
+        text-align: center;
+    }
+    .app-links-bottom a { 
+        font-size: 0.85rem;
+        text-align: center;
+    }
+
+    /* Botões ainda menores */
+    .btn {
+        padding: 10px 20px;
+        font-size: 0.8rem;
+    }
+    .stats-cta .btn {
+        padding: 10px 24px;
+        font-size: 0.75rem;
+    }
+
+    /* Mobile pequeno: efeitos de fundo ainda mais contidos */
+    #aplicativo::before {
+        width: 190px;
+        height: 190px;
+        left: -65px;
+        bottom: -65px;
+        opacity: 0.30;
+    }
+    #aplicativo::after {
+        width: 160px;
+        height: 260px;
+        right: -70px;
+        top: 20px;
+        opacity: 0.20;
+    }
+    .partners-grid,
+    .clientes-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        max-width: 100%;
+        width: 100%;
+        box-sizing: border-box;
+        padding: 0 4px;
+    }
+    .partner-card,
+    .cliente-card {
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+
+    .testimonial-card { flex-basis: 82vw; }
+    .testimonial-copy { right: 7%; bottom: 6%; left: 7%; }
+    .testimonial-duration { right: 6%; bottom: 6%; }
+}
+
+/* ========== MODAL DE DEPOIMENTOS — EXPERIÊNCIA MOBILE ========== */
+@media (max-width: 576px) {
+    .testimonial-modal { padding: 0; }
+    .testimonial-modal-stage {
+        display: block;
+        width: 100vw;
+        height: 100vh;
+        height: 100dvh;
+    }
+    .testimonial-phone {
+        width: 100vw;
+        height: 100vh;
+        height: 100dvh;
+        max-height: none;
+        aspect-ratio: auto;
+        padding: 0;
+        border: 0;
+        border-radius: 0;
+        box-shadow: none;
+    }
+    .testimonial-phone video { border-radius: 0; object-fit: cover; }
+    .testimonial-phone-island { display: none; }
+    .testimonial-story-top {
+        top: max(18px, env(safe-area-inset-top));
+        right: 68px;
+        left: 18px;
+    }
+    .testimonial-story-copy {
+        right: 0;
+        bottom: 0;
+        left: 0;
+        min-height: 175px;
+        padding: 72px 20px max(64px, calc(env(safe-area-inset-bottom) + 52px));
+        border-radius: 0;
+    }
+    .testimonial-modal-close {
+        position: fixed;
+        top: max(12px, env(safe-area-inset-top));
+        right: 12px;
+        left: auto;
+        width: 44px;
+        height: 44px;
+        background: rgba(48,0,53,0.7);
+    }
+    .testimonial-modal-nav {
+        position: fixed;
+        top: 50%;
+        width: 44px;
+        height: 52px;
+        border-color: rgba(255,255,255,0.18);
+        border-radius: 14px;
+        background: rgba(48,0,53,0.48);
+        transform: translateY(-50%);
+    }
+    .testimonial-modal-nav:hover { transform: translateY(-50%); }
+    .testimonial-modal-prev { left: 10px; }
+    .testimonial-modal-next { right: 10px; }
+    .testimonial-modal-indicator {
+        display: none;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .testimonials-viewport { scroll-behavior: auto; }
+    .testimonial-card,
+    .testimonial-play,
+    .testimonials-arrow,
+    .testimonials-cta,
+    .testimonial-modal,
+    .testimonial-modal-stage,
+    .testimonial-modal-nav,
+    .testimonial-modal-close { transition: none; }
+}

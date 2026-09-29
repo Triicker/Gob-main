@@ -1,0 +1,88 @@
+/* ================================================================
+   variables.css — Tokens de design, reset e tipografia base
+   Projeto: BASTA! Landing Page
+   ================================================================ */
+
+/* ========== TOKENS DE DESIGN ========== */
+:root {
+    --purple-dark:  #5B1A6E;
+    --purple:       #7B2D8E;
+    --purple-light: #9B4DB0;
+    --magenta:      #D4388E;
+    --gold:         #F5C518;
+    --cream:        #FDF5E6;
+    --bg-cream:     #FFF8EE;
+    --text-dark:    #333;
+    --text-light:   #fff;
+    --transition:   all 0.3s ease;
+
+    /* Espaçamento */
+    --space-xs:  8px;
+    --space-sm:  16px;
+    --space-md:  24px;
+    --space-lg:  40px;
+    --space-xl:  80px;
+
+    /* Bordas */
+    --radius-sm:  10px;
+    --radius-md:  20px;
+    --radius-lg:  50px;
+    --radius-full: 50%;
+
+    /* Sombras */
+    --shadow-sm:  0 4px 15px rgba(0,0,0,0.08);
+    --shadow-md:  0 8px 30px rgba(0,0,0,0.10);
+    --shadow-lg:  0 12px 40px rgba(0,0,0,0.12);
+
+    /* Fontes */
+    --font-body:    'Inter', sans-serif;
+    --font-heading: 'Playfair Display', serif;
+
+    /* Breakpoints (referência) */
+    /* --bp-xl:   1400px */
+    /* --bp-lg:   1200px */
+    /* --bp-md:   992px  */
+    /* --bp-sm:   768px  */
+    /* --bp-xs:   480px  */
+}
+
+/* ========== RESET ========== */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+html {
+    overflow-x: clip;
+}
+
+body {
+    font-family: var(--font-body);
+    color: var(--text-dark);
+    background: #fff;
+    line-height: 1.7;
+}
+
+h1, h2, h3 {
+    font-family: var(--font-heading);
+}
+
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}

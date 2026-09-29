@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BASTA! - Termos de Uso e Política de Privacidade</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="css/language-system.css">
+
+    <style>
+        /* ========== RESET & VARIÁVEIS ========== */
+        :root {
+            --purple-dark: #5B1A6E;
+            --purple: #7B2D8E;
+            --purple-light: #9B4DB0;
+            --magenta: #D4388E;
+            --gold: #F5C518;
+            --cream: #FDF5E6;
+            --text-dark: #333;
+            --text-light: #fff;
+            --bg-cream: #FFF8EE;
+            --transition: all 0.3s ease;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Inter', sans-serif; color: var(--text-dark); background: #fff; line-height: 1.7; overflow-x: hidden; }
+        
+        h1, h2, h3 { font-family: 'Playfair Display', serif; }
+        ul { list-style: none; }
+        a { text-decoration: none; color: inherit; }
+        img { max-width: 100%; display: block; }
+
+        /* ========== COMPONENTES REUTILIZÁVEIS ========== */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+        /* ========== HEADER & NAV ========== */
+        header { 
+            background: var(--purple-dark); 
+            padding: 15px 0; 
+            position: fixed; 
+            top: 0; 
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.2);
+        }
+        nav { display: flex; justify-content: space-between; align-items: center; }
+        .logo {
+            display: flex;
+            align-items: center;
+            line-height: 1;
+            margin-right: 20px;
+        }
+        .logo img {
+            height: 50px;
+            width: auto;
+        }
+        .nav-links { display: flex; gap: 5px; align-items: center; }
+        .nav-links a { 
+            font-weight: 500; 
+            font-size: 0.8rem; 
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 20px;
+            transition: var(--transition);
+        }
+        .nav-links a:hover { color: var(--gold); background: rgba(255,255,255,0.1); }
+        .nav-links a.nav-cta {
+            background: rgba(255,255,255,0.15);
+            color: #fff;
+            font-weight: 600;
+            border: 1px solid rgba(255,255,255,0.4);
+        }
+        .nav-links a.nav-cta:hover { background: rgba(255,255,255,0.25); }
+        .mobile-menu-icon { display: none; font-size: 1.5rem; color: #fff; cursor: pointer; z-index: 1001; }
+        .mobile-menu-close { 
+            display: none; 
+            position: fixed; 
+            top: 25px; 
+            right: 25px; 
+            font-size: 2rem; 
+            color: #fff; 
+            cursor: pointer; 
+            z-index: 1002;
+            width: 40px;
+            height: 40px;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease;
+        }
+        .mobile-menu-close:hover { transform: rotate(90deg); }
+        .nav-links.active ~ .mobile-menu-close { display: flex; }
+
+        /* ========== SEÇÕES DE CONTEÚDO ========== */
+        .section-termos {
+            background: var(--bg-cream);
+            padding: 140px 0 80px 0;
+            min-height: auto;
+            position: relative;
+        }
+        .section-termos .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        .section-title {
+            font-size: 2.5rem;
+            color: var(--purple-dark);
+            margin-bottom: 30px;
+            position: relative;
+        }
+        .termos-content {
+            padding-right: 40px;
+        }
+        .termos-content p {
+            font-size: 1rem;
+            color: #555;
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+        .termos-content ul {
+            margin-bottom: 20px;
+        }
+        .termos-content ul li {
+            color: #555;
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+        .termos-content ul li::before {
+            content: '•';
+            color: var(--purple);
+            font-size: 1.5rem;
+            position: absolute;
+            left: 0;
+            top: 5px;
+        }
+        .phones-image {
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        /* Decorative elements */
+        .decoration-dots {
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            background-image: radial-gradient(var(--gold) 3px, transparent 3px);
+            background-size: 15px 15px;
+            z-index: 0;
+        }
+        .decoration-dots.top-left {
+            top: 150px;
+            left: 45%;
+        }
+
+        /* ========== POLÍTICA DE PRIVACIDADE ========== */
+        .section-privacidade {
+            background: #fff;
+            padding: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .section-privacidade .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        .privacidade-content {
+            order: 2;
+            padding-left: 40px;
+        }
+        .woman-image-wrap {
+            order: 1;
+            position: relative;
+        }
+        .woman-image {
+            width: 100%;
+            max-width: 450px;
+        }
+        .decoration-wave {
+            position: absolute;
+            bottom: -50px;
+            left: -100px;
+            width: 300px;
+            height: 200px;
+            background: var(--purple);
+            border-radius: 50% 50% 0 50%;
+            opacity: 0.8;
+            z-index: 0;
+        }
+        .decoration-blob {
+            position: absolute;
+            top: -30px;
+            right: -50px;
+            width: 150px;
+            height: 150px;
+            background: var(--gold);
+            border-radius: 50% 30% 50% 70%;
+            opacity: 0.6;
+            z-index: 0;
+        }
+        .woman-image-wrap img {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ========== FOOTER ========== */
+        footer { 
+            background: #6D2573; 
+            color: #fff; 
+            padding: 0; 
+        }
+        .footer-banner-wrap {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 18px 40px;
+            background: #6D2573;
+            gap: 30px;
+        }
+        .footer-banner {
+            height: auto;
+            display: block;
+            object-fit: contain;
+        }
+        .footer-img-left { max-height: 60px; }
+        .footer-img-right { max-height: 60px; }
+        .footer-bottom { 
+            text-align: center; 
+            padding: 15px 20px; 
+            font-size: 0.8rem; 
+            color: rgba(255,255,255,0.6);
+            background: rgba(0,0,0,0.15);
+        }
+
+        /* ========== WHATSAPP FLOATING ========== */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: var(--transition);
+            animation: pulse-whatsapp 2s infinite;
+        }
+        .whatsapp-float img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 50%;
+        }
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+        }
+        @keyframes pulse-whatsapp {
+            0%, 100% { filter: drop-shadow(0 4px 12px rgba(37,211,102,0.4)); }
+            50% { filter: drop-shadow(0 6px 20px rgba(37,211,102,0.6)); }
+        }
+
+        /* ========== RESPONSIVIDADE ========== */
+        @media (max-width: 768px) {
+            header { background: #5A0061; }
+            header.scrolled { background: #5A0061; }
+            .nav-links { 
+                display: none; 
+                flex-direction: column;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100vh;
+                background: #5A0061;
+                padding: 100px 40px 80px;
+                box-shadow: none;
+                gap: 0;
+                z-index: 1000;
+                overflow-y: auto;
+                justify-content: center;
+                align-items: center;
+            }
+            .nav-links.active { display: flex; }
+            .nav-links.active li:first-child a {
+                color: #FF6B5B;
+                font-weight: 700;
+                font-size: 0.95rem;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+                padding: 0;
+                margin-bottom: 25px;
+                border-bottom: none;
+                border-radius: 0;
+            }
+            .nav-links li {
+                width: 100%;
+                max-width: 280px;
+                text-align: center;
+                position: relative;
+                margin-bottom: 25px;
+                border-bottom: none;
+            }
+            .nav-links li:not(:last-child)::after {
+                content: '';
+                display: block;
+                width: 180px;
+                height: 1px;
+                background: rgba(255,255,255,0.3);
+                margin: 25px auto 0;
+            }
+            .nav-links li:last-child { border-bottom: none; margin-bottom: 0; }
+            .nav-links a { 
+                color: #fff; 
+                font-weight: 400;
+                font-size: 0.95rem;
+                padding: 0;
+                border-radius: 0;
+                width: 100%;
+                text-align: center;
+                display: block;
+            }
+            .nav-links a:hover { color: #FF6B5B; background: transparent; }
+            .nav-links a.nav-cta { color: #fff; background: transparent; border: none; font-weight: 400; }
+            .mobile-menu-icon { display: block; }
+            .nav-links.active ~ .mobile-menu-close { display: flex; }
+            
+            .section-termos {
+                padding: 110px 0 60px 0;
+            }
+            .section-termos .container,
+            .section-privacidade .container {
+                grid-template-columns: 1fr;
+                gap: 22px;
+                max-width: 560px;
+                margin: 0 auto;
+            }
+
+            .section-title {
+                font-size: 1.75rem;
+                text-align: center;
+                margin-bottom: 18px;
+            }
+
+            .termos-content,
+            .privacidade-content {
+                padding: 18px 16px;
+                order: 1;
+                background: #fff;
+                border-radius: 18px;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            }
+            .termos-content { padding-right: 16px; }
+            .privacidade-content { padding-left: 16px; }
+
+            .termos-content p,
+            .privacidade-content p,
+            .termos-content ul li,
+            .privacidade-content ul li {
+                font-size: 0.95rem;
+                line-height: 1.75;
+            }
+
+            .phones-image,
+            .woman-image {
+                max-width: 320px;
+                margin: 0 auto;
+            }
+            .phones-image-wrap,
+            .woman-image-wrap {
+                order: 2;
+            }
+
+            .decoration-dots,
+            .decoration-wave,
+            .decoration-blob {
+                display: none;
+            }
+
+            footer { background: #6D2573; }
+            .footer-banner-wrap { flex-direction: column; padding: 40px 30px; gap: 20px; }
+            .footer-img-left,
+            .footer-img-right { width: 100%; max-width: 520px; max-height: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo">
+                    <img src="img/site-BASTA-copiar_0000s_0015_BASTA-logo2.png" alt="BASTA! - De violência contra a mulher">
+                </a>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="index.html#projeto" data-i18n="nav.project">O projeto</a></li>
+                    <li><a href="index.html#aplicativo" data-i18n="nav.app">O aplicativo</a></li>
+                    <li><a href="index.html#colecao" data-i18n="nav.collection">A coleção</a></li>
+                    <li><a href="index.html#legal" data-i18n="nav.legal">Fundamentação legal</a></li>
+                    <li><a href="index.html#parceiros" data-i18n="nav.partners">Parceiros e clientes</a></li>
+                    <li><a href="index.html#conheca-app" data-i18n="nav.knowApp">Conheça o aplicativo</a></li>
+                    <li><a href="contato.html" class="nav-cta" target="_blank" data-i18n="nav.contact">Fale conosco</a></li>
+                    <li class="lang-selector">
+                        <button class="lang-btn active" data-lang="pt" title="Português">🇧🇷</button>
+                        <button class="lang-btn" data-lang="en" title="English">🇺🇸</button>
+                        <button class="lang-btn" data-lang="es" title="Español">🇪🇸</button>
+                        <button class="lang-btn" data-lang="fr" title="Français">🇫🇷</button>
+                    </li>
+                </ul>
+                <div class="mobile-menu-icon" id="menuIcon"><i class="fas fa-bars"></i></div>
+                <div class="mobile-menu-close" id="menuClose"><i class="fas fa-times"></i></div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- TERMOS DE USO -->
+    <section class="section-termos" id="termos">
+        <div class="decoration-dots top-left"></div>
+        <div class="container">
+            <div class="termos-content">
+                <h1 class="section-title" data-i18n="terms.title">Termos de uso</h1>
+                <p data-i18n="terms.intro">Ao utilizar o aplicativo BASTA!, você concorda com os seguintes termos e condições de uso:</p>
+                <ul>
+                    <li data-i18n-html="terms.li1"><strong>Experiências:</strong> Fórum de situações reais vividas por outras mulheres</li>
+                    <li data-i18n-html="terms.li2"><strong>Segurança:</strong> Canais diretos para chamadas de emergências</li>
+                    <li data-i18n-html="terms.li3"><strong>Entendimento:</strong> Dicas de psicanalista especialista em casos de família</li>
+                    <li data-i18n-html="terms.li4"><strong>Conhecimento:</strong> Através dos conteúdos e exercícios dos livros</li>
+                </ul>
+                <p data-i18n="terms.p2">O uso do aplicativo é destinado exclusivamente para mulheres em situação de vulnerabilidade ou que desejam se informar sobre seus direitos. Todas as informações fornecidas são tratadas com confidencialidade e segurança.</p>
+                <p data-i18n="terms.p3">Reservamo-nos o direito de atualizar estes termos a qualquer momento, notificando os usuários através do próprio aplicativo.</p>
+            </div>
+            <div class="phones-image-wrap">
+                <img src="img/site-BASTA-copiar_0001s_0015_3phones.png" alt="App BASTA! - 3 Telas do Aplicativo" class="phones-image">
+            </div>
+        </div>
+    </section>
+
+    <!-- POLÍTICA DE PRIVACIDADE -->
+    <section class="section-privacidade" id="privacidade">
+        <div class="container">
+            <div class="woman-image-wrap">
+                <div class="decoration-wave"></div>
+                <img src="img/86119062-e1726229789768.png" alt="Mulher BASTA!" class="woman-image">
+            </div>
+            <div class="privacidade-content">
+                <h2 class="section-title" data-i18n="privacy.title">Política de privacidade</h2>
+                <p data-i18n="privacy.intro">A sua privacidade é de extrema importância para nós. O aplicativo BASTA! foi desenvolvido com os mais altos padrões de segurança e proteção de dados.</p>
+                <ul>
+                    <li data-i18n-html="privacy.li1"><strong>Coleta de dados:</strong> Coletamos apenas as informações necessárias para o funcionamento do aplicativo</li>
+                    <li data-i18n-html="privacy.li2"><strong>Armazenamento:</strong> Todos os dados são criptografados e armazenados em servidores seguros</li>
+                    <li data-i18n-html="privacy.li3"><strong>Compartilhamento:</strong> Suas informações nunca serão vendidas ou compartilhadas com terceiros sem seu consentimento</li>
+                    <li data-i18n-html="privacy.li4"><strong>Direitos:</strong> Você pode solicitar a exclusão de seus dados a qualquer momento</li>
+                </ul>
+                <p data-i18n="privacy.p2">Em conformidade com a Lei Geral de Proteção de Dados (LGPD), garantimos total transparência sobre como suas informações são utilizadas.</p>
+                <p data-i18n="privacy.p3">Para dúvidas sobre privacidade, entre em contato conosco através da página de contato.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-banner-wrap">
+            <img src="img/Grupo-133-1.png" alt="Ética Editora - redes sociais" class="footer-banner footer-img-left">
+            <img src="img/Grupo-132.png" alt="Empresa credenciada - selos" class="footer-banner footer-img-right">
+        </div>
+    </footer>
+
+    <!-- WHATSAPP FLOATING BUTTON -->
+    <a href="https://wa.me/5511987380525" target="_blank" class="whatsapp-float">
+        <img src="img/09.whatsapp.png" alt="WhatsApp">
+    </a>
+
+    <script>
+        // Menu Mobile Toggle
+        const menuIcon = document.getElementById('menuIcon');
+        const menuClose = document.getElementById('menuClose');
+        const navLinks = document.getElementById('navLinks');
+
+        menuIcon.addEventListener('click', () => {
+            navLinks.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+
+        if (menuClose) {
+            menuClose.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        }
+
+        // Close menu on link click (mobile)
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+    </script>
+
+    <!-- Language Selector -->
+    <script src="js/translations.js"></script>
+    <script src="js/language-system.js"></script>
+</body>
+</html>

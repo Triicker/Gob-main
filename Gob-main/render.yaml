@@ -1,0 +1,35 @@
+# render.yaml — Render Blueprint: backend + frontend estático
+# Doc: https://docs.render.com/blueprint-spec
+
+services:
+  # ── Backend (API WhatsApp via Z-API) ──────────────────────
+  - type: web
+    name: basta-zap-backend
+    runtime: node
+    region: oregon
+    plan: free
+    rootDir: zap-backend
+    buildCommand: npm install
+    startCommand: node server.js
+    envVars:
+      - key: ZAPI_INSTANCE_ID
+        sync: false            # definir manualmente no dashboard
+      - key: ZAPI_INSTANCE_TOKEN
+        sync: false
+      - key: ZAPI_CLIENT_TOKEN
+        sync: false
+      - key: ZAP_PHONE
+        sync: false
+      - key: ALLOWED_ORIGINS
+        value: https://basta.app.br,https://bastasite.onrender.com,https://gob-679g.onrender.com
+      - key: NODE_ENV
+        value: production
+
+  # ── Frontend (HTML/CSS/JS estático) ───────────────────────
+  - type: web
+    name: basta-frontend
+    runtime: static
+    region: oregon
+    plan: free
+    buildCommand: ""
+    staticPublishPath: .

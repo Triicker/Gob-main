@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BASTA! - Fale Conosco</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="css/language-system.css">
+
+    <style>
+        /* ========== RESET & VARIÁVEIS ========== */
+        :root {
+            --purple-dark: #5B1A6E;
+            --purple: #7B2D8E;
+            --purple-light: #9B4DB0;
+            --magenta: #D4388E;
+            --gold: #F5C518;
+            --cream: #FDF5E6;
+            --text-dark: #333;
+            --text-light: #fff;
+            --bg-cream: #FFF8EE;
+            --transition: all 0.3s ease;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Inter', sans-serif; color: var(--text-dark); background: #fff; line-height: 1.7; overflow-x: hidden; }
+        
+        h1, h2, h3 { font-family: 'Playfair Display', serif; }
+        ul { list-style: none; }
+        a { text-decoration: none; color: inherit; }
+        img { max-width: 100%; display: block; }
+
+        /* ========== COMPONENTES REUTILIZÁVEIS ========== */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        .btn { 
+            display: inline-block; 
+            padding: 14px 36px; 
+            border-radius: 50px; 
+            font-weight: 700; 
+            transition: var(--transition);
+            cursor: pointer;
+            border: none;
+            font-size: 0.95rem;
+        }
+        .btn-purple { background: var(--purple); color: white; }
+        .btn-purple:hover { background: var(--purple-dark); transform: translateY(-3px); }
+
+        /* ========== HEADER & NAV ========== */
+        header { 
+            background: var(--purple-dark); 
+            padding: 15px 0; 
+            position: fixed; 
+            top: 0; 
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.2);
+        }
+        nav { display: flex; justify-content: space-between; align-items: center; }
+        .logo {
+            display: flex;
+            align-items: center;
+            line-height: 1;
+            margin-right: 20px;
+        }
+        .logo img {
+            height: 50px;
+            width: auto;
+        }
+        .nav-links { display: flex; gap: 5px; align-items: center; }
+        .nav-links a { 
+            font-weight: 500; 
+            font-size: 0.8rem; 
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 20px;
+            transition: var(--transition);
+        }
+        .nav-links a:hover { color: var(--gold); background: rgba(255,255,255,0.1); }
+        .nav-links a.nav-cta {
+            background: rgba(255,255,255,0.15);
+            color: #fff;
+            font-weight: 600;
+            border: 1px solid rgba(255,255,255,0.4);
+        }
+        .nav-links a.nav-cta:hover { background: rgba(255,255,255,0.25); }
+        .mobile-menu-icon { display: none; font-size: 1.5rem; color: #fff; cursor: pointer; }
+
+        /* ========== CONTEÚDO PRINCIPAL ========== */
+        .section-title {
+            font-size: 2.8rem;
+            text-align: center;
+            color: var(--purple-dark);
+            margin-bottom: 40px;
+            position: relative;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--purple), var(--magenta));
+            border-radius: 2px;
+        }
+
+        /* ========== CONTATO ========== */
+        #contato {
+            background: var(--bg-cream);
+            padding: 120px 0 80px 0;
+            min-height: calc(100vh - 150px);
+        }
+        .contact-area-centered {
+            max-width: 700px;
+            margin: 0 auto;
+            background: #fff;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+        }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; margin-bottom: 5px; font-weight: 600; font-size: 0.88rem; color: var(--purple-dark); }
+        input, textarea, select { 
+            width: 100%; 
+            padding: 12px 16px; 
+            border: 2px solid #e8e0f0; 
+            border-radius: 10px; 
+            font-family: inherit; 
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: var(--purple);
+            box-shadow: 0 0 0 3px rgba(123,45,142,0.1);
+        }
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        /* ========== FOOTER ========== */
+        footer { 
+            background: #6D2573; 
+            color: #fff; 
+            padding: 0; 
+        }
+        .footer-banner-wrap {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 18px 40px;
+            background: #6D2573;
+            gap: 30px;
+        }
+        .footer-banner {
+            height: auto;
+            display: block;
+            object-fit: contain;
+        }
+        .footer-img-left { max-height: 60px; }
+        .footer-img-right { max-height: 60px; }
+       
+
+        /* ========== WHATSAPP FLOATING ========== */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: var(--transition);
+            animation: pulse-whatsapp 2s infinite;
+        }
+        .whatsapp-float img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 50%;
+        }
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+        }
+        @keyframes pulse-whatsapp {
+            0%, 100% { filter: drop-shadow(0 4px 12px rgba(37,211,102,0.4)); }
+            50% { filter: drop-shadow(0 6px 20px rgba(37,211,102,0.6)); }
+        }
+
+        /* ========== RESPONSIVIDADE ========== */
+        @media (max-width: 768px) {
+            .nav-links { 
+                display: none; 
+                flex-direction: column;
+                position: absolute;
+                top: 65px;
+                left: 0;
+                width: 100%;
+                background: rgba(91, 26, 110, 0.98);
+                padding: 20px;
+                box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+                gap: 5px;
+            }
+            .nav-links.active { display: flex; }
+            .nav-links.active a { color: #fff; }
+            .nav-links.active a:hover { color: var(--gold); background: rgba(255,255,255,0.1); }
+            .nav-links.active a.nav-cta { color: #fff; background: var(--purple); border: 1px solid rgba(255,255,255,0.3); }
+            .mobile-menu-icon { display: block; }
+            .form-row { grid-template-columns: 1fr; }
+            #contato { padding: 100px 0 60px 0; }
+            .footer-banner-wrap { flex-direction: column; padding: 40px 30px; gap: 20px; }
+            .footer-img-left,
+            .footer-img-right { width: 100%; max-width: 520px; max-height: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo">
+                    <img src="img/site-BASTA-copiar_0000s_0015_BASTA-logo2.png" alt="BASTA! - De violência contra a mulher">
+                </a>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="index.html#projeto" data-i18n="nav.project">O projeto</a></li>
+                    <li><a href="index.html#aplicativo" data-i18n="nav.app">O aplicativo</a></li>
+                    <li><a href="index.html#colecao" data-i18n="nav.collection">A coleção</a></li>
+                    <li><a href="index.html#legal" data-i18n="nav.legal">Fundamentação legal</a></li>
+                    <li><a href="index.html#parceiros" data-i18n="nav.partners">Parceiros e clientes</a></li>
+                    <li><a href="index.html#conheca-app" data-i18n="nav.knowApp">Conheça o aplicativo</a></li>
+                    <li><a href="#" class="nav-cta" data-i18n="nav.contact">Fale conosco</a></li>
+                    <li class="lang-selector">
+                        <button class="lang-btn active" data-lang="pt" title="Português">🇧🇷</button>
+                        <button class="lang-btn" data-lang="en" title="English">🇺🇸</button>
+                        <button class="lang-btn" data-lang="es" title="Español">🇪🇸</button>
+                        <button class="lang-btn" data-lang="fr" title="Français">🇫🇷</button>
+                    </li>
+                </ul>
+                <div class="mobile-menu-icon" id="menuIcon"><i class="fas fa-bars"></i></div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- CONTATO -->
+    <section id="contato">
+        <div class="container">
+            <h2 class="section-title" data-i18n="contact.title">Fale conosco</h2>
+            <div class="contact-area-centered">
+                <form id="contatoForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="contatoNome">Nome Completo</label>
+                            <input type="text" id="contatoNome" name="nome" placeholder="Seu nome" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="contatoInstituicao">Instituição</label>
+                            <input type="text" id="contatoInstituicao" name="instituicao" placeholder="Nome da escola">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="contatoCidade">Cidade</label>
+                            <input type="text" id="contatoCidade" name="cidade" placeholder="Sua cidade">
+                        </div>
+                        <div class="form-group">
+                            <label for="contatoTelefone">WhatsApp</label>
+                            <input type="tel" id="contatoTelefone" name="telefone" placeholder="(00) 00000-0000" required minlength="14" pattern="\(\d{2}\)\s?\d{4,5}-\d{4}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="contatoMensagem">Mensagem</label>
+                        <textarea id="contatoMensagem" name="mensagem" rows="4" placeholder="Como podemos ajudar?"></textarea>
+                    </div>
+                    
+                    <!-- Campo honeypot para proteção anti-bot (não remover) -->
+                    <input 
+                        type="text" 
+                        name="website" 
+                        style="position:absolute;left:-9999px;width:1px;height:1px;" 
+                        tabindex="-1" 
+                        autocomplete="off"
+                        aria-hidden="true"
+                    >
+                    
+                    <button type="submit" class="btn btn-purple" style="width: 100%;">Enviar</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-banner-wrap">
+            <img src="img/Grupo-133-1.png" alt="Ética Editora - redes sociais" class="footer-banner footer-img-left">
+            <img src="img/Grupo-132.png" alt="Empresa credenciada - selos" class="footer-banner footer-img-right">
+        </div>
+    </footer>
+
+    <!-- WHATSAPP FLOATING BUTTON -->
+    <a href="https://wa.me/5511987380525" target="_blank" class="whatsapp-float">
+        <img src="img/09.whatsapp.png" alt="WhatsApp">
+    </a>
+
+    <script>
+        // URL do backend
+        const BACKEND_URL = window.location.hostname === 'localhost'
+            ? 'http://localhost:3001'
+            : 'https://bastasite.onrender.com';
+
+        // Menu Mobile Toggle
+        const menuIcon = document.getElementById('menuIcon');
+        const navLinks = document.getElementById('navLinks');
+
+        menuIcon.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Close menu on link click (mobile)
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Form de contato — envio via backend Z-API
+        const contatoForm = document.getElementById('contatoForm');
+
+        // Máscara de telefone
+        const telInput = document.getElementById('contatoTelefone');
+        if (telInput) {
+            telInput.addEventListener('input', function () {
+                let v = this.value.replace(/\D/g, '').slice(0, 11);
+                if (v.length > 6) v = '(' + v.slice(0,2) + ') ' + v.slice(2,7) + '-' + v.slice(7);
+                else if (v.length > 2) v = '(' + v.slice(0,2) + ') ' + v.slice(2);
+                else if (v.length > 0) v = '(' + v;
+                this.value = v;
+            });
+        }
+
+        if (contatoForm) {
+            contatoForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const btn = contatoForm.querySelector('button[type="submit"]');
+                const textoOriginal = btn.textContent;
+                btn.textContent = 'Enviando...';
+                btn.disabled = true;
+
+                try {
+                    const fd = new FormData(contatoForm);
+                    const res = await fetch(BACKEND_URL + '/api/enviar-lead', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(Object.fromEntries(fd))
+                    });
+                    const data = await res.json();
+                    if (data.sucesso) {
+                        alert('Mensagem enviada com sucesso! Entraremos em contato.');
+                        contatoForm.reset();
+                    } else {
+                        alert(data.erro || 'Erro ao enviar. Tente novamente.');
+                    }
+                } catch (err) {
+                    console.error('Erro:', err);
+                    alert('Erro de conexão. Tente novamente.');
+                } finally {
+                    btn.textContent = textoOriginal;
+                    btn.disabled = false;
+                }
+            });
+        }
+    </script>
+
+    <!-- Language Selector & Translation System (Shared) -->
+    <script src="js/translations.js"></script>
+    <script src="js/language-system.js"></script>
+</body>
+</html>

@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BASTA! - Todas as Embaixadoras</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/language-system.css">
+
+    <style>
+        /* ========== RESET & VARIÁVEIS ========== */
+        :root {
+            --purple-dark: #5B1A6E;
+            --purple: #7B2D8E;
+            --purple-light: #9B4DB0;
+            --magenta: #D4388E;
+            --gold: #F5C518;
+            --cream: #FDF5E6;
+            --text-dark: #333;
+            --text-light: #fff;
+            --bg-cream: #FFF8EE;
+            --transition: all 0.3s ease;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Inter', sans-serif; color: var(--text-dark); background: #fff; line-height: 1.7; overflow-x: hidden; }
+        
+        h1, h2, h3 { font-family: 'Playfair Display', serif; }
+        ul { list-style: none; }
+        a { text-decoration: none; color: inherit; }
+        img { max-width: 100%; display: block; }
+
+        /* ========== COMPONENTES REUTILIZÁVEIS ========== */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        .btn { 
+            display: inline-block; 
+            padding: 14px 36px; 
+            border-radius: 50px; 
+            font-weight: 700; 
+            transition: var(--transition);
+            cursor: pointer;
+            border: none;
+            font-size: 0.95rem;
+        }
+        .btn-purple { background: var(--purple); color: white; }
+        .btn-purple:hover { background: var(--purple-dark); transform: translateY(-3px); }
+
+        /* ========== HEADER & NAV ========== */
+        header { 
+            background: var(--purple-dark); 
+            padding: 15px 0; 
+            position: fixed; 
+            top: 0; 
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.2);
+        }
+        nav { display: flex; justify-content: space-between; align-items: center; }
+        .logo {
+            display: flex;
+            align-items: center;
+            line-height: 1;
+            margin-right: 20px;
+        }
+        .logo img {
+            height: 50px;
+            width: auto;
+        }
+        .nav-links { display: flex; gap: 5px; align-items: center; }
+        .nav-links a { 
+            font-weight: 500; 
+            font-size: 0.8rem; 
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 20px;
+            transition: var(--transition);
+        }
+        .nav-links a:hover { color: var(--gold); background: rgba(255,255,255,0.1); }
+        .nav-links a.nav-cta {
+            background: rgba(255,255,255,0.15);
+            color: #fff;
+            font-weight: 600;
+            border: 1px solid rgba(255,255,255,0.4);
+        }
+        .nav-links a.nav-cta:hover { background: rgba(255,255,255,0.25); }
+        .mobile-menu-icon { display: none; font-size: 1.5rem; color: #fff; cursor: pointer; }
+
+        /* ========== CONTEÚDO PRINCIPAL ========== */
+        .section-title {
+            font-size: 2.8rem;
+            text-align: center;
+            color: #5B0163;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 4px;
+            background: #5B0163;
+            border-radius: 2px;
+        }
+
+        /* ========== EMBAIXADORAS ========== */
+        .embaixadoras-hero {
+            background: url('img/site-BASTA-copiar_0000s_0018_Retangulo-1-e1752681294479.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            padding: 140px 0 80px 0;
+            position: relative;
+        }
+        .embaixadoras-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 50%;
+            height: 80px;
+            background: linear-gradient(to top right, transparent 49.5%, var(--bg-cream) 50%);
+            z-index: 5;
+        }
+        .embaixadoras-hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50%;
+            height: 80px;
+            background: linear-gradient(to top left, transparent 49.5%, var(--bg-cream) 50%);
+            z-index: 5;
+        }
+        .embaixadoras-hero .container {
+            position: relative;
+            z-index: 10;
+        }
+        .subtitle {
+            text-align: center;
+            color: rgba(255,255,255,0.9);
+            margin-top: 30px;
+            font-size: 1.1rem;
+        }
+
+        /* ========== GRID DE EMBAIXADORAS ========== */
+        .embaixadoras-section {
+            background: var(--bg-cream);
+            padding: 60px 0;
+        }
+        .estado-section {
+            margin-bottom: 60px;
+        }
+        .estado-title {
+            font-size: 2rem;
+            color: var(--purple-dark);
+            margin-bottom: 30px;
+            text-align: center;
+            position: relative;
+        }
+        .estado-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: var(--purple);
+            border-radius: 2px;
+        }
+        .embaixadora-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        .embaixadora-card {
+            background: #fff;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            text-align: center;
+            transition: var(--transition);
+        }
+        .embaixadora-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 50px rgba(0,0,0,0.12);
+        }
+        .embaixadora-card.estadual {
+            border: 3px solid var(--purple);
+        }
+        .embaixadora-card.estadual::before {
+            content: 'EMBAIXADORA ESTADUAL';
+            display: block;
+            background: var(--purple);
+            color: #fff;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin: -45px auto 20px;
+            width: fit-content;
+        }
+        .embaixadora-foto {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            background-size: cover;
+            background-position: center;
+            border: 4px solid var(--purple-light);
+        }
+        .embaixadora-cidade {
+            font-size: 0.85rem;
+            color: var(--magenta);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+        .embaixadora-nome {
+            font-size: 1.3rem;
+            color: var(--purple-dark);
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        .embaixadora-perfil {
+            font-size: 0.9rem;
+            color: var(--magenta);
+            margin-bottom: 15px;
+        }
+        .embaixadora-divider {
+            width: 60px;
+            height: 3px;
+            background: var(--purple);
+            margin: 0 auto 15px;
+            border-radius: 2px;
+        }
+        .embaixadora-desc {
+            font-size: 0.85rem;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* ========== FOOTER ========== */
+        footer { 
+            background: #6D2573; 
+            color: #fff; 
+            padding: 0; 
+        }
+        .footer-banner-wrap {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 18px 40px;
+            background: #6D2573;
+            gap: 30px;
+        }
+        .footer-banner {
+            height: auto;
+            display: block;
+            object-fit: contain;
+        }
+        .footer-img-left { max-height: 60px; }
+        .footer-img-right { max-height: 60px; }
+     
+
+        /* WhatsApp button styles imported from css/components.css */
+
+        /* ========== RESPONSIVIDADE ========== */
+        @media (max-width: 768px) {
+            .nav-links { 
+                display: none; 
+                flex-direction: column;
+                position: absolute;
+                top: 65px;
+                left: 0;
+                width: 100%;
+                background: rgba(91, 26, 110, 0.98);
+                padding: 20px;
+                box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+                gap: 5px;
+            }
+            .nav-links.active { display: flex; }
+            .nav-links.active a { color: #fff; }
+            .nav-links.active a:hover { color: var(--gold); background: rgba(255,255,255,0.1); }
+            .nav-links.active a.nav-cta { color: #fff; background: var(--purple); border: 1px solid rgba(255,255,255,0.3); }
+            .mobile-menu-icon { display: block; }
+            .embaixadora-grid { grid-template-columns: 1fr; }
+            .section-title { font-size: 2rem; }
+            .estado-title { font-size: 1.5rem; }
+            .footer-banner-wrap { flex-direction: column; padding: 40px 30px; gap: 20px; }
+            .footer-img-left,
+            .footer-img-right { width: 100%; max-width: 520px; max-height: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo">
+                    <img src="img/site-BASTA-copiar_0000s_0015_BASTA-logo2.png" alt="BASTA! - De violência contra a mulher">
+                </a>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="index.html#projeto" data-i18n="nav.project">O projeto</a></li>
+                    <li><a href="index.html#aplicativo" data-i18n="nav.app">O aplicativo</a></li>
+                    <li><a href="index.html#colecao" data-i18n="nav.collection">A coleção</a></li>
+                    <li><a href="index.html#legal" data-i18n="nav.legal">Fundamentação legal</a></li>
+                    <li><a href="index.html#parceiros" data-i18n="nav.partners">Parceiros e clientes</a></li>
+                    <li><a href="index.html#conheca-app" data-i18n="nav.knowApp">Conheça o aplicativo</a></li>
+                    <li><a href="contato.html" class="nav-cta" target="_blank" data-i18n="nav.contact">Fale conosco</a></li>
+                    <li class="lang-selector">
+                        <button class="lang-btn active" data-lang="pt" title="Português">🇧🇷</button>
+                        <button class="lang-btn" data-lang="en" title="English">🇺🇸</button>
+                        <button class="lang-btn" data-lang="es" title="Español">🇪🇸</button>
+                        <button class="lang-btn" data-lang="fr" title="Français">🇫🇷</button>
+                    </li>
+                </ul>
+                <div class="mobile-menu-icon" id="menuIcon"><i class="fas fa-bars"></i></div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="embaixadoras-hero">
+        <div class="container">
+            <h1 class="section-title" data-i18n="ambassadors.title">Todas as Embaixadoras</h1>
+            <p class="subtitle" data-i18n="ambassadors.subtitle">Conheça todas as embaixadoras do projeto BASTA! em todo o Brasil</p>
+        </div>
+    </section>
+
+    <!-- EMBAIXADORAS CONTENT -->
+    <section class="embaixadoras-section">
+        <div class="container" id="embaixadoras-container">
+            <!-- Conteúdo gerado por JavaScript -->
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-banner-wrap">
+            <img src="img/Grupo-133-1.png" alt="Ética Editora - redes sociais" class="footer-banner footer-img-left">
+            <img src="img/Grupo-132.png" alt="Empresa credenciada - selos" class="footer-banner footer-img-right">
+        </div>
+    </footer>
+
+    <!-- WHATSAPP FLOATING BUTTON -->
+    <a href="https://wa.me/5511987380525" target="_blank" class="whatsapp-float">
+        <img src="img/09.whatsapp.png" alt="WhatsApp">
+    </a>
+
+    <script>
+        // Menu Mobile Toggle
+        const menuIcon = document.getElementById('menuIcon');
+        const navLinks = document.getElementById('navLinks');
+
+        menuIcon.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Close menu on link click (mobile)
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Dados das embaixadoras
+        const embaixadoresData = {
+            BA: {
+                estado: "BAHIA",
+                embaixadora: {
+                    nome: "Carol Silva Andrade",
+                    perfil: "@Carol.Silva",
+                    foto: "img/portrait-beautiful-brazilian-woman-with-curly-hair-smiling.png",
+                    descricao: "Carol Silva Andrade, 30 anos, é advogada com atuação voltada para o Direito de Família e pós-graduada em Processo Civil."
+                },
+                municipais: [
+                    { cidade: "Salvador", nome: "Ana Costa", perfil: "@ana.costa", foto: "img/portrait-beautiful-brazilian-woman-with-curly-hair-smiling.png", descricao: "Advogada especializada em direitos das mulheres, atuando na capital baiana." },
+                    { cidade: "Feira de Santana", nome: "Carla Oliveira", perfil: "@carla.oliveira", foto: "img/portrait-beautiful-brazilian-woman-with-curly-hair-smiling.png", descricao: "Psicóloga e assistente social focada no combate à violência doméstica." },
+                    { cidade: "Vitória da Conquista", nome: "Beatriz Lima", perfil: "@beatriz.lima", foto: "img/portrait-beautiful-brazilian-woman-with-curly-hair-smiling.png", descricao: "Educadora e ativista pelos direitos das mulheres." }
+                ]
+            },
+            SP: {
+                estado: "SÃO PAULO",
+                embaixadora: {
+                    nome: "Livânia Alves Sales",
+                    perfil: "@Livania.Alves",
+                    foto: "img/embaixadoraSP.jpg",
+                    descricao: "Livânia Alves Sales, 32 anos, primeira embaixadora do estado de São Paulo."
+                },
+                municipais: [
+                    { cidade: "São Paulo", nome: "Gabriela Alves", perfil: "@gabriela.alves", foto: "img/portrait-beautiful-brazilian-woman-with-curly-hair-smiling.png", descricao: "Atuante na defesa dos direitos das mulheres na capital paulista." },
+                    { cidade: "Santos", nome: "Isabela Cruz", perfil: "@isabela.cruz", foto: "img/portrait-beautiful-brazilian-woman-with-curly-hair-smiling.png", descricao: "Promotora de justiça especializada em violência doméstica." },
+                    { cidade: "Ribeirão Preto", nome: "Joana Pereira", perfil: "@joana.pereira", foto: "img/portrait-beautiful-brazilian-woman-with-curly-hair-smiling.png", descricao: "Psicóloga e ativista pelos direitos das mulheres." }
+                ]
+            },
+            RJ: {
+                estado: "RIO DE JANEIRO",
+                embaixadora: {
+                    nome: "Patricia Rodrigues",
+                    perfil: "@patricia.rodrigues",
+                    foto: "img/portrait-beautiful-woman-1.png",
+                    descricao: "Advogada especializada em direitos das mulheres no Rio de Janeiro."
+                },
+                municipais: [
+                    { cidade: "Rio de Janeiro", nome: "Mariana Costa", perfil: "@mariana.costa", foto: "img/portrait-beautiful-brazilian-woman-with-curly-hair-smiling.png", descricao: "Defensora pública e ativista pelos direitos das mulheres." },
+                    { cidade: "Niterói", nome: "Natália Souza", perfil: "@natalia.souza", foto: "img/portrait-beautiful-brazilian-woman-with-curly-hair-smiling.png", descricao: "Psicóloga especializada em atendimento a vítimas de violência." }
+                ]
+            },
+            MG: {
+                estado: "MINAS GERAIS",
+                embaixadora: {
+                    nome: "Roberta Almeida",
+                    perfil: "@roberta.almeida",
+                    foto: "img/portrait-beautiful-woman-1.png",
+                    descricao: "Advogada especializada em direitos das mulheres em Minas Gerais."
+                },
+                municipais: [
+                    { cidade: "Belo Horizonte", nome: "Sofia Martins", perfil: "@sofia.martins", foto: "img/portrait-beautiful-brazilian-woman-with-curly-hair-smiling.png", descricao: "Promotora de justiça especializada em casos de violência contra a mulher." },
+                    { cidade: "Uberlândia", nome: "Tânia Rocha", perfil: "@tania.rocha", foto: "img/portrait-beautiful-brazilian-woman-with-curly-hair-smiling.png", descricao: "Advogada e coordenadora de centro de apoio à mulher." }
+                ]
+            }
+        };
+
+        // Gerar HTML das embaixadoras
+        const container = document.getElementById('embaixadoras-container');
+        
+        Object.keys(embaixadoresData).forEach(sigla => {
+            const estado = embaixadoresData[sigla];
+            if (!estado.embaixadora.nome) return;
+
+            const section = document.createElement('div');
+            section.className = 'estado-section';
+            
+            let html = `<h2 class="estado-title">${estado.estado}</h2>`;
+            html += '<div class="embaixadora-grid">';
+            
+            // Embaixadora estadual
+            html += `
+                <div class="embaixadora-card estadual">
+                    <div class="embaixadora-foto" style="background-image: url('${estado.embaixadora.foto}')"></div>
+                    <div class="embaixadora-cidade">${estado.estado}</div>
+                    <div class="embaixadora-nome">${estado.embaixadora.nome}</div>
+                    <div class="embaixadora-perfil">${estado.embaixadora.perfil}</div>
+                    <div class="embaixadora-divider"></div>
+                    <p class="embaixadora-desc">${estado.embaixadora.descricao}</p>
+                </div>
+            `;
+            
+            // Embaixadoras municipais
+            estado.municipais.forEach(mun => {
+                html += `
+                    <div class="embaixadora-card">
+                        <div class="embaixadora-foto" style="background-image: url('${mun.foto}')"></div>
+                        <div class="embaixadora-cidade">${mun.cidade}</div>
+                        <div class="embaixadora-nome">${mun.nome}</div>
+                        <div class="embaixadora-perfil">${mun.perfil}</div>
+                        <div class="embaixadora-divider"></div>
+                        <p class="embaixadora-desc">${mun.descricao}</p>
+                    </div>
+                `;
+            });
+            
+            html += '</div>';
+            section.innerHTML = html;
+            container.appendChild(section);
+        });
+    </script>
+
+    <!-- Language Selector -->
+    <script src="js/translations.js"></script>
+    <script src="js/language-system.js"></script>
+</body>
+</html>

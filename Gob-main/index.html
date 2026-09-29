@@ -1,0 +1,1561 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="BASTA! - O maior ecossistema de educação, prevenção e formação contra violência doméstica. Livros didáticos, aplicativo de segurança e formação especializada para escolas.">
+    <meta name="keywords" content="violência doméstica, educação, prevenção, BASTA, escolas, Lei Maria da Penha, aplicativo segurança">
+    <meta name="author" content="BASTA!">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://basta.app.br">
+    <meta property="og:title" content="BASTA! - Escolas Unidas contra a Violência Doméstica">
+    <meta property="og:description" content="O maior ecossistema de educação, prevenção e formação contra violência doméstica do Brasil">
+    <meta property="og:image" content="img/site-BASTA-copiar_0000s_0015_BASTA-logo2.png">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://basta.app.br">
+    <meta property="twitter:title" content="BASTA! - Escolas Unidas contra a Violência Doméstica">
+    <meta property="twitter:description" content="O maior ecossistema de educação, prevenção e formação contra violência doméstica do Brasil">
+    <meta property="twitter:image" content="img/site-BASTA-copiar_0000s_0015_BASTA-logo2.png">
+    
+    <title>BASTA! - Escolas Unidas contra a Violência Doméstica</title>
+    
+    <!-- Preconnect para otimização -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;500;600;700;800&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "BASTA!",
+      "description": "Escolas Unidas contra a Violência Doméstica - O maior ecossistema de educação, prevenção e formação do Brasil",
+      "url": "https://basta.app.br",
+      "logo": "img/site-BASTA-copiar_0000s_0015_BASTA-logo2.png",
+      "sameAs": [
+        "https://www.facebook.com/basta",
+        "https://www.instagram.com/editoraeticaoficial?igsh=djBlZWF4bHYzN3l5",
+        "https://www.youtube.com/@EditoraEtica-tec"
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "Customer Service",
+        "availableLanguage": "Portuguese"
+      }
+    }
+    </script>
+
+    <!-- Folhas de estilo externas -->
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/language-system.css">
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo">
+                    <img src="img/site-BASTA-copiar_0000s_0015_BASTA-logo2.png" alt="BASTA! - De violência contra a mulher">
+                </a>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="#projeto" data-i18n="nav.project">O projeto</a></li>
+                    <li><a href="#aplicativo" data-i18n="nav.app">O aplicativo</a></li>
+                    <li><a href="#colecao" data-i18n="nav.collection">A coleção</a></li>
+                    <li><a href="#legal" data-i18n="nav.legal">Fundamentação legal</a></li>
+                    <li><a href="#parceiros" data-i18n="nav.partners">Parceiros e clientes</a></li>
+                    <li><a href="#conheca-app" data-i18n="nav.knowApp">Conheça o aplicativo</a></li>
+                    <li><a href="contato.html" class="nav-cta" target="_blank" data-i18n="nav.contact">Fale conosco</a></li>
+                    <li class="lang-selector">
+                        <button class="lang-btn active" data-lang="pt" title="Português">🇧🇷</button>
+                        <button class="lang-btn" data-lang="en" title="English">🇺🇸</button>
+                        <button class="lang-btn" data-lang="es" title="Español">🇪🇸</button>
+                        <button class="lang-btn" data-lang="fr" title="Français">🇫🇷</button>
+                    </li>
+                </ul>
+                <div class="mobile-menu-icon" id="menuIcon"><i class="fas fa-bars"></i></div>
+                <div class="mobile-menu-close" id="menuClose"><i class="fas fa-times"></i></div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="container">
+            <div class="hero-content">
+                <!-- Título -->
+                <h1 class="hero-title" data-i18n-html="hero.title">
+                    <span class="hero-title-hl">Escolas unidas</span> contra<br>
+                    a violência doméstica
+                </h1>
+                <!-- Subtítulo + checks — desktop only, dentro do hero (fundo roxo) -->
+                <p class="hero-subtitle hero-subtitle--in" data-i18n-html="hero.subtitle">
+                    O maior <span class="hero-text-hl">ecossistema</span> de educação,<br>
+                    prevenção e formação do Brasil
+                </p>
+                <ul class="hero-checks hero-checks--in">
+                    <li><img src="img/check.png" class="check-icon" alt=""> <span data-i18n="hero.check1">Conforme a LDB e Lei Maria da Penha</span></li>
+                    <li><img src="img/check.png" class="check-icon" alt=""> <span data-i18n="hero.check2">Tecnologia exclusiva</span></li>
+                    <li><img src="img/check.png" class="check-icon" alt=""> <span data-i18n="hero.check3">Aprovado por Conselhos de Educação</span></li>
+                    <li><img src="img/check.png" class="check-icon" alt=""> <span data-i18n="hero.check4">Aprovado pela Defensoria Pública</span></li>
+                </ul>
+                <!-- Cards — desktop only, abaixo dos checks dentro do hero roxo -->
+                <div class="hero-cards hero-cards--in">
+                    <a href="#colecao" class="hero-card">
+                        <div class="hero-card-icon"><img src="img/pilhaLivros.png" alt="Livros didáticos"></div>
+                        <span class="hero-card-label" data-i18n="hero.card1">Livros didáticos</span>
+                    </a>
+                    <a href="#projeto" class="hero-card">
+                        <div class="hero-card-icon"><img src="img/quadro.png" alt="Formação especializada"></div>
+                        <span class="hero-card-label" data-i18n="hero.card2">Formação especializada</span>
+                    </a>
+                    <a href="#conheca-app" class="hero-card">
+                        <div class="hero-card-icon"><img src="img/celular.png" alt="Aplicativo de segurança"></div>
+                        <span class="hero-card-label" data-i18n="hero.card3">Aplicativo de segurança</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!-- Triângulo divisor cream — centralizado na base da hero -->
+    </section>
+
+    <!-- HERO LOWER — subtítulo, checks e cards na área cream -->
+    <div class="hero-lower">
+        <div class="container">
+            <p class="hero-subtitle hero-subtitle--lower" data-i18n-html="hero.subtitle">
+                O maior <span class="hero-text-hl">ecossistema</span> de educação,<br>
+                prevenção e formação do Brasil
+            </p>
+            <ul class="hero-checks hero-checks--lower">
+                <li><img src="img/check.png" class="check-icon" alt=""> <span data-i18n="hero.check1">Conforme a LDB e Lei Maria da Penha</span></li>
+                <li><img src="img/check.png" class="check-icon" alt=""> <span data-i18n="hero.check2">Tecnologia exclusiva</span></li>
+                <li><img src="img/check.png" class="check-icon" alt=""> <span data-i18n="hero.check3">Aprovado por Conselhos de Educação</span></li>
+                <li><img src="img/check.png" class="check-icon" alt=""> <span data-i18n="hero.check4">Aprovado pela Defensoria Pública</span></li>
+            </ul>
+            <div class="hero-cards hero-cards--lower">
+                <a href="#colecao" class="hero-card">
+                    <div class="hero-card-icon">
+                        <img src="img/pilhaLivros.png" alt="Livros didáticos">
+                    </div>
+                    <span class="hero-card-label" data-i18n="hero.card1">Livros didáticos</span>
+                </a>
+                <a href="#projeto" class="hero-card">
+                    <div class="hero-card-icon">
+                        <img src="img/quadro.png" alt="Formação especializada">
+                    </div>
+                    <span class="hero-card-label" data-i18n="hero.card2">Formação especializada</span>
+                </a>
+                <a href="#conheca-app" class="hero-card">
+                    <div class="hero-card-icon">
+                        <img src="img/celular.png" alt="Aplicativo de segurança">
+                    </div>
+                    <span class="hero-card-label" data-i18n="hero.card3">Aplicativo de segurança</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- O PROJETO -->
+    <section id="projeto">
+        <div class="deco-circle" style="width:200px;height:200px;top:-50px;right:-50px;"></div>
+        <div class="deco-circle-filled" style="width:120px;height:120px;bottom:60px;right:80px;"></div>
+        <div class="deco-circle" style="width:80px;height:80px;top:100px;left:-30px;"></div>
+        <div class="container">
+            <h2 class="section-title-text" data-i18n="section.project">O projeto</h2>
+            <div class="project-grid">
+                <div class="project-text-box">
+                    <div class="section-text-content">
+                        <p data-i18n="project.p1">Pela primeira vez uma editora conseguiu aplicar de forma absoluta um projeto educativo que garante à todas as escolas da rede privada e pública o cumprimento das exigências federais no que tange o tema violência doméstica e contra a mulher.</p>
+                        <p data-i18n="project.p2">Aplicamos metodologias educacionais somadas às ferramentas da terapia cognitiva comportamental e psicanalíticas para garantir a eficiência desse inédito projeto, e assim torná-lo aplicável nas escolas, alcançando alunos e familiares para conquistas permanentes.</p>
+                        <p data-i18n="project.p3">Conceitos teóricos são aplicados nesse audacioso projeto que desenvolve as habilidades socioemocionais na prática, as quais serão aplicadas para promover o recondicionamento comportamental de todas as partes envolvidas em uma relação interpessoal, propondo mudanças significativas na postura, na comunicação, no tratamento mútuo.</p>
+                        <p data-i18n="project.p4">O uso diário das ferramentas educativas disponíveis neste projeto conseguirá promover avanços significativos na construção de uma personalidade amável e respeitosa, a ponto de construir e enraizar conceitos valorosos em toda a sociedade.</p>
+                        <p data-i18n="project.p5">Tudo isso é desenvolvido através da aplicação de um cronograma de conteúdos educacionais que confronta o problema da violência contra a mulher de forma inédita. A construção dessa nova mentalidade vai impactar diretamente no relacionamento interpessoal e na harmonia familiar, conduzindo o estudante a desenvolver postura comportamental nobre, como respeito, solidariedade e justiça para uma vivência feliz, onde a proteção e o respeito à integridade física, emocional e social sejam uma realidade na vida de todos.</p>
+                    </div>
+                </div>
+                <div class="project-images">
+                    <img src="img/phone_with_book-1.png" alt="BASTA! - Livros e App">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- O APLICATIVO -->
+    <section id="aplicativo">
+        <div class="container">
+            <div class="app-title-wrap">
+                <h2 class="section-title-text" data-i18n="section.app">O aplicativo</h2>
+            </div>
+            <div class="app-grid">
+                <div class="app-phones">
+                    <img src="img/EDITION1.png" alt="App BASTA!">
+                </div>
+                <div class="app-text-box">
+                    <div class="section-text-content">
+                        <p data-i18n="app.p1">Diante da necessidade de cumprimento das exigências legais contidas nas diversas Leis Federal e Estadual em defesa da mulher (Lei Maria da Penha; Lei de Diretrizes e Bases da educação; Lei do Feminicídio), bem como no apoio psicológico, físico e social das mulheres vítimas ou passivas de violência doméstica, a empresa Ética Tecnologia e Gestão Educacional Ltda, desenvolveu o mais completo sistema de educação e segurança pessoal para mulheres brasileiras.</p>
+                        <p data-i18n="app.p2">Através de orientações educacionais e terapêuticas para desenvolvimento cognitivo e comportamental que promoverá a melhoria do diálogo nos relacionamentos, visando levar o bem estar emocional, social e pessoal dessas pessoas enquanto indivíduos detentores de direitos e também de deveres, e ainda, com o intuito de apoiar a restruturação dos relacionamentos, tornando-os mais harmoniosos, respeitosos e seguros, promovendo a empatia, a solidariedade e a atenção nos relacionamentos conjugais, apresentamos o sistema educativo, preventivo de inteligência emocional e segurança para mulheres brasileiras: BASTA!!!.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- A COLEÇÃO -->
+    <section id="colecao">
+        <div class="deco-circle" style="width:150px;height:150px;top:-30px;left:60px;border-color:var(--gold);"></div>
+        <div class="deco-circle-filled" style="width:90px;height:90px;bottom:40px;right:40px;"></div>
+        <div class="container">
+            <div class="colecao-grid">
+                <div class="colecao-text">
+                    <h2 class="section-title-text left" data-i18n="section.collection">A coleção</h2>
+                    <div class="colecao-text-content" data-i18n-html="collection.text">
+                        <p>O projeto é composto por 3 kits educativos e completos que contêm:<br><strong>• Livro do aluno;</strong><br><strong>• Livro do Homem – Pai ou responsável;</strong><br><strong>• Livro da Mulher – Mãe ou responsável.</strong></p>
+                        <p>Todos os livros são exclusivos que se completam, se conversam e promovem a integração dos leitores entre si, partindo de uma perspectiva inicial da autoanálise comportamental e seguindo com as técnicas de neuropsicologia e PNL.</p>
+                        <p>As atividades práticas são específicas para cada pessoa integrante desse projeto distinto por perfil de leitor. Dessa forma, há um livro específico e com linguagem apropriada para o aluno, o homem e a mulher da casa, além do livro do professor, sendo que este último passa por uma formação especial que lhe concerne habilidades para aplicar o material em sala de aula.</p>
+                    </div>
+                </div>
+                <div class="colecao-images">
+                    <img src="img/apresentacao-BASTA-todos.png" alt="Coleção BASTA! - Todos os livros">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BOTÃO CRONOGRAMA -->
+    <div class="cronograma-cta">
+        <a href="#" class="btn" data-i18n="btn.cronograma" onclick="openCronogramaModal(); return false;">Conheça o cronograma de aplicação</a>
+    </div>
+
+    <!-- FUNDAMENTAÇÃO LEGAL -->
+    <section id="legal">
+        <div class="container">
+            <div class="legal-grid">
+                <div class="legal-image">
+                    <img src="img/site-BASTA-copiar_0001s_0004_34-2-1.png" alt="Livros BASTA!">
+                </div>
+                <div class="legal-content">
+                    <h2 class="section-title-text left" data-i18n="section.legal" style="margin-bottom:25px;">Fundamentação legal</h2>
+                    <div class="legal-text-content" data-i18n-html="legal.text">
+                        <p>• Considerando que toda a coleção está em absoluta concordância com a BNCC e que atende o desenvolvimento das habilidades previstas para as questões emocionais, além do projeto possuir o apoio pedagógico especializado, que integram pessoas e classes, de forma que desenvolve o autoconhecimento, aplicação de valores familiares e humanos, unindo forças e despertando as responsabilidades mútuas entre pilares diferentes da sociedade, buscando a resolução problemas sociais e educacionais. O projeto atende diretamente os dispositivos legais abaixo:</p>
+                        <p>• <strong>Cumprimento da Lei 14.899/24</strong> – Que exige a implementação de plano de metas para o enfrentamento integrado da violência doméstica e familiar contra a mulher, da Rede Estadual de Enfrentamento da Violência contra a Mulher.</p>
+                        <p>• <strong>Cumprimento da Lei 14.164/21</strong> – Que altera a Lei nº 9.394, de 20 de dezembro de 1996 (Lei de Diretrizes e Bases da Educação Nacional), para incluir conteúdo sobre a prevenção da violência contra a mulher nos currículos da educação básica, e institui a Semana Escolar de Combate à Violência contra a Mulher.</p>
+                        <p>• <strong>Cumprimento da Lei 11.340/07 (Maria da Penha)</strong> – Cria mecanismos para coibir a violência doméstica e familiar contra a mulher, nos termos do § 8° do art. 226 da Constituição Federal, da Convenção sobre a Eliminação de Todas as Formas de Discriminação contra as Mulheres.</p>
+                        <p>• A empresa é detentora dos direitos autorais sobre o projeto e as coleções, contando com a credencial de exclusividade comercial em todo o território nacional, conforme <strong>Lei 14.133/21</strong>, e assim oferece um processo transparente e com preço único e entrega direta em todo o Brasil.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PARCEIROS & CLIENTES -->
+    <div class="partners-clientes-wrapper">
+    <!-- PARCEIROS -->
+    <section class="partners-section" id="parceiros">
+        <div class="container">
+            <h2 class="section-title-text white" data-i18n="section.partners">Parceiros</h2>
+            <div class="partners-grid">
+                <div class="partner-card">
+                    <div class="partner-card-inner">
+                        <div class="partner-card-front">
+                            <img src="img/DEAM-1.png" alt="DEAM">
+                        </div>
+                        <div class="partner-card-back">
+                            <img src="img/site-BASTA-copiar_0000s_0015_BASTA-logo2.png" alt="BASTA!">
+                        </div>
+                    </div>
+                </div>
+                <div class="partner-card">
+                    <div class="partner-card-inner">
+                        <div class="partner-card-front">
+                            <img src="img/Intersecao-4-1.png" alt="Ronda Maria da Penha">
+                        </div>
+                        <div class="partner-card-back">
+                            <img src="img/site-BASTA-copiar_0000s_0015_BASTA-logo2.png" alt="BASTA!">
+                        </div>
+                    </div>
+                </div>
+                <div class="partner-card">
+                    <div class="partner-card-inner">
+                        <div class="partner-card-front">
+                            <img src="img/Retangulo-13-1.png" alt="SP Mulher">
+                        </div>
+                        <div class="partner-card-back">
+                            <img src="img/site-BASTA-copiar_0000s_0015_BASTA-logo2.png" alt="BASTA!">
+                        </div>
+                    </div>
+                </div>
+                <div class="partner-card">
+                    <div class="partner-card-inner">
+                        <div class="partner-card-front">
+                            <img src="img/PM-sp.png" alt="Polícia Militar São Paulo">
+                        </div>
+                        <div class="partner-card-back">
+                            <img src="img/site-BASTA-copiar_0000s_0015_BASTA-logo2.png" alt="BASTA!">
+                        </div>
+                    </div>
+                </div>
+                <div class="partner-card">
+                    <div class="partner-card-inner">
+                        <div class="partner-card-front">
+                            <img src="img/policia-militar-da-bahia-logo-692CC13C6B-seeklogo.com-1.png" alt="Polícia Militar da Bahia">
+                        </div>
+                        <div class="partner-card-back">
+                            <img src="img/site-BASTA-copiar_0000s_0015_BASTA-logo2.png" alt="BASTA!">
+                        </div>
+                    </div>
+                </div>
+                <div class="partner-card">
+                    <div class="partner-card-inner">
+                        <div class="partner-card-front">
+                            <img src="img/PM-go.png" alt="Polícia Militar GO">
+                        </div>
+                        <div class="partner-card-back">
+                            <img src="img/site-BASTA-copiar_0000s_0015_BASTA-logo2.png" alt="BASTA!">
+                        </div>
+                    </div>
+                </div>
+                <div class="partner-card">
+                    <div class="partner-card-inner">
+                        <div class="partner-card-front">
+                            <img src="img/oab-logo.png" alt="OAB">
+                        </div>
+                        <div class="partner-card-back">
+                            <img src="img/site-BASTA-copiar_0000s_0015_BASTA-logo2.png" alt="BASTA!">
+                        </div>
+                    </div>
+                </div>
+                <div class="partner-card">
+                    <div class="partner-card-inner">
+                        <div class="partner-card-front">
+                            <img src="img/440934281_866151792222457_4352024647181727977_n.png" alt="MEC">
+                        </div>
+                        <div class="partner-card-back">
+                            <img src="img/site-BASTA-copiar_0000s_0015_BASTA-logo2.png" alt="BASTA!">
+                        </div>
+                    </div>
+                </div>
+                <div class="partner-card">
+                    <div class="partner-card-inner">
+                        <div class="partner-card-front">
+                            <img src="img/Grupo-110-1.png" alt="Ministério das Mulheres">
+                        </div>
+                        <div class="partner-card-back">
+                            <img src="img/site-BASTA-copiar_0000s_0015_BASTA-logo2.png" alt="BASTA!">
+                        </div>
+                    </div>
+                </div>
+                <div class="partner-card">
+                    <div class="partner-card-inner">
+                        <div class="partner-card-front">
+                            <img src="img/FEM-zero.png" alt="Feminicídio Zero">
+                        </div>
+                        <div class="partner-card-back">
+                            <img src="img/site-BASTA-copiar_0000s_0015_BASTA-logo2.png" alt="BASTA!">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CLIENTES -->
+    <section class="clientes-section">
+        <div class="container">
+            <h2 class="section-title-text white" data-i18n="section.clients">Clientes</h2>
+            <div class="clientes-grid">
+                <!-- Cachoeira - branco -->
+                <div class="cliente-card">
+                    <div class="cliente-card-inner">
+                        <div class="cliente-card-front">
+                            <img src="img/Cachoeira.jpg" alt="Cachoeira">
+                        </div>
+                        <div class="cliente-card-back">
+                            <img src="img/site-BASTA-copiar_0000s_0015_BASTA-logo2.png" alt="BASTA!">
+                        </div>
+                    </div>
+                </div>
+                <!-- Dario Meira - branco -->
+                <div class="cliente-card">
+                    <div class="cliente-card-inner">
+                        <div class="cliente-card-front">
+                            <img src="img/Dario-meira.jpg" alt="Dario Meira">
+                        </div>
+                        <div class="cliente-card-back">
+                            <img src="img/site-BASTA-copiar_0000s_0015_BASTA-logo2.png" alt="BASTA!">
+                        </div>
+                    </div>
+                </div>
+                <!-- Itapitanga - branco -->
+                <div class="cliente-card">
+                    <div class="cliente-card-inner">
+                        <div class="cliente-card-front">
+                            <img src="img/Itapitanga.jpg" alt="Itapitanga">
+                        </div>
+                        <div class="cliente-card-back">
+                            <img src="img/site-BASTA-copiar_0000s_0015_BASTA-logo2.png" alt="BASTA!">
+                        </div>
+                    </div>
+                </div>
+                <!-- Nilo Peçanha - branco -->
+                <div class="cliente-card">
+                    <div class="cliente-card-inner">
+                        <div class="cliente-card-front">
+                            <img src="img/Nilo-Pecanha.jpg" alt="Nilo peçanha">
+                        </div>
+                        <div class="cliente-card-back">
+                            <img src="img/site-BASTA-copiar_0000s_0015_BASTA-logo2.png" alt="BASTA!">
+                        </div>
+                    </div>
+                </div>
+                <!-- Teixeira de Freitas - branco -->
+                <div class="cliente-card">
+                    <div class="cliente-card-inner">
+                        <div class="cliente-card-front">
+                            <img src="img/Teixeira-de-Freitas.jpg" alt="Texeira de Freitas">
+                        </div>
+                        <div class="cliente-card-back">
+                            <img src="img/site-BASTA-copiar_0000s_0015_BASTA-logo2.png" alt="BASTA!">
+                        </div>
+                    </div>
+                </div>
+                <!-- Ibicaraí - laranja (cor do logo da prefeitura) -->
+                <div class="cliente-card bg-laranja">
+                    <div class="cliente-card-inner">
+                        <div class="cliente-card-front">
+                            <img src="img/Ibicarai.jpg" alt="Ibicaraí">
+                        </div>
+                        <div class="cliente-card-back">
+                            <img src="img/site-BASTA-copiar_0000s_0015_BASTA-logo2.png" alt="BASTA!">
+                        </div>
+                    </div>
+                </div>
+                <!-- Ibititá - branco -->
+                <div class="cliente-card">
+                    <div class="cliente-card-inner">
+                        <div class="cliente-card-front">
+                            <img src="img/Grupo-85-e1726160812320.png" alt="Ibitita">
+                        </div>
+                        <div class="cliente-card-back">
+                            <img src="img/site-BASTA-copiar_0000s_0015_BASTA-logo2.png" alt="BASTA!">
+                        </div>
+                    </div>
+                </div>
+                <!-- Igaporã - vermelho -->
+                <div class="cliente-card bg-vermelho">
+                    <div class="cliente-card-inner">
+                        <div class="cliente-card-front">
+                            <img src="img/Igapora.jpg" alt="Igaporã">
+                        </div>
+                        <div class="cliente-card-back">
+                            <img src="img/site-BASTA-copiar_0000s_0015_BASTA-logo2.png" alt="BASTA!">
+                        </div>
+                    </div>
+                </div>
+                <!-- Juazeiro - branco -->
+                <div class="cliente-card">
+                    <div class="cliente-card-inner">
+                        <div class="cliente-card-front">
+                            <img src="img/juazeiro.jpg" alt="Juazeiro">
+                        </div>
+                        <div class="cliente-card-back">
+                            <img src="img/site-BASTA-copiar_0000s_0015_BASTA-logo2.png" alt="BASTA!">
+                        </div>
+                    </div>
+                </div>
+                <!-- Salvador - azul -->
+                <div class="cliente-card bg-azul-salvador">
+                    <div class="cliente-card-inner">
+                        <div class="cliente-card-front">
+                            <img src="img/Itabuna.jpg" alt="Itabuna">
+                        </div>
+                        <div class="cliente-card-back">
+                            <img src="img/site-BASTA-copiar_0000s_0015_BASTA-logo2.png" alt="BASTA!">
+                        </div>
+                    </div>
+                </div>
+                <!-- Tancredo Neves - branco -->
+                <div class="cliente-card">
+                    <div class="cliente-card-inner">
+                        <div class="cliente-card-front">
+                            <img src="img/Tancredo-Neves.jpg" alt="Tancredo Neves">
+                        </div>
+                        <div class="cliente-card-back">
+                            <img src="img/site-BASTA-copiar_0000s_0015_BASTA-logo2.png" alt="BASTA!">
+                        </div>
+                    </div>
+                </div>
+                <div class="cliente-card">
+                    <div class="cliente-card-inner">
+                        <div class="cliente-card-front">
+                            <img src="img/Prefeitura-Goiania.jpg" alt="Goiania">
+                        </div>
+                        <div class="cliente-card-back">
+                            <img src="img/site-BASTA-copiar_0000s_0015_BASTA-logo2.png" alt="BASTA!">
+                        </div>
+                    </div>
+                </div>
+                <div class="cliente-card">
+                    <div class="cliente-card-inner">
+                        <div class="cliente-card-front">
+                            <img src="img/Gandu.jpg" alt="Gandu">
+                        </div>
+                        <div class="cliente-card-back">
+                            <img src="img/site-BASTA-copiar_0000s_0015_BASTA-logo2.png" alt="BASTA!">
+                        </div>
+                    </div>
+                </div>
+                <div class="cliente-card">
+                    <div class="cliente-card-inner">
+                        <div class="cliente-card-front">
+                            <img src="img/Prefeitura-de-Salvador.jpg" alt="Salvador">
+                        </div>
+                        <div class="cliente-card-back">
+                            <img src="img/site-BASTA-copiar_0000s_0015_BASTA-logo2.png" alt="BASTA!">
+                        </div>
+                    </div>
+                </div>
+                <div class="cliente-card">
+                    <div class="cliente-card-inner">
+                        <div class="cliente-card-front">
+                            <img src="img/muritiba.jpg" alt="Muritiba">
+                        </div>
+                        <div class="cliente-card-back">
+                            <img src="img/site-BASTA-copiar_0000s_0015_BASTA-logo2.png" alt="BASTA!">
+                        </div>
+                    </div>
+                </div>
+                <div class="cliente-card">
+                    <div class="cliente-card-inner">
+                        <div class="cliente-card-front">
+                            <img src="img/Santo-amaro.jpg" alt="Gandu">
+                        </div>
+                        <div class="cliente-card-back">
+                            <img src="img/site-BASTA-copiar_0000s_0015_BASTA-logo2.png" alt="BASTA!">
+                        </div>
+                    </div>
+                </div>
+                <div class="cliente-card">
+                    <div class="cliente-card-inner">
+                        <div class="cliente-card-front">
+                            <img src="img/Prefeitura-Porto-da-Folha-SE.jpg" alt="Porto da Folha">
+                        </div>
+                        <div class="cliente-card-back">
+                            <img src="img/site-BASTA-copiar_0000s_0015_BASTA-logo2.png" alt="BASTA!">
+                        </div>
+                    </div>
+                </div>
+                <div class="cliente-card">
+                    <div class="cliente-card-inner">
+                        <div class="cliente-card-front">
+                            <img src="img/Grupo-86-e1726160693916.png" alt="Itapitanga">
+                        </div>
+                        <div class="cliente-card-back">
+                            <img src="img/site-BASTA-copiar_0000s_0015_BASTA-logo2.png" alt="BASTA!">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    </div><!-- /.partners-clientes-wrapper -->
+
+    <!-- CONHEÇA O APLICATIVO -->
+    <section id="conheca-app">
+        <div class="container">
+            <h2 class="section-title-text" data-i18n="section.knowApp">Conheça o aplicativo</h2>
+            <div class="carousel-wrapper">
+                <button class="carousel-arrow prev" id="carouselPrev"><img src="img/ativo1.png" alt="Anterior"></button>
+                <div class="app-showcase-content">
+                    <div class="app-showcase-card">
+                        <img id="slideImage" src="img/educacao-1.png" alt="App BASTA! - Slide">
+                    </div>
+                </div>
+                <button class="carousel-arrow next" id="carouselNext"><img src="img/ativo2.png" alt="Próximo"></button>
+            </div>
+            <div class="app-links-bottom">
+                <a href="termos.html#termos" target="_blank" data-i18n="link.terms">Termos de uso</a>
+                <a href="termos.html#privacidade" target="_blank" data-i18n="link.privacy">Política de privacidade</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- DEPOIMENTOS -->
+    <section class="testimonials-section" id="depoimentos" aria-labelledby="depoimentos-title">
+        <span class="testimonials-decor testimonials-decor-heart" aria-hidden="true">♡</span>
+        <span class="testimonials-decor testimonials-decor-star" aria-hidden="true">☆</span>
+
+        <div class="container testimonials-container">
+            <p class="testimonials-eyebrow" data-i18n="testimonials.eyebrow">Histórias que inspiram</p>
+            <h2 class="testimonials-title" id="depoimentos-title" data-i18n="testimonials.title">Depoimentos</h2>
+            <span class="testimonials-title-line" aria-hidden="true"></span>
+            <p class="testimonials-subtitle" data-i18n="testimonials.subtitle">Histórias de acolhimento, transformação e informação.</p>
+
+            <div class="testimonials-carousel" aria-label="Carrossel de depoimentos em vídeo">
+                <button class="testimonials-arrow testimonials-arrow-prev" type="button" aria-label="Depoimento anterior">
+                    <i class="fas fa-chevron-left" aria-hidden="true"></i>
+                </button>
+
+                <div class="testimonials-viewport" tabindex="0">
+                    <div class="testimonials-track">
+                        <button class="testimonial-card" type="button" data-video="videos/video1.mp4" data-video-title="Depoimento 01" aria-label="Reproduzir depoimento 01">
+                            <img src="videos/poster1.jpg" alt="Capa do vídeo de depoimento 01" loading="lazy">
+                            <span class="testimonial-card-shade" aria-hidden="true"></span>
+                            <span class="testimonial-quote" data-i18n="testimonials.quote">“Histórias que inspiram”</span>
+                            <span class="testimonial-play" aria-hidden="true"><i class="fas fa-play"></i></span>
+                            <span class="testimonial-copy">
+                                <strong data-i18n="testimonials.card1.title">Depoimento 01</strong>
+                                <small data-i18n="testimonials.demo">Relato em vídeo</small>
+                            </span>
+                            <span class="testimonial-duration">01:09</span>
+                        </button>
+
+                        <button class="testimonial-card" type="button" data-video="videos/video2.mp4" data-video-title="Depoimento 02" aria-label="Reproduzir depoimento 02">
+                            <img src="videos/poster2.jpg" alt="Capa do vídeo de depoimento 02" loading="lazy">
+                            <span class="testimonial-card-shade" aria-hidden="true"></span>
+                            <span class="testimonial-quote" data-i18n="testimonials.quote">“Histórias que inspiram”</span>
+                            <span class="testimonial-play" aria-hidden="true"><i class="fas fa-play"></i></span>
+                            <span class="testimonial-copy">
+                                <strong data-i18n="testimonials.card2.title">Depoimento 02</strong>
+                                <small data-i18n="testimonials.demo">Relato em vídeo</small>
+                            </span>
+                            <span class="testimonial-duration">01:12</span>
+                        </button>
+
+                        <button class="testimonial-card" type="button" data-video="videos/video3.mp4" data-video-title="Depoimento 03" aria-label="Reproduzir depoimento 03">
+                            <img src="videos/poster3.jpg" alt="Capa do vídeo de depoimento 03" loading="lazy">
+                            <span class="testimonial-card-shade" aria-hidden="true"></span>
+                            <span class="testimonial-quote" data-i18n="testimonials.quote">“Histórias que inspiram”</span>
+                            <span class="testimonial-play" aria-hidden="true"><i class="fas fa-play"></i></span>
+                            <span class="testimonial-copy">
+                                <strong data-i18n="testimonials.card3.title">Depoimento 03</strong>
+                                <small data-i18n="testimonials.demo">Relato em vídeo</small>
+                            </span>
+                            <span class="testimonial-duration">01:15</span>
+                        </button>
+
+                        <button class="testimonial-card" type="button" data-video="videos/video4.mp4" data-video-title="Depoimento 04" aria-label="Reproduzir depoimento 04">
+                            <img src="videos/poster4.jpg" alt="Capa do vídeo de depoimento 04" loading="lazy">
+                            <span class="testimonial-card-shade" aria-hidden="true"></span>
+                            <span class="testimonial-quote" data-i18n="testimonials.quote">“Histórias que inspiram”</span>
+                            <span class="testimonial-play" aria-hidden="true"><i class="fas fa-play"></i></span>
+                            <span class="testimonial-copy">
+                                <strong data-i18n="testimonials.card4.title">Depoimento 04</strong>
+                                <small data-i18n="testimonials.demo">Relato em vídeo</small>
+                            </span>
+                            <span class="testimonial-duration">01:10</span>
+                        </button>
+
+                        <button class="testimonial-card" type="button" data-video="videos/video5.mp4" data-video-title="Depoimento 05" aria-label="Reproduzir depoimento 05">
+                            <img src="videos/poster5.jpg" alt="Capa do vídeo de depoimento 05" loading="lazy">
+                            <span class="testimonial-card-shade" aria-hidden="true"></span>
+                            <span class="testimonial-quote" data-i18n="testimonials.quote">“Histórias que inspiram”</span>
+                            <span class="testimonial-play" aria-hidden="true"><i class="fas fa-play"></i></span>
+                            <span class="testimonial-copy">
+                                <strong data-i18n="testimonials.card5.title">Depoimento 05</strong>
+                                <small data-i18n="testimonials.demo">Relato em vídeo</small>
+                            </span>
+                            <span class="testimonial-duration">01:19</span>
+                        </button>
+                    </div>
+                </div>
+
+                <button class="testimonials-arrow testimonials-arrow-next" type="button" aria-label="Próximo depoimento">
+                    <i class="fas fa-chevron-right" aria-hidden="true"></i>
+                </button>
+            </div>
+
+            <div class="testimonials-dots" role="group" aria-label="Selecionar depoimento"></div>
+
+            <a class="testimonials-cta" href="https://www.youtube.com/@EditoraEtica-tec" target="_blank" rel="noopener noreferrer">
+                <span data-i18n="testimonials.cta">Ver todos os depoimentos</span>
+                <i class="fas fa-arrow-right" aria-hidden="true"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- EMBAIXADORAS -->
+    <section id="embaixadoras">
+      
+        <iframe src="mapas.html" class="embaixadoras-iframe" title="Mapa de Embaixadoras BASTA!" scrolling="no"></iframe>
+    </section>
+
+    <script>
+        // Detecta se é mobile e carrega o arquivo correto
+        (function() {
+            const iframe = document.querySelector('.embaixadoras-iframe');
+            const isMobile = window.innerWidth <= 768;
+            
+            if (iframe && isMobile) {
+                iframe.src = 'mapasMobile.html';
+            }
+        })();
+    </script>
+
+    <!-- NÚMEROS -->
+    <section class="stats" id="numeros">
+        <div class="stats-bg">
+            <img src="img/Grupo-104.png" alt="" aria-hidden="true">
+        </div>
+        <div class="container">
+            <h2 class="section-title-text white" data-i18n="section.stats">O projeto em números</h2>
+            <p class="stats-subtitle" data-i18n="stats.subtitle">* projeção até dezembro de 2024</p>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <h3>248.400</h3>
+                    <p data-i18n="stats.students">Projeto educativo por alunos</p>
+                </div>
+                <div class="stat-item">
+                    <h3>621</h3>
+                    <p data-i18n="stats.schools">Escolas atendidas</p>
+                </div>
+                <div class="stat-item">
+                    <h3>248.400</h3>
+                    <p data-i18n="stats.app">Aplicativo baixado</p>
+                </div>
+                <div class="stat-item">
+                    <h3>420</h3>
+                    <p data-i18n="stats.reports">Registro de acionamentos</p>
+                </div>
+            </div>
+            <div class="stats-cta">
+                <a href="distribuidor.html" target="_blank" class="btn" data-i18n="btn.distributor">SEJA UM DISTRIBUIDOR</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- MODAL DE VÍDEO DOS DEPOIMENTOS -->
+    <div class="testimonial-modal" id="testimonialModal" role="dialog" aria-modal="true" aria-labelledby="testimonialModalTitle" aria-hidden="true" tabindex="-1">
+        <div class="testimonial-modal-stage">
+            <button class="testimonial-modal-close" type="button" aria-label="Fechar vídeo"><i class="fas fa-times" aria-hidden="true"></i></button>
+
+            <button class="testimonial-modal-nav testimonial-modal-prev" type="button" aria-label="Reproduzir depoimento anterior">
+                <i class="fas fa-chevron-left" aria-hidden="true"></i>
+            </button>
+
+            <div class="testimonial-phone">
+                <span class="testimonial-phone-island" aria-hidden="true"></span>
+                <video id="testimonialVideo" controls playsinline preload="metadata"></video>
+
+                <div class="testimonial-story-top" aria-hidden="true">
+                    <div class="testimonial-story-progress"></div>
+                    <p>Depoimentos <span>•</span> <strong id="testimonialCurrent">01</strong> / <span id="testimonialTotal">05</span></p>
+                </div>
+
+                <div class="testimonial-story-copy">
+                    <h2 id="testimonialModalTitle">Depoimento</h2>
+                    <p id="testimonialModalDescription">Relato em vídeo</p>
+                </div>
+            </div>
+
+            <button class="testimonial-modal-nav testimonial-modal-next" type="button" aria-label="Reproduzir próximo depoimento">
+                <i class="fas fa-chevron-right" aria-hidden="true"></i>
+            </button>
+
+            <div class="testimonial-modal-indicator" aria-live="polite">
+                <span id="testimonialIndicatorCurrent">1</span> / <span id="testimonialIndicatorTotal">5</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-banner-wrap">
+            <div class="footer-social-links">
+                <a href="https://www.instagram.com/editoraeticaoficial?igsh=djBlZWF4bHYzN3l5" target="_blank" rel="noopener noreferrer" aria-label="Instagram Editora Ética">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://www.youtube.com/@EditoraEtica-tec" target="_blank" rel="noopener noreferrer" aria-label="YouTube Editora Ética">
+                    <i class="fab fa-youtube"></i>
+                </a>
+            </div>
+            <img src="img/Grupo-133-1.png" alt="Ética Editora - redes sociais" class="footer-banner footer-img-left">
+            <img src="img/Grupo-132.png" alt="Empresa credenciada - selos" class="footer-banner footer-img-right">
+        </div>
+    </footer>
+
+    <!-- WHATSAPP FLOATING BUTTON -->
+    <a href="https://wa.me/5511987380525" target="_blank" class="whatsapp-float">
+        <img src="img/09.whatsapp.png" alt="WhatsApp">
+    </a>
+
+    <!-- MODAL CRONOGRAMA -->
+    <div class="modal-overlay" id="cronogramaModal" aria-hidden="true">
+        <!-- Estado: Formulário -->
+        <div class="cron-state active" id="cron-state-form">
+            <div class="cron-modal-card">
+                <h2 class="cron-modal-title" data-i18n="cron.title">Conheça o cronograma</h2>
+                <form id="cronogramaForm" novalidate>
+                    <input class="cron-field" type="text" name="nome" data-i18n="cron.field.name" placeholder="Nome:" required>
+                    <input class="cron-field" type="text" name="cargo" data-i18n="cron.field.role" placeholder="Cargo:">
+                    <input class="cron-field" type="text" name="whatsapp" data-i18n="cron.field.whatsapp" placeholder="WhatsApp:">
+                    <input class="cron-field" type="text" name="instituicao" data-i18n="cron.field.institution" placeholder="Instituição:">
+                    <input class="cron-field" type="text" name="telefone" data-i18n="cron.field.phone" placeholder="Telefone da Instituição:">
+                    <input class="cron-field" type="text" name="cidade" data-i18n="cron.field.city" placeholder="Cidade:">
+                    <input class="cron-field" type="text" name="estado" data-i18n="cron.field.state" placeholder="Estado:">
+                    
+                    <!-- Campo honeypot para proteção anti-bot (não remover) -->
+                    <input 
+                        type="text" 
+                        name="homepage" 
+                        style="display:none;" 
+                        tabindex="-1" 
+                        autocomplete="off"
+                    >
+                    
+                    <button type="submit" class="btn-cron-submit" data-i18n="cron.btn.submit">Solicitar acesso</button>
+                </form>
+            </div>
+        </div>
+        <!-- Estado: Gerando acesso -->
+        <div class="cron-state" id="cron-state-loading">
+            <div class="cron-loading-wrap" data-i18n="cron.loading">Gerando acesso...</div>
+        </div>
+        <!-- Estado: Sucesso -->
+        <div class="cron-state" id="cron-state-success">
+            <div class="cron-success-card">
+                <div class="cron-success-icon"><i class="fas fa-check"></i></div>
+                <h3 data-i18n="cron.success.title">Acesso gerado com sucesso!</h3>
+                <p data-i18n-html="cron.success.text">Em breve você receberá o cronograma completo no seu WhatsApp.<br>Obrigado pelo interesse!</p>
+                <button onclick="closeCronogramaModal()" class="btn btn-purple" data-i18n="cron.btn.close">Fechar</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Menu Mobile Toggle
+        const menuIcon = document.getElementById('menuIcon');
+        const menuClose = document.getElementById('menuClose');
+        const navLinks = document.getElementById('navLinks');
+
+        menuIcon.addEventListener('click', () => {
+            navLinks.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+
+        menuClose.addEventListener('click', () => {
+            navLinks.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+
+        // Close menu on link click (mobile)
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+
+        // Smooth scroll handled by the section at the bottom with header offset
+
+        // ========== MODAL CRONOGRAMA ==========
+        const cronogramaModal = document.getElementById('cronogramaModal');
+
+        function openCronogramaModal() {
+            if (!cronogramaModal) return;
+            cronogramaModal.classList.add('is-open');
+            cronogramaModal.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden';
+            showCronogramaState('form');
+            const f = document.getElementById('cronogramaForm');
+            if (f) f.reset();
+        }
+
+        function closeCronogramaModal() {
+            if (!cronogramaModal) return;
+            cronogramaModal.classList.remove('is-open');
+            cronogramaModal.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = '';
+        }
+
+        function showCronogramaState(state) {
+            document.querySelectorAll('.cron-state').forEach(el => el.classList.remove('active'));
+            const target = document.getElementById('cron-state-' + state);
+            if (target) target.classList.add('active');
+        }
+
+        if (cronogramaModal) {
+            cronogramaModal.addEventListener('click', (e) => {
+                if (e.target === cronogramaModal) closeCronogramaModal();
+            });
+        }
+
+        // URL do backend — em produção trocar pelo domínio do Render
+        const BACKEND_URL = window.location.hostname === 'localhost'
+            ? 'http://localhost:3001'
+            : 'https://bastasite.onrender.com';
+
+        const cronogramaForm = document.getElementById('cronogramaForm');
+        if (cronogramaForm) {
+            cronogramaForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                showCronogramaState('loading');
+                try {
+                    const fd = new FormData(cronogramaForm);
+                    const res = await fetch(BACKEND_URL + '/api/enviar-cronograma', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(Object.fromEntries(fd))
+                    });
+                    const data = await res.json();
+                    if (data.sucesso) {
+                        showCronogramaState('success');
+                    } else {
+                        alert(data.erro || 'Erro ao enviar. Tente novamente.');
+                        showCronogramaState('form');
+                    }
+                } catch (err) {
+                    console.error('Erro:', err);
+                    alert('Erro de conexão. Tente novamente.');
+                    showCronogramaState('form');
+                }
+            });
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && cronogramaModal && cronogramaModal.classList.contains('is-open')) {
+                closeCronogramaModal();
+            }
+        });
+
+        // Header Scroll Effect
+        const header = document.querySelector('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // ========== CAROUSEL - Conheça o aplicativo ==========
+        const slidesDesktop = [
+            { image: 'img/educacao-1.png', alt: 'Conheça o aplicativo - Educação' },
+            { image: 'img/apoio-1.png', alt: 'Conheça o aplicativo - Apoio' },
+            { image: 'img/autocuidado-1.png', alt: 'Conheça o aplicativo - Autocuidado' },
+            { image: 'img/comunidade.png', alt: 'Conheça o aplicativo - Comunidade' },
+            { image: 'img/bt-panico.png', alt: 'Conheça o aplicativo - Botão do pânico' },
+            { image: 'img/guardioes-1.png', alt: 'Conheça o aplicativo - Guardiões' },
+            { image: 'img/del-online.png', alt: 'Conheça o aplicativo - Delegacia online' },
+            { image: 'img/tel-uteis.png', alt: 'Conheça o aplicativo - Telefones úteis' }
+        ];
+
+        // Versão MOBILE (conforme referências / links enviados)
+        const slidesMobile = [
+            { image: 'img/inicial.png', alt: 'Conheça o aplicativo - Tela inicial' },
+            { image: 'img/educacao-2.png', alt: 'Conheça o aplicativo - Educação' },
+            { image: 'img/apoio-2.png', alt: 'Conheça o aplicativo - Apoio' },
+            { image: 'img/autociodado.png', alt: 'Conheça o aplicativo - Autocuidado' },
+            { image: 'img/comunidade-1.png', alt: 'Conheça o aplicativo - Comunidade' },
+            { image: 'img/bt-panico-1.png', alt: 'Conheça o aplicativo - Botão do pânico' },
+            { image: 'img/guardioes-2.png', alt: 'Conheça o aplicativo - Guardiões' },
+            { image: 'img/del-online-1.png', alt: 'Conheça o aplicativo - Delegacia online' },
+            { image: 'img/tel-uteis-1.png', alt: 'Conheça o aplicativo - Telefones úteis' }
+        ];
+
+        const slideImage = document.getElementById('slideImage');
+        const prevBtn = document.getElementById('carouselPrev');
+        const nextBtn = document.getElementById('carouselNext');
+        const carouselMedia = window.matchMedia('(max-width: 768px)');
+
+        let slides = carouselMedia.matches ? slidesMobile : slidesDesktop;
+        let currentSlide = 0;
+
+        function updateSlide(index) {
+            const slide = slides[index];
+            if (slideImage && slide) {
+                slideImage.style.opacity = '0.6';
+                setTimeout(() => {
+                    slideImage.src = slide.image;
+                    slideImage.alt = slide.alt || ('App BASTA! - Slide ' + (index + 1));
+                    slideImage.style.opacity = '1';
+                }, 200);
+            }
+        }
+
+        function syncCarouselToViewport() {
+            slides = carouselMedia.matches ? slidesMobile : slidesDesktop;
+            currentSlide = 0;
+            updateSlide(currentSlide);
+        }
+
+        // Slide inicial correto (inclusive ao recarregar em mobile)
+        syncCarouselToViewport();
+
+        if (carouselMedia.addEventListener) {
+            carouselMedia.addEventListener('change', syncCarouselToViewport);
+        } else if (carouselMedia.addListener) {
+            carouselMedia.addListener(syncCarouselToViewport);
+        }
+
+        if (prevBtn) {
+            prevBtn.addEventListener('click', () => {
+                currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+                updateSlide(currentSlide);
+            });
+        }
+
+        if (nextBtn) {
+            nextBtn.addEventListener('click', () => {
+                currentSlide = (currentSlide + 1) % slides.length;
+                updateSlide(currentSlide);
+            });
+        }
+
+        // ========== CARROSSEL DE DEPOIMENTOS ==========
+        const testimonialsViewport = document.querySelector('.testimonials-viewport');
+        const testimonialCards = Array.from(document.querySelectorAll('.testimonial-card'));
+        const testimonialsDots = document.querySelector('.testimonials-dots');
+        const testimonialsPrev = document.querySelector('.testimonials-arrow-prev');
+        const testimonialsNext = document.querySelector('.testimonials-arrow-next');
+        const testimonialModal = document.getElementById('testimonialModal');
+        const testimonialVideo = document.getElementById('testimonialVideo');
+        const testimonialModalTitle = document.getElementById('testimonialModalTitle');
+        const testimonialModalDescription = document.getElementById('testimonialModalDescription');
+        const testimonialModalClose = document.querySelector('.testimonial-modal-close');
+        const testimonialModalPrev = document.querySelector('.testimonial-modal-prev');
+        const testimonialModalNext = document.querySelector('.testimonial-modal-next');
+        const testimonialPhone = document.querySelector('.testimonial-phone');
+        const testimonialStoryProgress = document.querySelector('.testimonial-story-progress');
+        const testimonialCurrent = document.getElementById('testimonialCurrent');
+        const testimonialTotal = document.getElementById('testimonialTotal');
+        const testimonialIndicatorCurrent = document.getElementById('testimonialIndicatorCurrent');
+        const testimonialIndicatorTotal = document.getElementById('testimonialIndicatorTotal');
+        let currentTestimonial = 0;
+        let activeModalTestimonial = 0;
+        let lastTestimonialTrigger = null;
+        let testimonialsScrollFrame = null;
+        let previousBodyOverflow = '';
+        let testimonialTouchStartX = 0;
+        let testimonialTouchStartY = 0;
+        let testimonialBackgroundState = [];
+
+        function updateTestimonialDots(index) {
+            currentTestimonial = index;
+            if (!testimonialsDots) return;
+            testimonialsDots.querySelectorAll('.testimonials-dot').forEach((dot, dotIndex) => {
+                const isActive = dotIndex === index;
+                dot.classList.toggle('is-active', isActive);
+                dot.setAttribute('aria-current', isActive ? 'true' : 'false');
+            });
+        }
+
+        function goToTestimonial(index) {
+            if (!testimonialCards.length) return;
+            const normalizedIndex = (index + testimonialCards.length) % testimonialCards.length;
+            testimonialCards[normalizedIndex].scrollIntoView({
+                behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+                block: 'nearest',
+                inline: 'center'
+            });
+            updateTestimonialDots(normalizedIndex);
+        }
+
+        if (testimonialsDots && testimonialCards.length) {
+            testimonialCards.forEach((card, index) => {
+                const dot = document.createElement('button');
+                dot.className = 'testimonials-dot';
+                dot.type = 'button';
+                dot.setAttribute('aria-label', 'Ir para o depoimento ' + (index + 1));
+                dot.addEventListener('click', () => goToTestimonial(index));
+                testimonialsDots.appendChild(dot);
+            });
+            updateTestimonialDots(0);
+        }
+
+        if (testimonialsPrev) testimonialsPrev.addEventListener('click', () => goToTestimonial(currentTestimonial - 1));
+        if (testimonialsNext) testimonialsNext.addEventListener('click', () => goToTestimonial(currentTestimonial + 1));
+
+        if (testimonialsViewport) {
+            testimonialsViewport.addEventListener('scroll', () => {
+                if (testimonialsScrollFrame) cancelAnimationFrame(testimonialsScrollFrame);
+                testimonialsScrollFrame = requestAnimationFrame(() => {
+                    const viewportCenter = testimonialsViewport.getBoundingClientRect().left + testimonialsViewport.clientWidth / 2;
+                    let closestIndex = 0;
+                    let closestDistance = Infinity;
+                    testimonialCards.forEach((card, index) => {
+                        const rect = card.getBoundingClientRect();
+                        const distance = Math.abs((rect.left + rect.width / 2) - viewportCenter);
+                        if (distance < closestDistance) {
+                            closestDistance = distance;
+                            closestIndex = index;
+                        }
+                    });
+                    updateTestimonialDots(closestIndex);
+                });
+            }, { passive: true });
+
+            testimonialsViewport.addEventListener('keydown', (event) => {
+                if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+                    event.preventDefault();
+                    goToTestimonial(currentTestimonial + (event.key === 'ArrowRight' ? 1 : -1));
+                }
+            });
+        }
+
+        if (testimonialStoryProgress) {
+            testimonialCards.forEach(() => {
+                const segment = document.createElement('span');
+                segment.className = 'testimonial-story-segment';
+                segment.appendChild(document.createElement('span'));
+                testimonialStoryProgress.appendChild(segment);
+            });
+        }
+
+        if (testimonialTotal) testimonialTotal.textContent = String(testimonialCards.length).padStart(2, '0');
+        if (testimonialIndicatorTotal) testimonialIndicatorTotal.textContent = testimonialCards.length;
+
+        function updateModalProgress() {
+            const segments = testimonialStoryProgress?.querySelectorAll('.testimonial-story-segment') || [];
+            const duration = testimonialVideo?.duration;
+            const progress = Number.isFinite(duration) && duration > 0 ? (testimonialVideo.currentTime / duration) * 100 : 0;
+            segments.forEach((segment, index) => {
+                segment.classList.toggle('is-viewed', index < activeModalTestimonial);
+                const fill = segment.firstElementChild;
+                if (fill) fill.style.width = index === activeModalTestimonial ? progress + '%' : '';
+            });
+        }
+
+        function loadTestimonialVideo(index, autoplay = true) {
+            if (!testimonialVideo || !testimonialCards.length) return;
+            activeModalTestimonial = (index + testimonialCards.length) % testimonialCards.length;
+            const card = testimonialCards[activeModalTestimonial];
+            const title = card.querySelector('.testimonial-copy strong')?.textContent || card.dataset.videoTitle || 'Depoimento';
+            const description = card.querySelector('.testimonial-copy small')?.textContent || '';
+
+            testimonialVideo.pause();
+            testimonialModalTitle.textContent = title;
+            if (testimonialModalDescription) testimonialModalDescription.textContent = description;
+            if (testimonialCurrent) testimonialCurrent.textContent = String(activeModalTestimonial + 1).padStart(2, '0');
+            if (testimonialIndicatorCurrent) testimonialIndicatorCurrent.textContent = activeModalTestimonial + 1;
+            testimonialVideo.src = card.dataset.video;
+            testimonialVideo.load();
+            updateModalProgress();
+            if (autoplay) testimonialVideo.play().catch(() => {});
+        }
+
+        function openTestimonialVideo(card) {
+            if (!testimonialModal || !testimonialVideo || !card) return;
+            lastTestimonialTrigger = card;
+            previousBodyOverflow = document.body.style.overflow;
+            testimonialBackgroundState = Array.from(document.body.children)
+                .filter(element => element !== testimonialModal && element.tagName !== 'SCRIPT')
+                .map(element => ({ element, inert: element.inert }));
+            testimonialBackgroundState.forEach(({ element }) => { element.inert = true; });
+            testimonialModal.classList.add('is-open');
+            testimonialModal.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden';
+            testimonialModal.focus({ preventScroll: true });
+            loadTestimonialVideo(testimonialCards.indexOf(card));
+            setTimeout(() => testimonialModalClose?.focus({ preventScroll: true }), 100);
+        }
+
+        function closeTestimonialVideo() {
+            if (!testimonialModal || !testimonialVideo) return;
+            testimonialVideo.pause();
+            testimonialVideo.removeAttribute('src');
+            testimonialVideo.load();
+            testimonialModal.classList.remove('is-open');
+            testimonialModal.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = previousBodyOverflow;
+            testimonialBackgroundState.forEach(({ element, inert }) => { element.inert = inert; });
+            testimonialBackgroundState = [];
+            lastTestimonialTrigger?.focus();
+        }
+
+        testimonialCards.forEach(card => card.addEventListener('click', () => openTestimonialVideo(card)));
+        testimonialModalClose?.addEventListener('click', closeTestimonialVideo);
+        testimonialModalPrev?.addEventListener('click', () => loadTestimonialVideo(activeModalTestimonial - 1));
+        testimonialModalNext?.addEventListener('click', () => loadTestimonialVideo(activeModalTestimonial + 1));
+        testimonialVideo?.addEventListener('timeupdate', updateModalProgress);
+        testimonialVideo?.addEventListener('loadedmetadata', updateModalProgress);
+        testimonialModal?.addEventListener('click', event => {
+            if (event.target === testimonialModal) closeTestimonialVideo();
+        });
+
+        testimonialPhone?.addEventListener('touchstart', event => {
+            const touch = event.changedTouches[0];
+            testimonialTouchStartX = touch.clientX;
+            testimonialTouchStartY = touch.clientY;
+        }, { passive: true });
+        testimonialPhone?.addEventListener('touchend', event => {
+            const touch = event.changedTouches[0];
+            const deltaX = touch.clientX - testimonialTouchStartX;
+            const deltaY = touch.clientY - testimonialTouchStartY;
+            if (Math.abs(deltaX) > 55 && Math.abs(deltaX) > Math.abs(deltaY) * 1.2) {
+                loadTestimonialVideo(activeModalTestimonial + (deltaX < 0 ? 1 : -1));
+            }
+        }, { passive: true });
+
+        document.addEventListener('keydown', event => {
+            if (!testimonialModal?.classList.contains('is-open')) return;
+            if (event.key === 'Escape') {
+                closeTestimonialVideo();
+            } else if (event.key === 'ArrowLeft') {
+                event.preventDefault();
+                loadTestimonialVideo(activeModalTestimonial - 1);
+            } else if (event.key === 'ArrowRight') {
+                event.preventDefault();
+                loadTestimonialVideo(activeModalTestimonial + 1);
+            } else if (event.key === 'Tab') {
+                const focusable = [testimonialModalClose, testimonialModalPrev, testimonialVideo, testimonialModalNext].filter(Boolean);
+                const first = focusable[0];
+                const last = focusable[focusable.length - 1];
+                if (event.shiftKey && document.activeElement === first) {
+                    event.preventDefault();
+                    last.focus();
+                } else if (!event.shiftKey && document.activeElement === last) {
+                    event.preventDefault();
+                    first.focus();
+                }
+            }
+        });
+
+        // ========== IFRAME AUTO-RESIZE (Embaixadoras) ==========
+        const embaixadorasIframe = document.querySelector('.embaixadoras-iframe');
+        if (embaixadorasIframe) {
+            function resizeIframe() {
+                try {
+                    const iframeDoc = embaixadorasIframe.contentDocument || embaixadorasIframe.contentWindow.document;
+                    const newHeight = iframeDoc.documentElement.scrollHeight;
+                    if (newHeight > 0) {
+                        embaixadorasIframe.style.height = newHeight + 'px';
+                    }
+                } catch(e) {
+                    // cross-origin fallback
+                }
+            }
+            embaixadorasIframe.addEventListener('load', () => {
+                resizeIframe();
+                // Observe mutations inside iframe for card expansions
+                try {
+                    const iframeDoc = embaixadorasIframe.contentDocument || embaixadorasIframe.contentWindow.document;
+                    const observer = new MutationObserver(() => {
+                        setTimeout(resizeIframe, 100);
+                    });
+                    observer.observe(iframeDoc.body, { childList: true, subtree: true, attributes: true });
+                } catch(e) {}
+            });
+            // Also check periodically for dynamic content changes
+            setInterval(() => { resizeIframe(); }, 500);
+        }
+
+        // Stats counter animation
+        const observerOptions = { threshold: 0.5 };
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const counters = entry.target.querySelectorAll('.stat-item h3');
+                    counters.forEach(counter => {
+                        const text = counter.textContent;
+                        const hasK = text.includes('k');
+                        const hasPlus = text.includes('+');
+                        const hasDot = text.includes('.');
+                        let target = parseInt(text.replace(/\D/g, ''));
+                        if (hasK && !hasDot) target *= 1000;
+                        
+                        let current = 0;
+                        const increment = target / 60;
+                        const timer = setInterval(() => {
+                            current += increment;
+                            if (current >= target) {
+                                counter.textContent = text;
+                                clearInterval(timer);
+                            } else {
+                                let display = Math.floor(current);
+                                if (hasDot) {
+                                    display = display.toLocaleString('pt-BR');
+                                }
+                                counter.textContent = display + (hasK ? 'k' : '') + (hasPlus ? '+' : '');
+                            }
+                        }, 30);
+                    });
+                    statsObserver.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        const statsSection = document.querySelector('.stats');
+        if (statsSection) statsObserver.observe(statsSection);
+
+        // Fade-in on scroll
+        const fadeElements = document.querySelectorAll('.project-text-box, .app-text-box, .colecao-text, .legal-content, .hero-card');
+        const fadeObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        fadeElements.forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            fadeObserver.observe(el);
+        });
+
+        // ========== INTERSECTION OBSERVER MELHORADO ==========
+        // Aplica fade-in em todas as seções
+        const sectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
+
+        // Observa todas as seções principais
+        document.querySelectorAll('section').forEach(section => {
+            section.classList.add('fade-in-element');
+            sectionObserver.observe(section);
+        });
+
+        // ========== LAZY LOADING DE IMAGENS ==========
+        // Para imagens que não têm lazy loading nativo
+        const lazyImages = document.querySelectorAll('img:not([loading])');
+        const imageObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    if (img.dataset.src) {
+                        img.src = img.dataset.src;
+                        img.removeAttribute('data-src');
+                    }
+                    imageObserver.unobserve(img);
+                }
+            });
+        }, {
+            rootMargin: '50px'
+        });
+
+        lazyImages.forEach(img => {
+            img.setAttribute('loading', 'lazy');
+        });
+
+        // ========== SMOOTH SCROLL COM OFFSET PARA HEADER FIXO ==========
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href === '#') return;
+                
+                e.preventDefault();
+                const target = document.querySelector(href);
+                if (target) {
+                    const headerHeight = document.querySelector('header').offsetHeight;
+                    const targetPosition = target.getBoundingClientRect().top + window.scrollY - headerHeight - 20;
+                    
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+
+                    // Close mobile menu if open
+                    const navLinks = document.getElementById('navLinks');
+                    if (navLinks) navLinks.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            });
+        });
+
+        // prefers-reduced-motion: tratado por @media (prefers-reduced-motion: reduce)
+        // em css/base.css — sem loop no DOM para melhor performance.
+
+        // ========== ANALYTICS: RASTREIA SCROLL DEPTH ==========
+        let scrollDepth = 0;
+        let scrollTimeout;
+        
+        window.addEventListener('scroll', () => {
+            clearTimeout(scrollTimeout);
+            scrollTimeout = setTimeout(() => {
+                const scrollPercentage = Math.round(
+                    (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100
+                );
+                
+                if (scrollPercentage > scrollDepth && scrollPercentage % 25 === 0) {
+                    scrollDepth = scrollPercentage;
+                    console.log(`Scroll depth: ${scrollPercentage}%`);
+                    // Aqui você pode enviar para analytics
+                    // gtag('event', 'scroll_depth', { value: scrollPercentage });
+                }
+            }, 100);
+        }, { passive: true });
+
+        // ========== CARD FLIP NO CLIQUE (mobile e desktop) ==========
+        document.querySelectorAll('.partner-card, .cliente-card').forEach(function(card) {
+            card.addEventListener('click', function() {
+                this.classList.toggle('is-flipped');
+            });
+        });
+
+        // ========== LOG DE MÉTRICAS DE PERFORMANCE ==========
+        window.addEventListener('load', () => {
+            // Web Vitals (se disponível)
+            if ('PerformanceObserver' in window) {
+                try {
+                    // Largest Contentful Paint
+                    const lcpObserver = new PerformanceObserver((list) => {
+                        const entries = list.getEntries();
+                        const lastEntry = entries[entries.length - 1];
+                        console.log('LCP:', lastEntry.renderTime || lastEntry.loadTime, 'ms');
+                    });
+                    lcpObserver.observe({ entryTypes: ['largest-contentful-paint'] });
+
+                    // First Input Delay
+                    const fidObserver = new PerformanceObserver((list) => {
+                        list.getEntries().forEach(entry => {
+                            console.log('FID:', entry.processingStart - entry.startTime, 'ms');
+                        });
+                    });
+                    fidObserver.observe({ entryTypes: ['first-input'] });
+
+                    // Cumulative Layout Shift
+                    let clsValue = 0;
+                    const clsObserver = new PerformanceObserver((list) => {
+                        list.getEntries().forEach(entry => {
+                            if (!entry.hadRecentInput) {
+                                clsValue += entry.value;
+                                console.log('CLS:', clsValue);
+                            }
+                        });
+                    });
+                    clsObserver.observe({ entryTypes: ['layout-shift'] });
+                } catch (e) {
+                    console.log('Performance observers não suportados');
+                }
+            }
+
+            // Navigation Timing
+            if (window.performance && window.performance.timing) {
+                const perfData = window.performance.timing;
+                const pageLoadTime = perfData.loadEventEnd - perfData.navigationStart;
+                const connectTime = perfData.responseEnd - perfData.requestStart;
+                const renderTime = perfData.domComplete - perfData.domLoading;
+                
+                console.log('Performance Metrics:');
+                console.log('- Page Load Time:', pageLoadTime, 'ms');
+                console.log('- Server Response Time:', connectTime, 'ms');
+                console.log('- Render Time:', renderTime, 'ms');
+            }
+        });
+    </script>
+
+    <!-- Language Selector & Translation System (Shared) -->
+    <script src="js/translations.js"></script>
+    <script src="js/language-system.js"></script>
+
+    <!-- Efeitos Interativos Modernos -->
+    <script>
+    (function() {
+        // ========== CURSOR GLOW ==========
+        const glow = document.createElement('div');
+        glow.className = 'cursor-glow';
+        document.body.appendChild(glow);
+        let glowX = 0, glowY = 0, curX = 0, curY = 0;
+        document.addEventListener('mousemove', (e) => {
+            curX = e.clientX; curY = e.clientY;
+            glow.classList.add('active');
+        });
+        document.addEventListener('mouseleave', () => glow.classList.remove('active'));
+        (function animateGlow() {
+            glowX += (curX - glowX) * 0.12;
+            glowY += (curY - glowY) * 0.12;
+            glow.style.left = glowX + 'px';
+            glow.style.top = glowY + 'px';
+            requestAnimationFrame(animateGlow);
+        })();
+
+        // ========== REVEAL SECTIONS ==========
+        const revealEls = document.querySelectorAll('section, .partners-clientes-wrapper');
+        revealEls.forEach(el => el.classList.add('reveal-section'));
+        const revealObs = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    e.target.classList.add('is-revealed');
+                    revealObs.unobserve(e.target);
+                }
+            });
+        }, { threshold: 0.08 });
+        revealEls.forEach(el => revealObs.observe(el));
+
+        // ========== STAGGER GRIDS ==========
+        document.querySelectorAll('.partners-grid, .clientes-grid').forEach(grid => {
+            grid.classList.add('stagger-reveal');
+        });
+        const staggerObs = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    e.target.classList.add('is-revealed');
+                    staggerObs.unobserve(e.target);
+                }
+            });
+        }, { threshold: 0.15 });
+        document.querySelectorAll('.stagger-reveal').forEach(el => staggerObs.observe(el));
+
+        // ========== TILT 3D CARDS ==========
+        document.querySelectorAll('.partner-card, .cliente-card, .hero-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = (e.clientX - rect.left) / rect.width - 0.5;
+                const y = (e.clientY - rect.top) / rect.height - 0.5;
+                card.style.transform = `perspective(600px) rotateY(${x * 12}deg) rotateX(${-y * 12}deg) translateY(-8px)`;
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = '';
+            });
+        });
+
+        // ========== MAGNETIC BUTTONS ==========
+        document.querySelectorAll('.btn').forEach(btn => {
+            btn.addEventListener('mousemove', (e) => {
+                const rect = btn.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                btn.style.transform = `translate(${x * 0.15}px, ${y * 0.15}px)`;
+            });
+            btn.addEventListener('mouseleave', () => {
+                btn.style.transform = '';
+            });
+        });
+
+        // ========== PARALLAX SUAVE ==========
+        let ticking = false;
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                requestAnimationFrame(() => {
+                    const scrollY = window.scrollY;
+                    document.querySelectorAll('.section-title-image').forEach(img => {
+                        const rect = img.getBoundingClientRect();
+                        if (rect.top < window.innerHeight && rect.bottom > 0) {
+                            const offset = (rect.top - window.innerHeight / 2) * 0.03;
+                            img.style.transform = `translateY(${offset}px)`;
+                        }
+                    });
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        });
+
+        // ========== GRADIENT BORDER NOS TÍTULOS DE SEÇÃO ==========
+        document.querySelectorAll('.section-title').forEach(t => t.classList.add('gradient-border'));
+
+    })();
+    </script>
+</body>
+</html>

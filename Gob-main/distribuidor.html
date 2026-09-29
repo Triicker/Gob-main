@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BASTA! - Seja um Distribuidor</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="css/language-system.css">
+
+    <style>
+        :root {
+            --purple-dark: #5B1A6E;
+            --purple: #7B2D8E;
+            --purple-light: #9B4DB0;
+            --magenta: #D4388E;
+            --gold: #F5C518;
+            --cream: #FDF5E6;
+            --bg-cream: #FFF8EE;
+            --text-dark: #333;
+            --transition: all 0.3s ease;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-dark);
+            background: var(--bg-cream);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+        h1, h2 { font-family: 'Playfair Display', serif; }
+        img { max-width: 100%; display: block; }
+        a { text-decoration: none; color: inherit; }
+
+        /* ========== HEADER ========== */
+        header {
+            background: var(--purple-dark);
+            padding: 15px 0;
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.2);
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        nav { display: flex; justify-content: space-between; align-items: center; }
+        .logo { margin-right: 20px; }
+        .logo img { height: 50px; width: auto; display: block; }
+        .nav-links { display: flex; gap: 5px; align-items: center; list-style: none; margin: 0; padding: 0; }
+        .nav-links a {
+            font-weight: 500;
+            font-size: 0.8rem;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 20px;
+            transition: var(--transition);
+        }
+        .nav-links a:hover { color: var(--gold); background: rgba(255,255,255,0.1); }
+        .nav-links a.nav-cta {
+            background: rgba(255,255,255,0.15);
+            color: #fff;
+            font-weight: 600;
+            border: 1px solid rgba(255,255,255,0.4);
+        }
+        .nav-links a.nav-cta:hover { background: rgba(255,255,255,0.25); }
+        .mobile-menu-icon { display: none; font-size: 1.5rem; color: #fff; cursor: pointer; z-index: 1001; }
+        .mobile-menu-close { 
+            display: none; 
+            position: fixed; 
+            top: 25px; 
+            right: 25px; 
+            font-size: 2rem; 
+            color: #fff; 
+            cursor: pointer; 
+            z-index: 1002;
+            width: 40px;
+            height: 40px;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease;
+        }
+        .mobile-menu-close:hover { transform: rotate(90deg); }
+        .nav-links.active ~ .mobile-menu-close { display: flex; }
+
+        /* ========== DECORAÇÕES ========== */
+        .deco-wrap {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+        .deco-blob {
+            position: absolute;
+            border-radius: 50% 30% 70% 40%;
+        }
+        .deco-blob-1 {
+            width: 260px; height: 340px;
+            background: #e8a0c0;
+            opacity: 0.35;
+            top: 18%; left: -80px;
+        }
+        .deco-blob-2 {
+            width: 200px; height: 260px;
+            background: #f5c518;
+            opacity: 0.2;
+            top: 12%; right: -60px;
+            border-radius: 40% 60% 50% 30%;
+        }
+        .deco-blob-3 {
+            width: 180px; height: 220px;
+            background: var(--purple-dark);
+            opacity: 0.18;
+            bottom: 8%; left: -50px;
+            border-radius: 60% 40% 30% 70%;
+        }
+        .deco-dots {
+            position: absolute;
+            width: 100px; height: 100px;
+            background-image: radial-gradient(var(--gold) 3px, transparent 3px);
+            background-size: 14px 14px;
+            bottom: 20%; right: 4%;
+            opacity: 0.5;
+        }
+        .deco-wave {
+            position: absolute;
+            bottom: 0; right: -30px;
+            width: 220px; height: 180px;
+            border: 3px solid var(--purple-light);
+            border-radius: 50% 50% 0 50%;
+            opacity: 0.25;
+        }
+
+        /* ========== MAIN LAYOUT ========== */
+        .page-wrapper {
+            position: relative;
+            z-index: 1;
+            min-height: 100vh;
+            padding: 110px 0 80px;
+        }
+        .form-card {
+            background: #fff;
+            border-radius: 24px;
+            box-shadow: 0 16px 50px rgba(0,0,0,0.10);
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 42px 44px 40px;
+            position: relative;
+        }
+
+        /* ========== TÍTULO ========== */
+        .page-title {
+            font-size: 2.6rem;
+            color: var(--purple-dark);
+            text-align: center;
+            margin-bottom: 36px;
+            line-height: 1.2;
+        }
+
+        /* ========== PROGRESS BAR ========== */
+        .progress-bar-wrap {
+            margin-bottom: 36px;
+        }
+        .progress-steps {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 0;
+            position: relative;
+        }
+        .progress-steps::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0; right: 0;
+            height: 3px;
+            background: #e8e0f0;
+            transform: translateY(-50%);
+            z-index: 0;
+        }
+        .progress-fill {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            height: 3px;
+            background: var(--purple);
+            transform: translateY(-50%);
+            transition: width 0.4s ease;
+            z-index: 1;
+        }
+        .step-dot {
+            width: 32px; height: 32px;
+            border-radius: 50%;
+            background: #e8e0f0;
+            color: #aaa;
+            font-size: 0.78rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 2;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+        .step-dot.active {
+            background: var(--purple);
+            color: #fff;
+            box-shadow: 0 0 0 4px rgba(123,45,142,0.15);
+        }
+        .step-dot.done {
+            background: var(--purple-dark);
+            color: #fff;
+        }
+        .progress-label {
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--purple);
+            margin-top: 10px;
+            font-weight: 600;
+        }
+
+        /* ========== STEPS ========== */
+        .step { display: none; }
+        .step.active { display: block; animation: fadeStep 0.35s ease; }
+
+        @keyframes fadeStep {
+            from { opacity: 0; transform: translateX(18px); }
+            to   { opacity: 1; transform: translateX(0); }
+        }
+
+        /* ========== SEÇÃO LABEL ========== */
+        .section-label {
+            font-size: 0.78rem;
+            font-weight: 800;
+            color: var(--purple);
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        /* ========== CHECKBOXES / RADIOS ========== */
+        .check-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+            margin-bottom: 28px;
+        }
+        .check-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            font-size: 0.97rem;
+            color: var(--text-dark);
+            padding: 12px 16px;
+            border-radius: 12px;
+            border: 2px solid #e8e0f0;
+            transition: var(--transition);
+        }
+        .check-item:hover {
+            border-color: var(--purple-light);
+            background: #f9f0ff;
+        }
+        .check-item input[type="checkbox"],
+        .check-item input[type="radio"] {
+            width: 20px; height: 20px;
+            accent-color: var(--purple);
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+        .check-item.selected {
+            border-color: var(--purple);
+            background: #f5edff;
+        }
+        .radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 28px;
+        }
+        .radio-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            font-size: 0.97rem;
+        }
+        .radio-item input[type="radio"] {
+            width: 20px; height: 20px;
+            accent-color: var(--purple);
+            cursor: pointer;
+        }
+
+        /* ========== INPUTS ========== */
+        .field-row {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+        .field-row.two-col {
+            grid-template-columns: 1fr auto;
+        }
+        .field-row.two-col-equal {
+            grid-template-columns: 1fr 1fr;
+        }
+        .field-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        input[type="text"],
+        input[type="tel"],
+        input[type="email"],
+        textarea {
+            width: 100%;
+            background: #f7f3ff;
+            border: 1.5px solid #e8e0f0;
+            border-radius: 12px;
+            padding: 14px 16px;
+            font-size: 0.95rem;
+            font-family: 'Inter', sans-serif;
+            color: var(--text-dark);
+            outline: none;
+            transition: var(--transition);
+        }
+        input[type="text"]::placeholder,
+        input[type="tel"]::placeholder,
+        input[type="email"]::placeholder,
+        textarea::placeholder {
+            color: #b0a0c0;
+        }
+        input[type="text"]:focus,
+        input[type="tel"]:focus,
+        input[type="email"]:focus,
+        textarea:focus {
+            border-color: var(--purple-light);
+            background: #f2e8ff;
+            box-shadow: 0 0 0 3px rgba(123,45,142,0.1);
+        }
+        .uf-input { max-width: 90px; }
+
+        .historico-desc {
+            font-size: 0.9rem;
+            color: var(--purple);
+            font-weight: 600;
+            margin-bottom: 16px;
+            line-height: 1.6;
+        }
+        .historico-row {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 8px;
+            margin-bottom: 16px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #f0e8ff;
+        }
+        .historico-row:last-of-type { border-bottom: none; }
+        .historico-sub {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 10px;
+        }
+        .historico-sub .uf-input { max-width: 120px; }
+
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+        .msg-desc {
+            font-size: 0.9rem;
+            color: var(--purple);
+            font-weight: 600;
+            margin-bottom: 14px;
+            line-height: 1.6;
+        }
+
+        /* ========== CIDADES ========== */
+        .cidades-row {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        /* ========== BOTÕES NAV ========== */
+        .btn-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 32px;
+            gap: 14px;
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 14px 32px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+        }
+        .btn-primary {
+            background: var(--purple-dark);
+            color: #fff;
+            flex: 1;
+            box-shadow: 0 4px 16px rgba(91,26,110,0.3);
+        }
+        .btn-primary:hover {
+            background: var(--purple);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 22px rgba(91,26,110,0.4);
+        }
+        .btn-back {
+            background: transparent;
+            color: var(--purple);
+            border: 2px solid var(--purple-light);
+            padding: 12px 24px;
+            flex-shrink: 0;
+        }
+        .btn-back:hover {
+            background: #f5edff;
+        }
+        .btn-submit {
+            background: var(--purple-dark);
+            color: #fff;
+            width: 100%;
+            font-size: 1.05rem;
+            padding: 16px 32px;
+            box-shadow: 0 4px 16px rgba(91,26,110,0.35);
+        }
+        .btn-submit:hover {
+            background: var(--purple);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 24px rgba(91,26,110,0.5);
+        }
+
+        /* ========== SUCCESS ========== */
+        .success-wrap {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 30px 0 10px;
+            animation: fadeStep 0.5s ease;
+        }
+        .success-wrap.show { display: flex; }
+        .success-icon {
+            width: 80px; height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--purple), var(--magenta));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.2rem;
+            color: #fff;
+            margin-bottom: 24px;
+            box-shadow: 0 8px 24px rgba(123,45,142,0.3);
+        }
+        .success-wrap h2 {
+            font-size: 1.8rem;
+            color: var(--purple-dark);
+            margin-bottom: 12px;
+        }
+        .success-wrap p {
+            color: #666;
+            margin-bottom: 28px;
+            line-height: 1.7;
+        }
+
+        /* ========== WHATSAPP ========== */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px; right: 30px;
+            width: 65px; height: 65px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            animation: pulse-wa 2s infinite;
+        }
+        .whatsapp-float img { width: 100%; height: 100%; object-fit: contain; border-radius: 50%; }
+        @keyframes pulse-wa {
+            0%, 100% { filter: drop-shadow(0 4px 12px rgba(37,211,102,0.4)); }
+            50%       { filter: drop-shadow(0 6px 20px rgba(37,211,102,0.6)); }
+        }
+
+        /* ========== FOOTER ========== */
+        footer { background: #6D2573; padding: 0; }
+        .footer-banner-wrap { display: flex; align-items: center; justify-content: center; padding: 18px 40px; background: #6D2573; gap: 30px; }
+        .footer-banner { height: auto; display: block; object-fit: contain; }
+        .footer-img-left { max-height: 60px; }
+        .footer-img-right { max-height: 60px; }
+
+        /* ========== RESPONSIVIDADE ========== */
+        @media (max-width: 768px) {
+            header { background: #5A0061; }
+            header.scrolled { background: #5A0061; }
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100vh;
+                background: #5A0061;
+                padding: 100px 40px 80px;
+                box-shadow: none;
+                gap: 0;
+                z-index: 1000;
+                overflow-y: auto;
+                justify-content: center;
+                align-items: center;
+            }
+            .nav-links.active { display: flex; }
+            .nav-links.active li:first-child a {
+                color: #FF6B5B;
+                font-weight: 700;
+                font-size: 0.95rem;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+                padding: 0;
+                margin-bottom: 25px;
+                border-bottom: none;
+                border-radius: 0;
+            }
+            .nav-links li {
+                width: 100%;
+                max-width: 280px;
+                text-align: center;
+                position: relative;
+                margin-bottom: 25px;
+                border-bottom: none;
+            }
+            .nav-links li:not(:last-child)::after {
+                content: '';
+                display: block;
+                width: 180px;
+                height: 1px;
+                background: rgba(255,255,255,0.3);
+                margin: 25px auto 0;
+            }
+            .nav-links li:last-child { border-bottom: none; margin-bottom: 0; }
+            .nav-links a {
+                color: #fff;
+                font-weight: 400;
+                font-size: 0.95rem;
+                padding: 0;
+                border-radius: 0;
+                width: 100%;
+                text-align: center;
+                display: block;
+            }
+            .nav-links a:hover { color: #FF6B5B; background: transparent; }
+            .nav-links a.nav-cta { color: #fff; background: transparent; border: none; font-weight: 400; }
+            .mobile-menu-icon { display: block; }
+            .nav-links.active ~ .mobile-menu-close { display: flex; }
+            .form-card {
+                border-radius: 0;
+                box-shadow: none;
+                padding: 28px 18px 36px;
+                max-width: 100%;
+            }
+            .page-title { font-size: 1.9rem; margin-bottom: 28px; }
+            .check-group { grid-template-columns: 1fr; gap: 10px; }
+            .field-row.two-col { grid-template-columns: 1fr; }
+            .field-row.two-col-equal { grid-template-columns: 1fr; }
+            .historico-sub { grid-template-columns: 1fr; }
+            .historico-sub .uf-input { max-width: 100%; }
+            .cidades-row { grid-template-columns: 1fr; }
+            .uf-input { max-width: 100%; }
+            .deco-blob-1, .deco-blob-2, .deco-blob-3,
+            .deco-dots, .deco-wave { display: none; }
+            .btn-nav { flex-direction: column-reverse; }
+            .btn-back { width: 100%; justify-content: center; }
+
+            footer { background: #6D2573; }
+            .footer-banner-wrap { flex-direction: column; padding: 40px 30px; gap: 20px; }
+            .footer-img-left,
+            .footer-img-right { width: 100%; max-width: 520px; max-height: none; }
+        }
+        @media (min-width: 769px) {
+            .check-group { grid-template-columns: 1fr 1fr; }
+            .cidades-row { grid-template-columns: 1fr 90px; }
+            .historico-sub { grid-template-columns: 1fr 120px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- DECORAÇÕES -->
+    <div class="deco-wrap" aria-hidden="true">
+        <div class="deco-blob-1 deco-blob"></div>
+        <div class="deco-blob-2 deco-blob"></div>
+        <div class="deco-blob-3 deco-blob"></div>
+        <div class="deco-dots"></div>
+        <div class="deco-wave"></div>
+    </div>
+
+    <!-- HEADER -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo">
+                    <img src="img/site-BASTA-copiar_0000s_0015_BASTA-logo2.png" alt="BASTA! - De violência contra a mulher">
+                </a>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="index.html#projeto" data-i18n="nav.project">O projeto</a></li>
+                    <li><a href="index.html#aplicativo" data-i18n="nav.app">O aplicativo</a></li>
+                    <li><a href="index.html#colecao" data-i18n="nav.collection">A coleção</a></li>
+                    <li><a href="index.html#legal" data-i18n="nav.legal">Fundamentação legal</a></li>
+                    <li><a href="index.html#parceiros" data-i18n="nav.partners">Parceiros e clientes</a></li>
+                    <li><a href="index.html#conheca-app" data-i18n="nav.knowApp">Conheça o aplicativo</a></li>
+                    <li><a href="contato.html" class="nav-cta" target="_blank" data-i18n="nav.contact">Fale conosco</a></li>
+                    <li class="lang-selector">
+                        <button class="lang-btn active" data-lang="pt" title="Português">🇧🇷</button>
+                        <button class="lang-btn" data-lang="en" title="English">🇺🇸</button>
+                        <button class="lang-btn" data-lang="es" title="Español">🇪🇸</button>
+                        <button class="lang-btn" data-lang="fr" title="Français">🇫🇷</button>
+                    </li>
+                </ul>
+                <div class="mobile-menu-icon" id="menuIcon"><i class="fas fa-bars"></i></div>
+                <div class="mobile-menu-close" id="menuClose"><i class="fas fa-times"></i></div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <div class="page-wrapper">
+        <div class="container">
+            <h1 class="page-title" data-i18n="distributor.title">Seja um distribuidor</h1>
+
+            <div class="form-card" id="formCard">
+
+                <!-- PROGRESS BAR -->
+                <div class="progress-bar-wrap">
+                    <div class="progress-steps" id="progressSteps">
+                        <div class="progress-fill" id="progressFill"></div>
+                        <div class="step-dot active" data-step="1">1</div>
+                        <div class="step-dot" data-step="2">2</div>
+                        <div class="step-dot" data-step="3">3</div>
+                        <div class="step-dot" data-step="4">4</div>
+                        <div class="step-dot" data-step="5">5</div>
+                    </div>
+                    <div class="progress-label" id="progressLabel">Etapa 1 de 5 — Tipo de parceiro</div>
+                </div>
+
+                <form id="distributorForm" novalidate>
+
+                    <!-- STEP 1: TIPO DE PARCEIRO -->
+                    <div class="step active" id="step-1">
+                        <span class="section-label">Desejo ser:</span>
+                        <div class="check-group">
+                            <label class="check-item" id="lbl-representante">
+                                <input type="checkbox" name="tipo" value="Representante"> Representante
+                            </label>
+                            <label class="check-item" id="lbl-distribuidor">
+                                <input type="checkbox" name="tipo" value="Distribuidor"> Distribuidor
+                            </label>
+                            <label class="check-item" id="lbl-formador">
+                                <input type="checkbox" name="tipo" value="Formador"> Formador
+                            </label>
+                            <label class="check-item" id="lbl-livraria">
+                                <input type="checkbox" name="tipo" value="Livraria"> Livraria
+                            </label>
+                        </div>
+                        <div class="btn-nav">
+                            <button type="button" class="btn btn-primary" onclick="nextStep()">
+                                Próximo <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- STEP 2: FICHA DO DISTRIBUIDOR -->
+                    <div class="step" id="step-2">
+                        <span class="section-label">Ficha do distribuidor</span>
+                        <div class="field-row">
+                            <input type="text" name="nome" placeholder="Nome:" required>
+                        </div>
+                        <div class="field-row">
+                            <input type="tel" name="contato" placeholder="Contato:">
+                        </div>
+                        <div class="field-row two-col">
+                            <input type="text" name="cidade" placeholder="Cidade:">
+                            <input type="text" name="uf" placeholder="UF:" class="uf-input" maxlength="2">
+                        </div>
+                        <div class="field-row">
+                            <input type="text" name="empresa" placeholder="Empresa:">
+                        </div>
+                        <div class="field-row">
+                            <input type="text" name="cnpj" placeholder="CNPJ:">
+                        </div>
+                        <div class="btn-nav">
+                            <button type="button" class="btn btn-back" onclick="prevStep()">
+                                <i class="fas fa-arrow-left"></i> Voltar
+                            </button>
+                            <button type="button" class="btn btn-primary" onclick="nextStep()">
+                                Próximo <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- STEP 3: HISTÓRICO DE VENDAS -->
+                    <div class="step" id="step-3">
+                        <p class="historico-desc">Histórico com resumo de vendas alcançadas por sua equipe no mercado educacional recentemente:</p>
+                        <div class="historico-row">
+                            <input type="text" name="hist1" placeholder="">
+                            <div class="historico-sub">
+                                <input type="text" name="cliente1" placeholder="Cliente:">
+                                <input type="text" name="ano1" placeholder="Ano:" class="uf-input">
+                            </div>
+                        </div>
+                        <div class="historico-row">
+                            <input type="text" name="hist2" placeholder="">
+                            <div class="historico-sub">
+                                <input type="text" name="cliente2" placeholder="Cliente:">
+                                <input type="text" name="ano2" placeholder="Ano:" class="uf-input">
+                            </div>
+                        </div>
+                        <div class="historico-row">
+                            <input type="text" name="hist3" placeholder="">
+                            <div class="historico-sub">
+                                <input type="text" name="cliente3" placeholder="Cliente:">
+                                <input type="text" name="ano3" placeholder="Ano:" class="uf-input">
+                            </div>
+                        </div>
+                        <div class="historico-row">
+                            <input type="text" name="hist4" placeholder="">
+                            <div class="historico-sub">
+                                <input type="text" name="cliente4" placeholder="Cliente:">
+                                <input type="text" name="ano4" placeholder="Ano:" class="uf-input">
+                            </div>
+                        </div>
+                        <div class="historico-row">
+                            <input type="text" name="hist5" placeholder="">
+                            <div class="historico-sub">
+                                <input type="text" name="cliente5" placeholder="Cliente:">
+                                <input type="text" name="ano5" placeholder="Ano:" class="uf-input">
+                            </div>
+                        </div>
+                        <div class="btn-nav">
+                            <button type="button" class="btn btn-back" onclick="prevStep()">
+                                <i class="fas fa-arrow-left"></i> Voltar
+                            </button>
+                            <button type="button" class="btn btn-primary" onclick="nextStep()">
+                                Próximo <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- STEP 4: FOCO + CIDADES -->
+                    <div class="step" id="step-4">
+                        <span class="section-label">Foco:</span>
+                        <div class="radio-group" style="margin-bottom:28px;">
+                            <label class="radio-item">
+                                <input type="radio" name="foco" value="Rede pública"> Rede pública
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="foco" value="Rede privada"> Rede privada
+                            </label>
+                        </div>
+
+                        <span class="section-label">Cidades :</span>
+                        <div class="cidades-row">
+                            <input type="text" name="cid1" placeholder="">
+                            <input type="text" name="uf_cid1" placeholder="UF:" maxlength="2">
+                        </div>
+                        <div class="cidades-row">
+                            <input type="text" name="cid2" placeholder="">
+                            <input type="text" name="uf_cid2" placeholder="UF:" maxlength="2">
+                        </div>
+                        <div class="cidades-row">
+                            <input type="text" name="cid3" placeholder="">
+                            <input type="text" name="uf_cid3" placeholder="UF:" maxlength="2">
+                        </div>
+                        <div class="cidades-row">
+                            <input type="text" name="cid4" placeholder="">
+                            <input type="text" name="uf_cid4" placeholder="UF:" maxlength="2">
+                        </div>
+                        <div class="cidades-row">
+                            <input type="text" name="cid5" placeholder="">
+                            <input type="text" name="uf_cid5" placeholder="UF:" maxlength="2">
+                        </div>
+
+                        <div class="btn-nav">
+                            <button type="button" class="btn btn-back" onclick="prevStep()">
+                                <i class="fas fa-arrow-left"></i> Voltar
+                            </button>
+                            <button type="button" class="btn btn-primary" onclick="nextStep()">
+                                Próximo <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- STEP 5: MENSAGEM FINAL + ENVIAR -->
+                    <div class="step" id="step-5">
+                        <p class="msg-desc">O que efetivamente podemos esperar de você e sua equipe para atender o mercado nessas cidades solicitadas?</p>
+                        <textarea name="mensagem" placeholder="Mensagem:" rows="5"></textarea>
+
+                        <!-- Campo honeypot para proteção anti-bot (não remover) -->
+                        <input 
+                            type="text" 
+                            name="bot_field" 
+                            style="position:absolute;left:-9999px;" 
+                            tabindex="-1" 
+                            autocomplete="off"
+                        >
+
+                        <div class="btn-nav" style="margin-top:24px;">
+                            <button type="button" class="btn btn-back" onclick="prevStep()">
+                                <i class="fas fa-arrow-left"></i> Voltar
+                            </button>
+                            <button type="submit" class="btn btn-primary">
+                                Enviar <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                </form>
+
+                <!-- SUCESSO -->
+                <div class="success-wrap" id="successWrap">
+                    <div class="success-icon"><i class="fas fa-check"></i></div>
+                    <h2>Enviado com sucesso!</h2>
+                    <p>Obrigado pelo seu interesse em ser um distribuidor BASTA!<br>Em breve nossa equipe entrará em contato.</p>
+                    <a href="index.html" class="btn btn-primary" style="width:100%;justify-content:center;">
+                        <i class="fas fa-home"></i> Voltar ao site
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-banner-wrap">
+            <img src="img/Grupo-133-1.png" alt="Ética Editora - redes sociais" class="footer-banner footer-img-left">
+            <img src="img/Grupo-132.png" alt="Empresa credenciada - selos" class="footer-banner footer-img-right">
+        </div>
+    </footer>
+
+    <!-- WHATSAPP FLOATING BUTTON -->
+    <a href="https://wa.me/5511987380525" target="_blank" class="whatsapp-float" aria-label="WhatsApp">
+        <img src="img/09.whatsapp.png" alt="WhatsApp">
+    </a>
+
+    <script>
+        // ========== MENU MOBILE ==========
+        const menuIcon = document.getElementById('menuIcon');
+        const menuClose = document.getElementById('menuClose');
+        const navLinks = document.getElementById('navLinks');
+
+        if (menuIcon) {
+            menuIcon.addEventListener('click', () => {
+                navLinks.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        }
+        if (menuClose) {
+            menuClose.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        }
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+
+        const TOTAL_STEPS = 5;
+        const STEP_LABELS = [
+            'Tipo de parceiro',
+            'Ficha do distribuidor',
+            'Histórico de vendas',
+            'Foco e cidades',
+            'Mensagem final'
+        ];
+
+        let currentStep = 1;
+
+        function getStepEl(n) { return document.getElementById('step-' + n); }
+        function getDots() { return document.querySelectorAll('.step-dot'); }
+        function getFill() { return document.getElementById('progressFill'); }
+        function getLabel() { return document.getElementById('progressLabel'); }
+
+        function updateProgress() {
+            const dots = getDots();
+            dots.forEach((dot, i) => {
+                const n = i + 1;
+                dot.classList.remove('active', 'done');
+                if (n < currentStep) dot.classList.add('done');
+                else if (n === currentStep) dot.classList.add('active');
+            });
+
+            // Fill line: from first dot center to current dot center
+            const stepsEl = document.getElementById('progressSteps');
+            const firstDot = dots[0];
+            const currDot = dots[currentStep - 1];
+            const wrapRect = stepsEl.getBoundingClientRect();
+            const firstRect = firstDot.getBoundingClientRect();
+            const currRect = currDot.getBoundingClientRect();
+            const fillStart = firstRect.left + firstRect.width / 2 - wrapRect.left;
+            const fillEnd = currRect.left + currRect.width / 2 - wrapRect.left;
+            getFill().style.left = fillStart + 'px';
+            getFill().style.width = Math.max(0, fillEnd - fillStart) + 'px';
+
+            getLabel().textContent = `Etapa ${currentStep} de ${TOTAL_STEPS} — ${STEP_LABELS[currentStep - 1]}`;
+        }
+
+        function showStep(n) {
+            for (let i = 1; i <= TOTAL_STEPS; i++) {
+                const el = getStepEl(i);
+                if (el) el.classList.remove('active');
+            }
+            const target = getStepEl(n);
+            if (target) target.classList.add('active');
+            currentStep = n;
+            updateProgress();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function nextStep() {
+            if (!validateStep(currentStep)) return;
+            if (currentStep < TOTAL_STEPS) showStep(currentStep + 1);
+        }
+
+        function prevStep() {
+            if (currentStep > 1) showStep(currentStep - 1);
+        }
+
+        // ========== VALIDAÇÃO POR STEP ==========
+        function validateStep(step) {
+            clearErrors();
+            let valid = true;
+
+            if (step === 1) {
+                // Pelo menos um tipo selecionado
+                const checked = document.querySelectorAll('#step-1 input[type="checkbox"]:checked');
+                if (checked.length === 0) {
+                    showStepError('Selecione pelo menos uma opção.');
+                    document.querySelectorAll('#step-1 .check-item').forEach(el => el.style.borderColor = '#e74c3c');
+                    valid = false;
+                }
+            }
+
+            if (step === 2) {
+                const nome = document.querySelector('#step-2 input[name="nome"]');
+                const contato = document.querySelector('#step-2 input[name="contato"]');
+                const cidade = document.querySelector('#step-2 input[name="cidade"]');
+                const uf = document.querySelector('#step-2 input[name="uf"]');
+
+                if (!nome.value.trim()) { markInvalid(nome); valid = false; }
+                if (!contato.value.trim()) { markInvalid(contato); valid = false; }
+                if (!cidade.value.trim()) { markInvalid(cidade); valid = false; }
+                if (!uf.value.trim()) { markInvalid(uf); valid = false; }
+
+                if (!valid) showStepError('Preencha os campos obrigatórios.');
+            }
+
+            if (step === 4) {
+                const foco = document.querySelector('#step-4 input[name="foco"]:checked');
+                if (!foco) {
+                    showStepError('Selecione o foco (Rede pública ou privada).');
+                    document.querySelectorAll('#step-4 .radio-item').forEach(el => el.style.color = '#e74c3c');
+                    valid = false;
+                }
+            }
+
+            return valid;
+        }
+
+        function markInvalid(el) {
+            el.style.borderColor = '#e74c3c';
+            el.style.background = '#fff5f5';
+            el.addEventListener('input', function handler() {
+                el.style.borderColor = '';
+                el.style.background = '';
+                el.removeEventListener('input', handler);
+            });
+        }
+
+        function showStepError(msg) {
+            let errEl = document.getElementById('stepError');
+            if (!errEl) {
+                errEl = document.createElement('div');
+                errEl.id = 'stepError';
+                errEl.style.cssText = 'color:#e74c3c;font-size:0.88rem;font-weight:600;text-align:center;margin-top:12px;padding:8px;background:#fff5f5;border-radius:8px;animation:fadeStep 0.3s ease;';
+                const formCard = document.getElementById('formCard');
+                const activeStep = formCard.querySelector('.step.active');
+                if (activeStep) activeStep.appendChild(errEl);
+            }
+            errEl.textContent = msg;
+        }
+
+        function clearErrors() {
+            const err = document.getElementById('stepError');
+            if (err) err.remove();
+            document.querySelectorAll('#formCard input, #formCard .check-item, #formCard .radio-item').forEach(el => {
+                el.style.borderColor = '';
+                el.style.background = '';
+                el.style.color = '';
+            });
+        }
+
+        // Checkbox visual
+        document.querySelectorAll('.check-item').forEach(lbl => {
+            lbl.addEventListener('change', () => {
+                lbl.classList.toggle('selected', lbl.querySelector('input').checked);
+            });
+        });
+
+        // URL do backend
+        const BACKEND_URL = window.location.hostname === 'localhost'
+            ? 'http://localhost:3001'
+            : 'https://bastasite.onrender.com';
+
+        // Submit
+        document.getElementById('distributorForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const form = e.target;
+            const btn = form.querySelector('button[type="submit"]');
+            const textoOriginal = btn.innerHTML;
+            btn.innerHTML = 'Enviando... <i class="fas fa-spinner fa-spin"></i>';
+            btn.disabled = true;
+
+            try {
+                const fd = new FormData(form);
+                // Checkboxes "tipo" — pega todos os selecionados como array
+                const tipos = fd.getAll('tipo');
+                const dados = Object.fromEntries(fd);
+                dados.tipo = tipos;
+
+                const res = await fetch(BACKEND_URL + '/api/enviar-distribuidor', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(dados)
+                });
+                const data = await res.json();
+                if (data.sucesso) {
+                    form.style.display = 'none';
+                    document.querySelector('.progress-bar-wrap').style.display = 'none';
+                    document.getElementById('successWrap').classList.add('show');
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                } else {
+                    alert(data.erro || 'Erro ao enviar. Tente novamente.');
+                    btn.innerHTML = textoOriginal;
+                    btn.disabled = false;
+                }
+            } catch (err) {
+                console.error('Erro:', err);
+                alert('Erro de conexão. Tente novamente.');
+                btn.innerHTML = textoOriginal;
+                btn.disabled = false;
+            }
+        });
+
+        // Init
+        updateProgress();
+    </script>
+
+    <!-- Language Selector -->
+    <script src="js/translations.js"></script>
+    <script src="js/language-system.js"></script>
+</body>
+</html>

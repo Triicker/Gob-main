@@ -1,0 +1,301 @@
+/* ================================================================
+   components.css — Cards, modais, carrossel, WhatsApp
+   Projeto: BASTA! Landing Page
+   ================================================================ */
+
+/* ========== PARCEIROS — Cards com flip ========== */
+.partner-card {
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 1;
+    padding: 10px;
+    transition: all 0.3s ease;
+    perspective: 1000px;
+    cursor: pointer;
+}
+.partner-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.7s cubic-bezier(0.4, 0.2, 0.2, 1);
+    transform-style: preserve-3d;
+}
+.partner-card:hover .partner-card-inner,
+.partner-card.is-flipped .partner-card-inner { transform: rotateY(180deg); }
+
+.partner-card-front,
+.partner-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 18px;
+}
+.partner-card-front {
+    background: #fff;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.08);
+}
+.partner-card-back {
+    background: var(--purple-dark);
+    transform: rotateY(180deg);
+}
+.partner-card:hover { transform: translateY(-8px); }
+.partner-card:hover .partner-card-front { box-shadow: 0 12px 30px rgba(0,0,0,0.18); }
+.partner-card img { max-width: 95%; max-height: 95%; object-fit: contain; }
+
+/* Cores individuais por ordem */
+.partner-card:nth-child(1) .partner-card-front { background: #fff; }
+.partner-card:nth-child(2) .partner-card-front { background: #fff; }
+.partner-card:nth-child(3) .partner-card-front { background: #000; }
+.partner-card:nth-child(4) .partner-card-front { background: #fff; border: 2px solid #e0e0e0; }
+.partner-card:nth-child(5) .partner-card-front { background: #fff; border: 2px solid #e0e0e0; }
+.partner-card:nth-child(6) .partner-card-front { background: #fff; border: 2px solid #e0e0e0; }
+.partner-card:nth-child(7) .partner-card-front { background: #fff; border: 2px solid #e0e0e0; }
+.partner-card:nth-child(8) .partner-card-front { background: #183FFF; }
+.partner-card:nth-child(9) .partner-card-front { background: #fff; border: 2px solid #e0e0e0; }
+.partner-card:nth-child(10) .partner-card-front { background: #601282; }
+
+/* ========== CLIENTES — Cards com flip ========== */
+/* Cores customizadas por classe semântica */
+.cliente-card.bg-azul-salvador .cliente-card-front { background: #006DB9; }
+.cliente-card.bg-vermelho     .cliente-card-front  { background: #B2002F; }
+.cliente-card.bg-laranja      .cliente-card-front  { background: #FFA20D; }
+.cliente-card.bg-verde        .cliente-card-front  { background: #27AE60; }
+.cliente-card.bg-amarelo      .cliente-card-front  { background: #F1C40F; }
+.cliente-card.bg-roxo         .cliente-card-front  { background: #6D2573; }
+.cliente-card.bg-azul-escuro  .cliente-card-front  { background: #1A3A5C; }
+.cliente-card.bg-azul-claro   .cliente-card-front  { background: #2980B9; }
+.cliente-card.bg-cinza        .cliente-card-front  { background: #95A5A6; }
+.cliente-card.bg-preto        .cliente-card-front  { background: #1a1a1a; }
+
+.cliente-card {
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 1;
+    padding: 10px;
+    transition: all 0.3s ease;
+    perspective: 1000px;
+    cursor: pointer;
+}
+.cliente-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.7s cubic-bezier(0.4, 0.2, 0.2, 1);
+    transform-style: preserve-3d;
+}
+.cliente-card:hover .cliente-card-inner,
+.cliente-card.is-flipped .cliente-card-inner { transform: rotateY(180deg); }
+
+.cliente-card-front,
+.cliente-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 18px;
+}
+.cliente-card-front {
+    background: #fff;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.08);
+}
+.cliente-card-back {
+    background: var(--purple-dark);
+    transform: rotateY(180deg);
+}
+.cliente-card:hover { transform: translateY(-8px); }
+.cliente-card:hover .cliente-card-front { box-shadow: 0 12px 30px rgba(0,0,0,0.18); }
+.cliente-card img { max-width: 95%; max-height: 95%; object-fit: contain; }
+
+/* ========== CARROSSEL ========== */
+.carousel-wrapper {
+    position: relative;
+    padding: 0 65px;
+}
+.carousel-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    transition: all 0.3s ease;
+    z-index: 5;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+.carousel-arrow:hover { transform: translateY(-50%) scale(1.1); }
+.carousel-arrow img   { width: 100%; height: 100%; object-fit: contain; }
+.carousel-arrow.prev  { left: 0; }
+.carousel-arrow.next  { right: 0; }
+
+/* ========== WHATSAPP FLOATING ========== */
+.whatsapp-float {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 99999;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+.whatsapp-float:hover { transform: scale(1.12); opacity: 0.92; }
+.whatsapp-float::before,
+.whatsapp-float::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: rgba(37,211,102,0.55);
+    animation: wa-pulse-ring 2.2s ease-out infinite;
+    z-index: 0;
+}
+.whatsapp-float::after {
+    background: rgba(37,211,102,0.3);
+    animation-delay: 0.75s;
+}
+.whatsapp-float img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 50%;
+    position: relative;
+    z-index: 1;
+}
+.whatsapp-float:hover { transform: scale(1.1); }
+
+/* ========== MODAL CRONOGRAMA ========== */
+/* Modal Overlay - Base */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.modal-overlay.is-open {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Modal Cards */
+.cron-modal-card {
+    background: #fff;
+    border-radius: 14px;
+    padding: 30px 28px 26px;
+    width: min(460px, 92vw);
+    position: relative;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+}
+.cron-modal-title {
+    font-family: 'Inter', sans-serif;
+    font-weight: 900;
+    font-size: 1rem;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: #1a1a1a;
+    text-align: center;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #1a1a1a;
+    margin-bottom: 16px;
+}
+.cron-field {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1.5px solid rgba(0,0,0,0.2);
+    border-radius: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    background: #fff;
+    margin-bottom: 9px;
+    display: block;
+    color: #333;
+    outline: none;
+    transition: border-color 0.2s;
+}
+.cron-field:focus { border-color: var(--purple); box-shadow: 0 0 0 3px rgba(123,45,142,0.1); }
+.cron-field::placeholder { color: #999; }
+
+.btn-cron-submit {
+    width: 100%;
+    padding: 14px;
+    background: #DB294B;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 4px;
+    transition: background 0.2s, transform 0.15s;
+}
+.btn-cron-submit:hover { background: #c0233f; transform: translateY(-1px); }
+
+.cron-loading-wrap {
+    text-align: center;
+    color: #fff;
+    font-size: 1.6rem;
+    font-weight: 600;
+    font-family: 'Playfair Display', serif;
+    animation: cron-pulse 1.2s ease-in-out infinite;
+}
+.cron-success-card {
+    background: #fff;
+    border-radius: 18px;
+    padding: 44px 36px;
+    width: min(400px, 90vw);
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+}
+.cron-success-icon {
+    width: 68px;
+    height: 68px;
+    background: #4CAF50;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 22px;
+    font-size: 2rem;
+    color: #fff;
+}
+.cron-success-card h3 { font-size: 1.35rem; color: var(--purple-dark); margin-bottom: 12px; }
+.cron-success-card p  { color: #666; margin-bottom: 26px; font-size: 0.95rem; line-height: 1.65; }
+.cron-state        { display: none; width: 100%; align-items: center; justify-content: center; }
+.cron-state.active { display: flex; }
