@@ -114,6 +114,12 @@
             radial-gradient(circle at -8% 100%, rgba(212,56,142,0.08) 0 100px, transparent 102px),
             #fffaf0;
     }
+    .project-details-section { padding: 58px 0 68px; }
+    .project-details-title { font-size: clamp(2.2rem, 11vw, 3.7rem); }
+    .project-details-title-line { height: 6px; margin-bottom: 16px; }
+    .project-details-subtitle { max-width: 340px; margin-bottom: 24px; font-size: 1rem; }
+    .project-details-dots-decor { top: 25%; left: -18px; width: 62px; height: 180px; opacity: 0.72; background-size: 20px 20px; }
+    .project-details-carousel::after { right: -36%; width: 72%; height: 40%; opacity: 0.8; }
     .testimonials-eyebrow { font-size: 0.68rem; }
     .testimonials-title { font-size: clamp(2.5rem, 13vw, 4rem); }
     .testimonials-title-line { height: 6px; margin-bottom: 20px; }
@@ -175,7 +181,13 @@
 
     /* Header */
     header,
-    header.scrolled { background: #5A0061; }
+    header.scrolled {
+        background-color: #5A0061;
+        background-image: url('../img/headerdeep.png');
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
 
     /* Menu fullscreen */
     .nav-links {
@@ -185,7 +197,11 @@
         top: 0; left: 0;
         width: 100%;
         height: 100vh;
-        background: #5A0061;
+        background-color: #5A0061;
+        background-image: url('../img/headerdeep.png');
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
         padding: 100px 40px 80px;
         gap: 0;
         z-index: 1000;
@@ -246,11 +262,19 @@
         font-size: 0.8rem;
     }
 
-    .mobile-menu-icon { display: block; }
+    .mobile-menu-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 48px;
+        height: 48px;
+        font-size: 2.2rem;
+        line-height: 1;
+    }
 
     /* Logo mobile maior */
-    .logo img { height: 60px; }
-    header.scrolled .logo img { height: 50px; }
+    .logo img { height: 70px; }
+    header.scrolled .logo img { height: 62px; }
 
     /* Hero — only title inside, woman visible on right */
     .hero { min-height: 72vh; background: transparent; overflow: hidden; }
@@ -258,9 +282,15 @@
         position: absolute;
         top: 5%; left: 0;
         width: 100%; height: 100%;
-        background-image: url('../img/homeimage.png');
+        background-image: url('../img/homeimagemobile.png');
         background-position: right 30% top 20px;
         background-size: cover;
+    }
+    .hero-left {
+        content: url('../img/homeleftmobile.png');
+        top: 20%;
+        left: 20px;
+        width: min(83vw, 324px);
     }
     .hero .container {
         position: relative;
@@ -524,9 +554,27 @@
         margin: 0 auto 18px auto !important;
     }
     
-    .hero { min-height: auto; }
-    .hero-bg { height: 40vh; min-height: 250px; }
-    .hero .container  { padding: 20px 15px 30px; }
+    /* A arte mobile tem proporção 430x710 e precisa ocupar todo o hero. */
+    .hero {
+        height: calc(100vw * 710 / 430);
+        min-height: 0;
+        padding: 0;
+        background: transparent;
+    }
+    .hero-bg {
+        top: 0;
+        height: 100%;
+        min-height: 0;
+        background-position: center;
+        background-size: cover;
+    }
+    .hero-left {
+        /* Mantém a chamada abaixo do cabeçalho fixo no mobile. */
+        top: 15%;
+        left: 8%;
+        width: min(72vw, 324px);
+    }
+    .hero .container  { height: 100%; min-height: 0; padding: 0 15px; }
     .hero-title-img   { max-width: 220px; }
     .hero-subtitle-img { max-width: 100%; }
     .hero-cards { gap: 8px; justify-content: space-between; align-items: flex-start; flex-wrap: nowrap; }
@@ -616,7 +664,26 @@
         box-sizing: border-box;
     }
 
-    .testimonial-card { flex-basis: 82vw; }
+    .testimonials-viewport {
+        height: min(160vw, 620px);
+        margin: 0;
+    }
+    .testimonial-card {
+        width: min(82vw, 300px);
+        flex-basis: auto;
+        border-radius: 34px;
+    }
+    .testimonial-card.is-prev {
+        transform: translate(-50%, -50%) translateX(-92vw) scale(0.72);
+    }
+    .testimonial-card.is-next {
+        transform: translate(-50%, -50%) translateX(92vw) scale(0.72);
+    }
+    .testimonial-card.is-prev,
+    .testimonial-card.is-next {
+        opacity: 0;
+        pointer-events: none;
+    }
     .testimonial-copy { right: 7%; bottom: 6%; left: 7%; }
     .testimonial-duration { right: 6%; bottom: 6%; }
 }

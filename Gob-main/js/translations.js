@@ -46,6 +46,8 @@ const translations = {
         'testimonials.card4.title': 'Depoimento 04',
         'testimonials.card5.title': 'Depoimento 05',
         'testimonials.cta': 'Ver todos os depoimentos',
+        'projectDetails.title': 'Detalhes do projeto',
+        'projectDetails.subtitle': 'Antes de conhecermos os livros, os planos de aula e as atividades que serão desenvolvidas, precisamos compreender por que este projeto existe.',
 
         // Parágrafos — O projeto
         'project.p1': 'Pela primeira vez uma editora conseguiu aplicar de forma absoluta um projeto educativo que garante à todas as escolas da rede privada e pública o cumprimento das exigências federais no que tange o tema violência doméstica e contra a mulher.',
@@ -70,7 +72,7 @@ const translations = {
         'contact.email': 'E-mail',
         'contact.phone': 'Telefone',
         'contact.message': 'Mensagem',
-        'contact.submit': 'Enviar mensagem',
+        'contact.submit': 'Enviar',
         
         // Página distribuidor
         'distributor.title': 'Seja um distribuidor',
@@ -185,6 +187,8 @@ const translations = {
         'testimonials.card4.title': 'Testimonial 04',
         'testimonials.card5.title': 'Testimonial 05',
         'testimonials.cta': 'View all testimonials',
+        'projectDetails.title': 'Project details',
+        'projectDetails.subtitle': 'Before getting to know the books, lesson plans and activities that will be developed, we need to understand why this project exists.',
 
         // Paragraphs — The Project
         'project.p1': 'For the first time, a publisher has been able to fully implement an educational project that guarantees all private and public schools compliance with federal requirements regarding domestic violence and violence against women.',
@@ -324,6 +328,8 @@ const translations = {
         'testimonials.card4.title': 'Testimonio 04',
         'testimonials.card5.title': 'Testimonio 05',
         'testimonials.cta': 'Ver todos los testimonios',
+        'projectDetails.title': 'Detalles del proyecto',
+        'projectDetails.subtitle': 'Antes de conocer los libros, los planes de clase y las actividades que se desarrollarán, necesitamos comprender por qué existe este proyecto.',
         // Párrafos — El Proyecto
         'project.p1': 'Por primera vez, una editorial ha logrado implementar de forma absoluta un proyecto educativo que garantiza a todas las escuelas de la red privada y pública el cumplimiento de las exigencias federales en materia de violencia doméstica y contra la mujer.',
         'project.p2': 'Aplicamos metodologías educativas combinadas con herramientas de terapia cognitivo conductual y psicoanalíticas para garantizar la eficiencia de este inédito proyecto, haciéndolo aplicable en las escuelas y llegando a alumnos y familias para logros permanentes.',
@@ -462,6 +468,8 @@ const translations = {
         'testimonials.card4.title': 'Témoignage 04',
         'testimonials.card5.title': 'Témoignage 05',
         'testimonials.cta': 'Voir tous les témoignages',
+        'projectDetails.title': 'Détails du projet',
+        'projectDetails.subtitle': 'Avant de découvrir les livres, les plans de cours et les activités qui seront développés, nous devons comprendre pourquoi ce projet existe.',
 
         // Paragraphes — Le Projet
         'project.p1': "Pour la première fois, un éditeur a réussi à mettre en œuvre de manière absolue un projet éducatif garantissant à toutes les écoles privées et publiques le respect des exigences fédérales concernant la violence domestique et la violence contre les femmes.",

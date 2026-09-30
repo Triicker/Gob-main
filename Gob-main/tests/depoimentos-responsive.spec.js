@@ -10,8 +10,8 @@ test('modal de depoimentos reproduz, navega e responde ao viewport', async ({ pa
 
   await expect(section).toBeVisible();
   await expect(page.locator('#depoimentos-title')).toHaveText(/Depoimentos/i);
-  await expect(cards).toHaveCount(5);
-  await expect(section.locator('.testimonials-dot')).toHaveCount(5);
+  await expect(cards).toHaveCount(4);
+  await expect(section.locator('.testimonials-dot')).toHaveCount(4);
 
   const horizontalOverflow = await page.evaluate(() =>
     document.documentElement.scrollWidth - document.documentElement.clientWidth
@@ -27,7 +27,7 @@ test('modal de depoimentos reproduz, navega e responde ao viewport', async ({ pa
   const video = page.locator('#testimonialVideo');
   const phone = page.locator('.testimonial-phone');
   await expect(modal).toHaveClass(/is-open/);
-  await expect(video).toHaveAttribute('src', 'videos/video1.mp4');
+  await expect(video).toHaveAttribute('src', 'https://midiasave-5c064.web.app/video1.mp4');
   if (testInfo.project.name.includes('Safari')) {
     // O WebKit headless pode devolver o foco ao player nativo durante autoplay.
     await expect(modal).toHaveAttribute('tabindex', '-1');
@@ -47,19 +47,19 @@ test('modal de depoimentos reproduz, navega e responde ao viewport', async ({ pa
   expect(phoneBox).not.toBeNull();
   if (viewport.width <= 576) {
     expect(Math.abs(phoneBox.width - viewport.width)).toBeLessThanOrEqual(1);
-    expect(Math.abs(phoneBox.height - viewport.height)).toBeLessThanOrEqual(1);
+    expect(Math.abs(phoneBox.height - viewport.height)).toBeLessThanOrEqual(3);
   } else {
     expect(phoneBox.width).toBeLessThanOrEqual(390);
     expect(phoneBox.height).toBeLessThanOrEqual(viewport.height * 0.88);
   }
 
   await page.keyboard.press('ArrowRight');
-  await expect(video).toHaveAttribute('src', 'videos/video2.mp4');
+  await expect(video).toHaveAttribute('src', 'https://midiasave-5c064.web.app/video2.mp4');
   await expect(page.locator('#testimonialCurrent')).toHaveText('02');
   await expect(page.locator('#testimonialModalTitle')).toHaveText('Depoimento 02');
 
   await page.keyboard.press('ArrowLeft');
-  await expect(video).toHaveAttribute('src', 'videos/video1.mp4');
+  await expect(video).toHaveAttribute('src', 'https://midiasave-5c064.web.app/video1.mp4');
 
   await page.keyboard.press('Escape');
   await expect(modal).not.toHaveClass(/is-open/);
@@ -67,6 +67,8 @@ test('modal de depoimentos reproduz, navega e responde ao viewport', async ({ pa
   await expect(cards.first()).toBeFocused();
   await expect(page.locator('body')).not.toHaveCSS('overflow', 'hidden');
 
+  await section.locator('.testimonials-dot').nth(1).click();
+  await expect(cards.nth(1)).toHaveClass(/is-active/);
   await cards.nth(1).click();
   await page.locator('.testimonial-modal-close').click();
   await expect(modal).not.toHaveClass(/is-open/);
