@@ -606,6 +606,12 @@
                 <button class="carousel-arrow prev" id="carouselPrev"><img src="img/ativo1.png" alt="Anterior"></button>
                 <div class="app-showcase-content">
                     <div class="app-showcase-card">
+                        <div class="app-slide-copy" aria-live="polite">
+                            <h3 id="slideTitle"></h3>
+                            <p id="slideDescription"></p>
+                            <div id="slideExtraParagraphs"></div>
+                            <ul id="slidePoints"></ul>
+                        </div>
                         <img id="slideImage" src="img/educacao-1.png" alt="App BASTA! - Slide">
                     </div>
                 </div>
@@ -766,7 +772,7 @@
 
                 <div class="testimonial-story-top" aria-hidden="true">
                     <div class="testimonial-story-progress"></div>
-                    <p>Depoimentos <span>•</span> <strong id="testimonialCurrent">01</strong> / <span id="testimonialTotal">04</span></p>
+                    <p>Depoimentos <span>•</span> <strong id="testimonialCurrent">01</strong> / <span id="testimonialTotal">15</span></p>
                 </div>
 
                 <div class="testimonial-story-copy">
@@ -780,7 +786,7 @@
             </button>
 
             <div class="testimonial-modal-indicator" aria-live="polite">
-                <span id="testimonialIndicatorCurrent">1</span> / <span id="testimonialIndicatorTotal">4</span>
+                <span id="testimonialIndicatorCurrent">1</span> / <span id="testimonialIndicatorTotal">15</span>
             </div>
         </div>
     </div>
@@ -957,30 +963,160 @@
 
         // ========== CAROUSEL - Conheça o aplicativo ==========
         const slidesDesktop = [
-            { image: 'img/educacao-1.png', alt: 'Conheça o aplicativo - Educação' },
-            { image: 'img/apoio-1.png', alt: 'Conheça o aplicativo - Apoio' },
-            { image: 'img/autocuidado-1.png', alt: 'Conheça o aplicativo - Autocuidado' },
-            { image: 'img/comunidade.png', alt: 'Conheça o aplicativo - Comunidade' },
-            { image: 'img/bt-panico.png', alt: 'Conheça o aplicativo - Botão do pânico' },
-            { image: 'img/guardioes-1.png', alt: 'Conheça o aplicativo - Guardiões' },
-            { image: 'img/del-online.png', alt: 'Conheça o aplicativo - Delegacia online' },
-            { image: 'img/tel-uteis.png', alt: 'Conheça o aplicativo - Telefones úteis' }
+            {
+                image: 'img/01.png',
+                alt: 'Conheça o aplicativo - Tela inicial',
+                title: 'Tela inicial',
+                paragraphs: [
+                    'Este aplicativo foi desenvolvido com o objetivo de oferecer à mulher apoio para sua vida pessoal, profissional e familiar.',
+                    'Aqui ela poderá desenvolver:'
+                ],
+                points: [
+                    'Dignidade: Conhecimento de seus direitos e deveres;',
+                    'Experiências: Fórum de situações reais vividas por outras mulheres;',
+                    'Segurança: Canais diretos para chamadas de emergências;',
+                    'Entendimento: Dicas de psicanalista especialista em casos de família;',
+                    'Conhecimento: Através dos conteúdos e exercícios dos livros.'
+                ]
+            },
+            {
+                image: 'img/09-Tela Educação.png',
+                alt: 'Conheça o aplicativo - Educação',
+                title: 'Educação',
+                paragraphs: ['Nesta sessão a mulher encontrará material educativo como:'],
+                points: [
+                    'Tipos de violência;',
+                    'Leis e direitos;',
+                    'Sinais de alerta: um breve questionário para que ela saiba reconhecer os sinais de violência e entender quando está em risco.'
+                ]
+            },
+            {
+                image: 'img/10-Rede de apoio.png',
+                alt: 'Conheça o aplicativo - Apoio',
+                title: 'Apoio',
+                paragraphs: [
+                    'Aqui a mulher encontrará locais próximos onde poderá buscar ajuda, como delegacias especializadas, abrigos e centros de apoio.',
+                    'Esses locais serão apresentados através de um mapa, permitindo visualizar os pontos de atendimento disponíveis e facilitar o acesso à rede de apoio.'
+                ]
+            },
+            {
+                image: 'img/11-Guardiões.png',
+                alt: 'Conheça o aplicativo - Guardiões',
+                title: 'Guardiões',
+                paragraphs: [
+                    'Aqui a mulher poderá cadastrar números de pessoas de sua confiança para acioná-las rapidamente caso necessite de ajuda.',
+                    'Ela também poderá deixar uma mensagem pré-configurada para envio rápido aos seus guardiões em situações de emergência.'
+                ]
+            },
+            {
+                image: 'img/12-SIga-me.png',
+                alt: 'Conheça o aplicativo - Siga-me',
+                title: 'Siga-me',
+                paragraphs: [
+                    'Nesta sessão, a mulher poderá ativar o compartilhamento de sua localização, permitindo que sua posição seja acompanhada durante situações em que necessite de maior segurança.',
+                    'O recurso poderá ser utilizado como apoio preventivo e para facilitar sua localização em caso de necessidade.'
+                ]
+            },
+            {
+                image: 'img/13-Embaixadoras.png',
+                alt: 'Conheça o aplicativo - Embaixadora da sua cidade',
+                title: 'Embaixadora da sua cidade',
+                paragraphs: [
+                    'Nesta sessão, a mulher poderá acompanhar conteúdos, vídeos e ações realizadas pelas embaixadoras do projeto em sua cidade.',
+                    'O espaço busca divulgar iniciativas locais, compartilhar informações e aproximar as mulheres das atividades desenvolvidas em sua região.'
+                ]
+            },
+            {
+                image: 'img/14-Condenados.png',
+                alt: 'Conheça o aplicativo - Condenados',
+                title: 'Condenados',
+                paragraphs: [
+                    'Nesta sessão, a mulher poderá consultar informações relacionadas a condenados por crimes contra a mulher.',
+                    'A busca poderá ser realizada por estado e cidade, facilitando o acesso às informações disponíveis e contribuindo para a conscientização e prevenção.'
+                ]
+            },
+            {
+                image: 'img/07-Botão de emergência.png',
+                alt: 'Conheça o aplicativo - Botão de emergência',
+                title: 'Botão de emergência',
+                paragraphs: [
+                    'Inclui dois botões de emergência.',
+                    'Um deles, quando pressionado, envia um alerta para os guardiões — como amigos, familiares ou pessoas de confiança — contendo a localização da vítima e a mensagem configurada.',
+                    'O outro botão, quando pressionado por 3 segundos, realiza um chamado de emergência.'
+                ]
+            }
         ];
 
-        // Versão MOBILE (conforme referências / links enviados)
+        // Versão MOBILE: os textos acompanham exclusivamente os novos mockups mobile.
         const slidesMobile = [
-            { image: 'img/inicial.png', alt: 'Conheça o aplicativo - Tela inicial' },
-            { image: 'img/educacao-2.png', alt: 'Conheça o aplicativo - Educação' },
-            { image: 'img/apoio-2.png', alt: 'Conheça o aplicativo - Apoio' },
-            { image: 'img/autociodado.png', alt: 'Conheça o aplicativo - Autocuidado' },
-            { image: 'img/comunidade-1.png', alt: 'Conheça o aplicativo - Comunidade' },
-            { image: 'img/bt-panico-1.png', alt: 'Conheça o aplicativo - Botão do pânico' },
-            { image: 'img/guardioes-2.png', alt: 'Conheça o aplicativo - Guardiões' },
-            { image: 'img/del-online-1.png', alt: 'Conheça o aplicativo - Delegacia online' },
-            { image: 'img/tel-uteis-1.png', alt: 'Conheça o aplicativo - Telefones úteis' }
+            {
+                image: 'img/01.png',
+                alt: 'Conheça o aplicativo - Tela inicial',
+                title: 'Tela inicial',
+                description: 'Este aplicativo foi desenvolvido com o objetivo de oferecer à mulher apoio para sua vida pessoal, profissional e familiar.',
+                points: [
+                    'Dignidade: Conhecimento de seus direitos e deveres;',
+                    'Experiências: Fórum de situações reais vividas por outras mulheres;',
+                    'Segurança: Canais diretos para chamadas de emergências;',
+                    'Entendimento: Dicas de psicanalista especialista em casos de família;',
+                    'Conhecimento: Através dos conteúdos e exercícios dos livros.'
+                ]
+            },
+            {
+                image: 'img/09-Tela Educação.png',
+                alt: 'Conheça o aplicativo - Educação',
+                title: 'Educação',
+                description: 'Nesta sessão a mulher encontrará material educativo como:',
+                points: [
+                    'Tipos de violência;',
+                    'Leis e direitos;',
+                    'Sinais de alerta (um breve questionário para que ela saiba reconhecer os sinais de violência e entender quando está em risco).'
+                ]
+            },
+            {
+                image: 'img/10-Rede de apoio.png',
+                alt: 'Conheça o aplicativo - Apoio',
+                title: 'Apoio',
+                description: 'Aqui a mulher encontrará locais próximos onde as mulheres podem buscar ajuda, como delegacias especializadas, abrigos e centros de apoio. Estes locais serão mostrados através de um mapa com cada local marcado.'
+            },
+            {
+                image: 'img/11-Guardiões.png',
+                alt: 'Conheça o aplicativo - Guardiões',
+                title: 'Guardiões',
+                description: 'Aqui a mulher irá cadastrar números de pessoas de sua confiança para, caso precise, acioná-los por meio de mensagem. Ela também irá deixar uma mensagem pré-digitada para envio rápido.'
+            },
+            {
+                image: 'img/12-SIga-me.png',
+                alt: 'Conheça o aplicativo - Siga-me',
+                title: 'Siga-me',
+                description: 'Nesta sessão, a mulher poderá ativar o compartilhamento de sua localização, permitindo que sua posição seja acompanhada durante situações em que necessite de maior segurança. O recurso poderá ser utilizado como apoio preventivo e para facilitar sua localização em caso de necessidade.'
+            },
+            {
+                image: 'img/13-Embaixadoras.png',
+                alt: 'Conheça o aplicativo - Embaixadora da sua cidade',
+                title: 'Embaixadora da sua cidade',
+                description: 'Nesta sessão, a mulher poderá acompanhar conteúdos, vídeos e ações realizadas pelas embaixadoras do projeto em sua cidade. O espaço busca divulgar iniciativas locais, compartilhar informações e aproximar as mulheres das atividades desenvolvidas em sua região.'
+            },
+            {
+                image: 'img/14-Condenados.png',
+                alt: 'Conheça o aplicativo - Condenados',
+                title: 'Condenados',
+                description: 'Nesta sessão, a mulher poderá consultar informações relacionadas a condenados por crimes contra a mulher. A busca poderá ser realizada por estado e cidade, facilitando o acesso às informações disponíveis e contribuindo para a conscientização e prevenção.'
+            },
+            {
+                image: 'img/07-Botão de emergência.png',
+                alt: 'Conheça o aplicativo - Botão de emergência',
+                title: 'Botão de emergência',
+                description: 'Inclui dois botões de emergência. Um que, quando pressionado, envia um alerta para os guardiões (amigos, familiares, autoridades) com a localização da vítima e a mensagem configurada. O outro botão, pressionado por 3 segundos, realiza um chamado de emergência.'
+            }
         ];
 
         const slideImage = document.getElementById('slideImage');
+        const slideTitle = document.getElementById('slideTitle');
+        const slideDescription = document.getElementById('slideDescription');
+        const slideExtraParagraphs = document.getElementById('slideExtraParagraphs');
+        const slidePoints = document.getElementById('slidePoints');
+        const appLinksBottom = document.querySelector('.app-links-bottom');
         const prevBtn = document.getElementById('carouselPrev');
         const nextBtn = document.getElementById('carouselNext');
         const carouselMedia = window.matchMedia('(max-width: 768px)');
@@ -997,6 +1133,26 @@
                     slideImage.alt = slide.alt || ('App BASTA! - Slide ' + (index + 1));
                     slideImage.style.opacity = '1';
                 }, 200);
+            }
+            if (slideTitle && slideDescription && slideExtraParagraphs && slidePoints) {
+                slideTitle.textContent = slide.title || '';
+                const paragraphs = slide.paragraphs || (slide.description ? [slide.description] : []);
+                slideDescription.textContent = paragraphs[0] || '';
+                slideExtraParagraphs.replaceChildren();
+                paragraphs.slice(1).forEach((paragraph) => {
+                    const element = document.createElement('p');
+                    element.textContent = paragraph;
+                    slideExtraParagraphs.appendChild(element);
+                });
+                slidePoints.replaceChildren();
+                (slide.points || []).forEach((point) => {
+                    const item = document.createElement('li');
+                    item.textContent = point;
+                    slidePoints.appendChild(item);
+                });
+            }
+            if (appLinksBottom) {
+                appLinksBottom.classList.toggle('desktop-slide-links-hidden', !carouselMedia.matches && index !== 0);
             }
         }
 
@@ -1028,6 +1184,41 @@
                 updateSlide(currentSlide);
             });
         }
+
+        // Os dois carrosséis compartilham os vídeos 1–15. Os quatro primeiros
+        // permanecem declarados no HTML e os demais são acrescentados aqui para
+        // manter a estrutura dos dois componentes sincronizada.
+        function appendAdditionalVideoCards(trackSelector, kind) {
+            const track = document.querySelector(trackSelector);
+            if (!track) return;
+
+            for (let videoNumber = 5; videoNumber <= 15; videoNumber += 1) {
+                const number = String(videoNumber).padStart(2, '0');
+                const posterNumber = ((videoNumber - 1) % 5) + 1;
+                const isDetails = kind === 'details';
+                const title = (isDetails ? 'Detalhe ' : 'Depoimento ') + number;
+                const quote = isDetails ? '“Por que este projeto existe”' : '“Histórias que inspiram”';
+                const card = document.createElement('button');
+
+                card.className = isDetails ? 'testimonial-card project-detail-card' : 'testimonial-card';
+                card.type = 'button';
+                card.dataset.video = 'https://midiasave-5c064.web.app/video' + videoNumber + '.mp4';
+                card.dataset.videoTitle = title;
+                card.setAttribute('aria-label', 'Reproduzir ' + title.toLowerCase());
+                card.innerHTML = `
+                    <img src="videos/poster${posterNumber}.jpg" alt="Capa do vídeo de ${title.toLowerCase()}" loading="lazy">
+                    <span class="testimonial-card-shade" aria-hidden="true"></span>
+                    <span class="testimonial-quote">${quote}</span>
+                    <span class="testimonial-play" aria-hidden="true"><i class="fas fa-play"></i></span>
+                    <span class="testimonial-copy"><strong${isDetails ? '' : ' data-i18n="testimonials.card' + videoNumber + '.title"'}>${title}</strong><small>Relato em vídeo</small></span>
+                    <span class="testimonial-duration">01:10</span>
+                `;
+                track.appendChild(card);
+            }
+        }
+
+        appendAdditionalVideoCards('.project-details-carousel .testimonials-track', 'details');
+        appendAdditionalVideoCards('#depoimentos .testimonials-track', 'testimonials');
 
         // ========== CARROSSEL DE DEPOIMENTOS ==========
         const testimonialsViewport = document.querySelector('#depoimentos .testimonials-viewport');

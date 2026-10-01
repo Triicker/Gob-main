@@ -10,8 +10,8 @@ test('modal de depoimentos reproduz, navega e responde ao viewport', async ({ pa
 
   await expect(section).toBeVisible();
   await expect(page.locator('#depoimentos-title')).toHaveText(/Depoimentos/i);
-  await expect(cards).toHaveCount(4);
-  await expect(section.locator('.testimonials-dot')).toHaveCount(4);
+  await expect(cards).toHaveCount(15);
+  await expect(section.locator('.testimonials-dot')).toHaveCount(15);
 
   const horizontalOverflow = await page.evaluate(() =>
     document.documentElement.scrollWidth - document.documentElement.clientWidth

@@ -59,7 +59,8 @@ header.scrolled .logo img { height: 72px; }
 
 /* Desktop: o menu começa logo após o logo; as ações continuam ancoradas à direita. */
 @media (min-width: 769px) {
-    nav { justify-content: flex-start; }
+    nav { justify-content: flex-start; gap: 0; }
+    .logo { margin-right: 20px; }
     .nav-links { justify-content: flex-start; }
     .nav-links > li:nth-last-child(2) { margin-left: auto; }
 }
@@ -691,6 +692,8 @@ footer {
     filter: drop-shadow(0 20px 40px rgba(0,0,0,0.08));
     transition: opacity 0.4s ease-in-out;
 }
+.app-slide-copy { display: none; }
+#slideExtraParagraphs { display: none; }
 .app-links-bottom {
     display: flex;
     gap: 70px;
@@ -704,6 +707,92 @@ footer {
     font-size: 0.95rem;
 }
 .app-links-bottom a:hover { color: var(--magenta); }
+
+/* ========== CONHEÇA O APLICATIVO — DESKTOP ========== */
+@media (min-width: 769px) {
+    #conheca-app { scroll-margin-top: 110px; }
+    #conheca-app > .container > .section-title-text {
+        position: relative;
+        max-width: none;
+        margin: 0 auto 42px;
+        padding-bottom: 16px;
+        font-size: clamp(2.2rem, 3vw, 2.8rem);
+        line-height: 1.1;
+    }
+    #conheca-app > .container > .section-title-text::after {
+        content: '';
+        position: absolute;
+        left: 50%;
+        bottom: 0;
+        width: min(350px, 60%);
+        height: 4px;
+        background: var(--magenta);
+        transform: translateX(-50%);
+    }
+    #conheca-app .app-showcase-content {
+        max-width: 1100px;
+    }
+    #conheca-app .app-showcase-card {
+        width: 100%;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(260px, 320px);
+        align-items: center;
+        gap: clamp(28px, 4vw, 56px);
+        min-height: 550px;
+        padding: 34px clamp(32px, 4vw, 56px);
+    }
+    #conheca-app .app-slide-copy {
+        display: block;
+        min-width: 0;
+        align-self: start;
+        padding-top: 8px;
+        color: var(--purple-dark);
+        text-align: left;
+    }
+    #conheca-app .app-slide-copy h3 {
+        margin: 0 0 16px;
+        color: var(--purple-dark);
+        font-family: 'Montserrat', 'Arial Black', sans-serif;
+        font-weight: 900;
+        font-size: clamp(2rem, 3vw, 2.7rem);
+        line-height: 1.08;
+    }
+    #conheca-app .app-slide-copy p {
+        margin: 0 0 12px;
+        font-size: clamp(0.9rem, 1vw, 1rem);
+        line-height: 1.42;
+    }
+    #conheca-app #slideExtraParagraphs { display: block; }
+    #conheca-app .app-slide-copy ul {
+        margin: 4px 0 0;
+        padding-left: 1.1rem;
+        font-size: clamp(0.88rem, 0.95vw, 0.98rem);
+        line-height: 1.38;
+    }
+    #conheca-app .app-slide-copy li + li { margin-top: 4px; }
+    #conheca-app .app-showcase-card > #slideImage {
+        width: 100%;
+        max-width: 260px;
+        height: auto;
+        justify-self: center;
+        object-fit: contain;
+    }
+    #conheca-app .app-links-bottom {
+        width: min(1100px, calc(100% - 130px));
+        box-sizing: border-box;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+        padding-left: 56px;
+        margin: -82px auto 0;
+        position: relative;
+        z-index: 2;
+    }
+    #conheca-app .app-links-bottom.desktop-slide-links-hidden {
+        visibility: hidden;
+        pointer-events: none;
+    }
+}
 
 /* ========== DETALHES DO PROJETO ========== */
 .project-details-section {
