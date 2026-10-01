@@ -619,13 +619,28 @@ footer {
     z-index: 1;
 }
 .partners-section .section-title { color: #fff; }
-.partners-grid {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
+.partners-carousel {
+    position: relative;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 46px;
+}
+.partners-carousel-viewport {
+    overflow: hidden;
+}
+.partners-grid,
+.clientes-grid {
+    display: flex;
+    flex-wrap: nowrap;
     gap: 20px;
     padding: 20px 0;
-    max-width: 900px;
-    margin: 0 auto;
+    max-width: none;
+    margin: 0;
+    transition: transform 0.45s ease;
+    will-change: transform;
+}
+.partners-grid > .partner-card {
+    flex: 0 0 calc((100% - 80px) / 5);
 }
 
 .clientes-section {
@@ -637,30 +652,49 @@ footer {
 }
 .clientes-section .section-title { color: #fff; }
 .clientes-grid {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    gap: 22px;
-    padding: 20px 0;
-    max-width: 1200px;
-    margin: 0 auto;
+    gap: 14px;
+}
+.clientes-grid > .cliente-card {
+    flex: 0 0 calc((100% - 70px) / 6);
 }
 
 /* A página apresenta esta área como uma única vitrine de parceiros.
    Os seis primeiros logos de clientes complementam a segunda fileira. */
 .partners-section { padding-bottom: 0; }
-.partners-grid .partner-card:nth-child(n + 6) { display: none; }
 .clientes-section {
     display: block;
     padding: 0 0 60px;
 }
 .clientes-section > .container > .section-title-text { display: none; }
 .clientes-grid {
-    grid-template-columns: repeat(6, 1fr);
-    gap: 14px;
-    max-width: 900px;
-    padding: 20px 0 0;
+    padding: 20px 0;
 }
-.clientes-grid .cliente-card:nth-child(n + 7) { display: none; }
+
+.partners-carousel-arrow {
+    position: absolute;
+    top: 50%;
+    z-index: 2;
+    width: 32px;
+    height: 32px;
+    border: 0;
+    border-radius: 50%;
+    background: #ff5ba9;
+    color: #fff;
+    cursor: pointer;
+    font: 900 30px/27px Arial, sans-serif;
+    box-shadow: 0 3px 10px rgba(55, 0, 62, 0.18);
+    transform: translateY(-50%);
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+.partners-carousel-arrow:hover:not(:disabled) {
+    transform: translateY(-50%) scale(1.08);
+}
+.partners-carousel-arrow:disabled {
+    opacity: 0.35;
+    cursor: default;
+}
+.partners-carousel-prev { left: 4px; }
+.partners-carousel-next { right: 4px; }
 
 /* ========== CONHEÇA O APLICATIVO ========== */
 #conheca-app {

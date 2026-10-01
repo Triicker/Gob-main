@@ -292,7 +292,10 @@
     <section class="partners-section" id="parceiros">
         <div class="container">
             <h2 class="section-title-text white" data-i18n="section.partners">Parceiros</h2>
-            <div class="partners-grid">
+            <div class="partners-carousel" data-logo-carousel="partners">
+                <button class="partners-carousel-arrow partners-carousel-prev" type="button" aria-label="Parceiro anterior">‹</button>
+                <div class="partners-carousel-viewport">
+                    <div class="partners-grid">
                 <div class="partner-card">
                     <div class="partner-card-inner">
                         <div class="partner-card-front">
@@ -393,6 +396,9 @@
                         </div>
                     </div>
                 </div>
+                    </div>
+                </div>
+                <button class="partners-carousel-arrow partners-carousel-next" type="button" aria-label="Próximo parceiro">›</button>
             </div>
         </div>
     </section>
@@ -401,7 +407,10 @@
     <section class="clientes-section">
         <div class="container">
             <h2 class="section-title-text white" data-i18n="section.clients">Clientes</h2>
-            <div class="clientes-grid">
+            <div class="partners-carousel clientes-carousel" data-logo-carousel="clientes">
+                <button class="partners-carousel-arrow partners-carousel-prev" type="button" aria-label="Cliente anterior">‹</button>
+                <div class="partners-carousel-viewport">
+                    <div class="clientes-grid">
                 <!-- Cachoeira - branco -->
                 <div class="cliente-card">
                     <div class="cliente-card-inner">
@@ -418,6 +427,17 @@
                     <div class="cliente-card-inner">
                         <div class="cliente-card-front">
                             <img src="img/Dario-meira.jpg" alt="Dario Meira">
+                        </div>
+                        <div class="cliente-card-back">
+                            <img src="img/site-BASTA-copiar_0000s_0015_BASTA-logo2.png" alt="BASTA!">
+                        </div>
+                    </div>
+                </div>
+                <!-- Prefeitura de Itapitanga - branco -->
+                <div class="cliente-card">
+                    <div class="cliente-card-inner">
+                        <div class="cliente-card-front">
+                            <img src="img/Grupo-86-e1726160693916.png" alt="Prefeitura Municipal de Itapitanga">
                         </div>
                         <div class="cliente-card-back">
                             <img src="img/site-BASTA-copiar_0000s_0015_BASTA-logo2.png" alt="BASTA!">
@@ -583,16 +603,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="cliente-card">
-                    <div class="cliente-card-inner">
-                        <div class="cliente-card-front">
-                            <img src="img/Grupo-86-e1726160693916.png" alt="Itapitanga">
-                        </div>
-                        <div class="cliente-card-back">
-                            <img src="img/site-BASTA-copiar_0000s_0015_BASTA-logo2.png" alt="BASTA!">
-                        </div>
                     </div>
                 </div>
+                <button class="partners-carousel-arrow partners-carousel-next" type="button" aria-label="Próximo cliente">›</button>
             </div>
         </div>
     </section>
@@ -1720,6 +1733,57 @@
                 }
             }, 100);
         }, { passive: true });
+
+        // ========== CARROSSEIS DE PARCEIROS E CLIENTES ==========
+        function setupLogoCarousels() {
+            document.querySelectorAll('[data-logo-carousel]').forEach((carousel) => {
+                const track = carousel.querySelector('.partners-grid, .clientes-grid');
+                const cards = track ? Array.from(track.children) : [];
+                const previous = carousel.querySelector('.partners-carousel-prev');
+                const next = carousel.querySelector('.partners-carousel-next');
+                if (!track || !cards.length || !previous || !next) return;
+
+                let page = 0;
+                let resizeFrame = 0;
+
+                const visibleCards = () => window.matchMedia('(max-width: 768px)').matches
+                    ? 2
+                    : carousel.dataset.logoCarousel === 'clientes' ? 6 : 5;
+
+                const update = () => {
+                    const visible = visibleCards();
+                    const pageCount = Math.max(1, Math.ceil(cards.length / visible));
+                    page = Math.min(page, pageCount - 1);
+
+                    const firstCard = cards[0];
+                    const trackStyles = getComputedStyle(track);
+                    const gap = parseFloat(trackStyles.columnGap || trackStyles.gap) || 0;
+                    const step = firstCard.getBoundingClientRect().width + gap;
+                    track.style.transform = `translate3d(${-page * visible * step}px, 0, 0)`;
+                    previous.disabled = page === 0;
+                    next.disabled = page === pageCount - 1;
+                    carousel.dataset.currentPage = String(page + 1);
+                    carousel.dataset.pageCount = String(pageCount);
+                };
+
+                previous.addEventListener('click', () => {
+                    page = Math.max(0, page - 1);
+                    update();
+                });
+                next.addEventListener('click', () => {
+                    const pageCount = Math.max(1, Math.ceil(cards.length / visibleCards()));
+                    page = Math.min(pageCount - 1, page + 1);
+                    update();
+                });
+                window.addEventListener('resize', () => {
+                    cancelAnimationFrame(resizeFrame);
+                    resizeFrame = requestAnimationFrame(update);
+                }, { passive: true });
+                update();
+            });
+        }
+
+        setupLogoCarousels();
 
         // ========== CARD FLIP NO CLIQUE (mobile e desktop) ==========
         document.querySelectorAll('.partner-card, .cliente-card').forEach(function(card) {
