@@ -1,6 +1,8 @@
 # Dependencies
 node_modules/
 package-lock.json
+dist/
+.wrangler/
 
 # Playwright
 test-results/
@@ -29,8 +31,12 @@ Thumbs.db
 *~
 
 # Env / Credenciais
+.dev.vars
+.dev.vars.*
 .env
-.env.local
+.env.*
+!.env.example
+!.dev.vars.example
 env
 zap-backend/.env
 

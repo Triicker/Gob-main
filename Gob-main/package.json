@@ -4,7 +4,11 @@
   "description": "Landing page institucional do programa **BASTA!**, o maior ecossistema de educação, prevenção e formação contra violência doméstica do Brasil. O projeto atua em escolas com livros didáticos, aplicativo de segurança e formação especializada para profissionais da educação.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "node scripts/build-static.mjs",
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "deploy:dry-run": "wrangler deploy --dry-run",
+    "test": "node --experimental-vm-modules --test tests/worker-contact.test.cjs"
   },
   "repository": {
     "type": "git",
@@ -19,6 +23,7 @@
   "homepage": "https://github.com/eticadeveloper2025/Gob#readme",
   "devDependencies": {
     "@playwright/test": "^1.58.2",
-    "http-server": "^14.1.1"
+    "http-server": "^14.1.1",
+    "wrangler": "^4.147.0"
   }
 }

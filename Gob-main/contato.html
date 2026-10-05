@@ -317,7 +317,7 @@
                         </div>
                         <div class="form-group">
                             <label for="contatoEmail" data-i18n="contact.email">E-mail</label>
-                            <input type="email" id="contatoEmail" name="email" placeholder="seu@email.com">
+                            <input type="email" id="contatoEmail" name="email" placeholder="seu@email.com" required>
                         </div>
                     </div>
                     <div class="form-row">
@@ -336,7 +336,7 @@
                     </div>
                     <div class="form-group">
                         <label for="contatoMensagem" data-i18n="contact.message">Mensagem</label>
-                        <textarea id="contatoMensagem" name="mensagem" rows="4" placeholder="Como podemos ajudar?"></textarea>
+                        <textarea id="contatoMensagem" name="mensagem" rows="4" placeholder="Como podemos ajudar?" required></textarea>
                     </div>
                     
                     <!-- Campo honeypot para proteção anti-bot (não remover) -->
@@ -349,7 +349,7 @@
                         aria-hidden="true"
                     >
                     
-                    <button type="submit" class="btn btn-purple"><span data-i18n="contact.submit">Enviar mensagem</span></button>
+                    <button type="submit" class="btn btn-purple" aria-live="polite"><span data-i18n="contact.submit">Enviar mensagem</span></button>
                 </form>
             </div>
         </div>
@@ -369,11 +369,6 @@
     </a>
 
     <script>
-        // URL do backend
-        const BACKEND_URL = window.location.hostname === 'localhost'
-            ? 'http://localhost:3001'
-            : 'https://bastasite.onrender.com';
-
         // Menu Mobile Toggle
         const menuIcon = document.getElementById('menuIcon');
         const navLinks = document.getElementById('navLinks');
@@ -389,8 +384,9 @@
             });
         });
 
-        // Form de contato — envio via backend Z-API
+        // Form de contato — envio pelo Worker do mesmo domínio
         const contatoForm = document.getElementById('contatoForm');
+        let contatoFeedbackTimer = null;
 
         // Máscara de telefone
         const telInput = document.getElementById('contatoTelefone');
@@ -408,30 +404,40 @@
             contatoForm.addEventListener('submit', async (e) => {
                 e.preventDefault();
                 const btn = contatoForm.querySelector('button[type="submit"]');
-                const textoOriginal = btn.textContent;
+                window.clearTimeout(contatoFeedbackTimer);
+                const conteudoOriginal = btn.innerHTML;
                 btn.textContent = 'Enviando...';
                 btn.disabled = true;
 
                 try {
-                    const fd = new FormData(contatoForm);
-                    const res = await fetch(BACKEND_URL + '/api/enviar-lead', {
+                    const values = Object.fromEntries(new FormData(contatoForm));
+                    const res = await fetch('/api/contact', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(Object.fromEntries(fd))
+                        body: JSON.stringify({
+                            nome: values.nome,
+                            telefone: values.telefone,
+                            email: values.email,
+                            instituicao: values.instituicao,
+                            cidade: values.cidade,
+                            mensagem: values.mensagem
+                        })
                     });
                     const data = await res.json();
-                    if (data.sucesso) {
-                        alert('Mensagem enviada com sucesso! Entraremos em contato.');
+                    if (res.ok && data.success) {
                         contatoForm.reset();
+                        btn.textContent = 'Mensagem enviada com sucesso!';
                     } else {
-                        alert(data.erro || 'Erro ao enviar. Tente novamente.');
+                        btn.textContent = 'Não foi possível enviar. Tente novamente.';
                     }
                 } catch (err) {
                     console.error('Erro:', err);
-                    alert('Erro de conexão. Tente novamente.');
+                    btn.textContent = 'Não foi possível enviar. Tente novamente.';
                 } finally {
-                    btn.textContent = textoOriginal;
-                    btn.disabled = false;
+                    contatoFeedbackTimer = window.setTimeout(() => {
+                        btn.innerHTML = conteudoOriginal;
+                        btn.disabled = false;
+                    }, 3000);
                 }
             });
         }
