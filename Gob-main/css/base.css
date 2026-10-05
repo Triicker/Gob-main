@@ -228,6 +228,60 @@ section {
     color: #ffffff;
 }
 
+/* Sistema visual compartilhado: O projeto, O aplicativo, Detalhes e A coleção. */
+.visual-container {
+    width: min(
+        calc(100% - var(--visual-container-gutter) - var(--visual-container-gutter)),
+        var(--visual-container-max)
+    );
+    max-width: none;
+    margin-inline: auto;
+    padding-inline: 0;
+}
+
+.visual-section-title {
+    margin: 0;
+    color: #5B0163;
+    font-family: var(--visual-font-title);
+    font-size: var(--visual-title-size);
+    font-weight: 900;
+    line-height: var(--visual-title-line-height);
+    letter-spacing: -0.035em;
+}
+
+.visual-section-title--featured {
+    font-size: var(--visual-detail-title-size);
+}
+
+.visual-section-lead {
+    font-family: var(--visual-font-body);
+    font-size: var(--visual-lead-size);
+    font-weight: 400;
+    line-height: 1.42;
+}
+
+.visual-section-copy,
+.visual-section-copy p,
+.visual-section-copy li {
+    font-family: var(--visual-font-body);
+    font-size: var(--visual-body-size);
+    line-height: var(--visual-body-line-height);
+}
+
+.visual-section-copy p {
+    margin-block: 0;
+}
+
+.visual-section-copy p + p {
+    margin-top: var(--visual-paragraph-gap);
+}
+
+.visual-feature-label {
+    font-family: var(--visual-font-body);
+    font-size: var(--visual-feature-label-size);
+    line-height: 1.25;
+}
+
 /* Transição suave para elementos traduzidos */
 [data-i18n] {
     transition: opacity 0.15s ease;

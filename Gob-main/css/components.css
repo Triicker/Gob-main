@@ -39,41 +39,48 @@
     border-radius: 18px;
 }
 .partner-card-front {
-    background: #fff;
+    background-color: #fff;
     box-shadow: 0 4px 18px rgba(0,0,0,0.08);
 }
 .partner-card-back {
-    background: var(--purple-dark);
+    background-color: var(--purple-dark);
     transform: rotateY(180deg);
 }
 .partner-card:hover { transform: translateY(-8px); }
 .partner-card:hover .partner-card-front { box-shadow: 0 12px 30px rgba(0,0,0,0.18); }
-.partner-card img { max-width: 95%; max-height: 95%; object-fit: contain; }
+.partner-card img {
+    max-width: 95%;
+    max-height: 95%;
+    object-fit: contain;
+    filter: none;
+    opacity: 1;
+    mix-blend-mode: normal;
+}
 
 /* Cores individuais por ordem */
-.partner-card:nth-child(1) .partner-card-front { background: #fff; }
-.partner-card:nth-child(2) .partner-card-front { background: #fff; }
-.partner-card:nth-child(3) .partner-card-front { background: #000; }
-.partner-card:nth-child(4) .partner-card-front { background: #fff; border: 2px solid #e0e0e0; }
-.partner-card:nth-child(5) .partner-card-front { background: #fff; border: 2px solid #e0e0e0; }
-.partner-card:nth-child(6) .partner-card-front { background: #fff; border: 2px solid #e0e0e0; }
-.partner-card:nth-child(7) .partner-card-front { background: #fff; border: 2px solid #e0e0e0; }
-.partner-card:nth-child(8) .partner-card-front { background: #183FFF; }
-.partner-card:nth-child(9) .partner-card-front { background: #fff; border: 2px solid #e0e0e0; }
-.partner-card:nth-child(10) .partner-card-front { background: #601282; }
+.partner-card:nth-child(1) .partner-card-front { background-color: #fff; }
+.partner-card:nth-child(2) .partner-card-front { background-color: #fff; }
+.partner-card:nth-child(3) .partner-card-front { background-color: #000; }
+.partner-card:nth-child(4) .partner-card-front { background-color: #fff; border: 2px solid #e0e0e0; }
+.partner-card:nth-child(5) .partner-card-front { background-color: #fff; border: 2px solid #e0e0e0; }
+.partner-card:nth-child(6) .partner-card-front { background-color: #fff; border: 2px solid #e0e0e0; }
+.partner-card:nth-child(7) .partner-card-front { background-color: #fff; border: 2px solid #e0e0e0; }
+.partner-card:nth-child(8) .partner-card-front { background-color: #183FFF; }
+.partner-card:nth-child(9) .partner-card-front { background-color: #fff; border: 2px solid #e0e0e0; }
+.partner-card:nth-child(10) .partner-card-front { background-color: #601282; }
 
 /* ========== CLIENTES — Cards com flip ========== */
 /* Cores customizadas por classe semântica */
-.cliente-card.bg-azul-salvador .cliente-card-front { background: #006DB9; }
-.cliente-card.bg-vermelho     .cliente-card-front  { background: #B2002F; }
-.cliente-card.bg-laranja      .cliente-card-front  { background: #FFA20D; }
-.cliente-card.bg-verde        .cliente-card-front  { background: #27AE60; }
-.cliente-card.bg-amarelo      .cliente-card-front  { background: #F1C40F; }
-.cliente-card.bg-roxo         .cliente-card-front  { background: #6D2573; }
-.cliente-card.bg-azul-escuro  .cliente-card-front  { background: #1A3A5C; }
-.cliente-card.bg-azul-claro   .cliente-card-front  { background: #2980B9; }
-.cliente-card.bg-cinza        .cliente-card-front  { background: #95A5A6; }
-.cliente-card.bg-preto        .cliente-card-front  { background: #1a1a1a; }
+.cliente-card.bg-azul-salvador .cliente-card-front { background-color: #006DB9; }
+.cliente-card.bg-vermelho     .cliente-card-front  { background-color: #B2002F; }
+.cliente-card.bg-laranja      .cliente-card-front  { background-color: #FFA20D; }
+.cliente-card.bg-verde        .cliente-card-front  { background-color: #27AE60; }
+.cliente-card.bg-amarelo      .cliente-card-front  { background-color: #F1C40F; }
+.cliente-card.bg-roxo         .cliente-card-front  { background-color: #6D2573; }
+.cliente-card.bg-azul-escuro  .cliente-card-front  { background-color: #1A3A5C; }
+.cliente-card.bg-azul-claro   .cliente-card-front  { background-color: #2980B9; }
+.cliente-card.bg-cinza        .cliente-card-front  { background-color: #95A5A6; }
+.cliente-card.bg-preto        .cliente-card-front  { background-color: #1a1a1a; }
 
 .cliente-card {
     border-radius: 18px;
@@ -110,16 +117,23 @@
     border-radius: 18px;
 }
 .cliente-card-front {
-    background: #fff;
+    background-color: #fff;
     box-shadow: 0 4px 18px rgba(0,0,0,0.08);
 }
 .cliente-card-back {
-    background: var(--purple-dark);
+    background-color: var(--purple-dark);
     transform: rotateY(180deg);
 }
 .cliente-card:hover { transform: translateY(-8px); }
 .cliente-card:hover .cliente-card-front { box-shadow: 0 12px 30px rgba(0,0,0,0.18); }
-.cliente-card img { max-width: 95%; max-height: 95%; object-fit: contain; }
+.cliente-card img {
+    max-width: 95%;
+    max-height: 95%;
+    object-fit: contain;
+    filter: none;
+    opacity: 1;
+    mix-blend-mode: normal;
+}
 
 /* ========== CARROSSEL ========== */
 .carousel-wrapper {

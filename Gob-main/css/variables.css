@@ -38,6 +38,22 @@
     --font-body:    'Inter', sans-serif;
     --font-heading: 'Playfair Display', serif;
 
+    /* Sistema editorial das quatro seções principais */
+    --visual-font-body: 'Inter', sans-serif;
+    --visual-font-title: 'Montserrat', 'Arial Black', sans-serif;
+    --visual-container-max: 1640px;
+    --visual-container-gutter: clamp(24px, 7.3vw, 140px);
+    --visual-section-padding: clamp(56px, 5.2vw, 92px);
+    --visual-section-gap: clamp(28px, 3vw, 48px);
+    --visual-title-size: clamp(2.5rem, 3.2vw, 3.75rem);
+    --visual-title-line-height: 1.05;
+    --visual-detail-title-size: clamp(2.75rem, 3.55vw, 4.1rem);
+    --visual-lead-size: clamp(1rem, 1.2vw, 1.2rem);
+    --visual-body-size: clamp(0.94rem, 1.02vw, 1.05rem);
+    --visual-body-line-height: 1.48;
+    --visual-feature-label-size: clamp(0.75rem, 0.8vw, 0.94rem);
+    --visual-paragraph-gap: clamp(12px, 1.1vw, 18px);
+
     /* Breakpoints (referência) */
     /* --bp-xl:   1400px */
     /* --bp-lg:   1200px */

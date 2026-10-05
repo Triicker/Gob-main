@@ -36,6 +36,44 @@
     .hero-subtitle { font-size: 1rem; }
 }
 
+/* ========== ≤ 1024px — O PROJETO EM TABLET ========== */
+@media (max-width: 1024px) {
+    .project-grid {
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-areas:
+            "heading"
+            "logo"
+            "copy"
+            "features";
+        gap: 30px;
+        max-width: 760px;
+        margin: 0 auto;
+    }
+    .project-copy-column,
+    .project-visual { display: contents; }
+    .project-heading {
+        grid-area: heading;
+        margin-bottom: 0;
+    }
+    .project-text-box {
+        grid-area: copy;
+        max-width: 680px;
+        margin: 0 auto;
+    }
+    .project-logo-wrap {
+        grid-area: logo;
+        margin-bottom: 0;
+    }
+    .project-logo { width: clamp(260px, 46vw, 360px); }
+    .project-features {
+        grid-area: features;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        max-width: 620px;
+        margin: 0 auto;
+        gap: 20px 24px;
+    }
+}
+
 /* ========== ≤ 992px — TABLET ========== */
 @media (max-width: 992px) {
     .hero { min-height: 70vh; }
@@ -67,7 +105,6 @@
     #aplicativo .container { text-align: center; }
     .project-text-box,
     .app-text-box  { text-align: left; }
-    .project-images,
     .app-phones    { justify-content: center; }
 
     /* O Aplicativo: phones primeiro, texto depois */
@@ -101,10 +138,23 @@
 
 /* ========== ≤ 768px — MOBILE ========== */
 @media (max-width: 768px) {
+    :root {
+        --visual-title-size: 2.5rem;
+        --visual-detail-title-size: clamp(2.2rem, 11vw, 3.7rem);
+        --visual-lead-size: 1rem;
+        --visual-body-size: 0.91rem;
+        --visual-body-line-height: 1.52;
+        --visual-section-padding: 58px;
+    }
+
     .container {
         width: 100%;
         box-sizing: border-box;
         padding: 0 16px;
+    }
+    .visual-container {
+        width: 100%;
+        padding-inline: 16px;
     }
 
     .testimonials-section {
@@ -115,7 +165,7 @@
             #fffaf0;
     }
     .project-details-section { padding: 58px 0 68px; }
-    .project-details-title { font-size: clamp(2.2rem, 11vw, 3.7rem); }
+    .project-details-title { font-size: var(--visual-detail-title-size); }
     .project-details-title-line { height: 6px; margin-bottom: 16px; }
     .project-details-subtitle { max-width: 340px; margin-bottom: 24px; font-size: 1rem; }
     .project-details-dots-decor { top: 25%; left: -18px; width: 62px; height: 180px; opacity: 0.72; background-size: 20px 20px; }
@@ -468,31 +518,49 @@
         box-sizing: border-box;
     }
 
-    /* ===== O PROJETO – layout editorial, sem caixa ===== */
-    #projeto .section-title-image {
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
+    /* ===== O PROJETO – composição roxa responsiva, sem cards ===== */
+    #projeto {
+        padding: 48px 0 64px;
+        background-position: center top;
+    }
+    .project-title img { width: min(210px, 58vw); }
+    .project-title-line {
+        width: min(360px, 82vw);
+        margin-top: 8px;
     }
     .project-grid {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 28px;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-areas:
+            "heading"
+            "logo"
+            "copy"
+            "features";
+        gap: 30px;
+        max-width: 100%;
     }
     .project-text-box {
-        background: transparent;
-        border-left: none;
+        background-color: transparent;
+        border: 0;
         border-radius: 0;
         box-shadow: none;
-        padding: 0 20px;
-        max-width: 500px;
+        padding: 0 4px;
+        max-width: 620px;
         width: 100%;
         margin: 0 auto;
     }
-    .project-text-box img { width: 100%; height: auto; display: block; }
-    .project-images       { max-width: 360px; margin: 0 auto; }
-    .project-images img   { max-width: 80vw; display: block; filter: drop-shadow(0 12px 28px rgba(0,0,0,0.14)); }
+    .project-text-box p {
+        font-size: 0.9rem;
+        line-height: 1.62;
+        text-align: left;
+    }
+    .project-logo { width: min(270px, 72vw); }
+    .project-features {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 20px 14px;
+        max-width: 430px;
+    }
+    .project-features img { max-width: 150px; }
 
     /* ===== O APLICATIVO – phones como hero, card abaixo ===== */
     #aplicativo .section-title-image {
@@ -502,6 +570,7 @@
     }
     .app-title-wrap { margin-bottom: 18px; }
     .app-title-wrap .section-title-image { margin-bottom: 0; }
+    .app-title-wrap .section-title-text { margin-bottom: 0 !important; }
 
     /* Efeitos de fundo do #aplicativo — reduzir no mobile (evita “gigante”) */
     #aplicativo::before {
@@ -530,11 +599,17 @@
         width: 100%;
         display: flex;
         justify-content: center;
+        padding-left: 0;
     }
     #aplicativo .app-phones img {
-        max-width: 82vw;
+        width: min(82vw, 500px);
+        max-width: none;
         display: block;
         filter: drop-shadow(0 18px 36px rgba(91,26,110,0.18));
+    }
+    #aplicativo .app-phones::after {
+        left: 50%;
+        bottom: -8px;
     }
     #aplicativo .app-text-box {
         order: 2;
@@ -542,11 +617,12 @@
         width: calc(100% - 40px);
         margin: 0 auto;
         background: #fff;
-        border-left: 4px solid var(--purple);
+        border: 1px solid rgba(91, 1, 99, 0.06);
         border-radius: 20px;
-        padding: 22px 20px;
+        padding: 24px 38px 24px 22px;
         box-shadow: 0 4px 20px rgba(0,0,0,0.08);
     }
+    #aplicativo .app-text-box::before { border-radius: 0 20px 20px 0; }
     #aplicativo .app-text-box img { width: 100%; height: auto; display: block; }
 
     /* Formulário */
@@ -596,6 +672,13 @@
 
 /* ========== ≤ 480px — MOBILE PEQUENO ========== */
 @media (max-width: 480px) {
+    :root {
+        --visual-title-size: 2rem;
+        --visual-detail-title-size: clamp(2.15rem, 10vw, 2.8rem);
+        --visual-body-size: 0.86rem;
+        --visual-section-padding: 48px;
+    }
+
     /* Títulos ainda menores e centralizados */
     .section-title-image {
         max-width: 80% !important;
@@ -635,6 +718,21 @@
     .hero-card { width: calc(33.33% - 6px); max-width: 90px; flex: 0 0 calc(33.33% - 6px); }
     .hero-card-icon { width: 74px; height: 74px; }
     .hero-card img { width: 100%; max-width: 100%; height: auto; display: block; }
+
+    #projeto { padding: 42px 0 56px; }
+    .project-grid { gap: 26px; }
+    .project-logo { width: min(240px, 70vw); }
+    .project-text-box { padding: 0 2px; }
+    .project-text-box p {
+        margin-bottom: 13px;
+        font-size: 0.86rem;
+        line-height: 1.58;
+    }
+    .project-features {
+        gap: 18px 10px;
+        max-width: 340px;
+    }
+    .project-features img { max-width: 142px; }
 
     /* Stats - mobile pequeno */
     .stats { text-align: center; }
