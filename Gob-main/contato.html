@@ -388,6 +388,20 @@
         const contatoForm = document.getElementById('contatoForm');
         let contatoFeedbackTimer = null;
 
+        async function readJsonSafely(response) {
+            const contentType = response.headers.get('content-type') || '';
+            if (!contentType.toLowerCase().includes('application/json')) return null;
+
+            const body = await response.text();
+            if (!body.trim()) return null;
+
+            try {
+                return JSON.parse(body);
+            } catch {
+                return null;
+            }
+        }
+
         // Máscara de telefone
         const telInput = document.getElementById('contatoTelefone');
         if (telInput) {
@@ -420,11 +434,12 @@
                             email: values.email,
                             instituicao: values.instituicao,
                             cidade: values.cidade,
-                            mensagem: values.mensagem
+                            mensagem: values.mensagem,
+                            website: values.website
                         })
                     });
-                    const data = await res.json();
-                    if (res.ok && data.success) {
+                    const data = await readJsonSafely(res);
+                    if (res.ok && data?.success) {
                         contatoForm.reset();
                         btn.textContent = 'Mensagem enviada com sucesso!';
                     } else {

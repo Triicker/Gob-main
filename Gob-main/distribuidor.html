@@ -1024,10 +1024,19 @@
             });
         });
 
-        // URL do backend
-        const BACKEND_URL = window.location.hostname === 'localhost'
-            ? 'http://localhost:3001'
-            : 'https://bastasite.onrender.com';
+        async function readJsonSafely(response) {
+            const contentType = response.headers.get('content-type') || '';
+            if (!contentType.toLowerCase().includes('application/json')) return null;
+
+            const body = await response.text();
+            if (!body.trim()) return null;
+
+            try {
+                return JSON.parse(body);
+            } catch {
+                return null;
+            }
+        }
 
         // Submit
         document.getElementById('distributorForm').addEventListener('submit', async (e) => {
@@ -1045,19 +1054,19 @@
                 const dados = Object.fromEntries(fd);
                 dados.tipo = tipos;
 
-                const res = await fetch(BACKEND_URL + '/api/enviar-distribuidor', {
+                const res = await fetch('/api/distributor', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(dados)
                 });
-                const data = await res.json();
-                if (data.sucesso) {
+                const data = await readJsonSafely(res);
+                if (res.ok && data?.success) {
                     form.style.display = 'none';
                     document.querySelector('.progress-bar-wrap').style.display = 'none';
                     document.getElementById('successWrap').classList.add('show');
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                 } else {
-                    alert(data.erro || 'Erro ao enviar. Tente novamente.');
+                    alert(data?.error || 'Erro ao enviar. Tente novamente.');
                     btn.innerHTML = textoOriginal;
                     btn.disabled = false;
                 }

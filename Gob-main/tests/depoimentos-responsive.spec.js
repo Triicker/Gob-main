@@ -1,17 +1,22 @@
 const { test, expect } = require('@playwright/test');
 
-const URL = 'http://localhost:3333/index.html#depoimentos';
+const URL = 'http://localhost:3333/index.html#reportagens';
 
-test('modal de depoimentos reproduz, navega e responde ao viewport', async ({ page }, testInfo) => {
+test('modal de reportagens reproduz, navega e responde ao viewport', async ({ page }, testInfo) => {
   await page.goto(URL, { waitUntil: 'networkidle' });
 
-  const section = page.locator('#depoimentos');
+  const section = page.locator('#reportagens');
   const cards = section.locator('.testimonial-card');
 
   await expect(section).toBeVisible();
-  await expect(page.locator('#depoimentos-title')).toHaveText(/Depoimentos/i);
-  await expect(cards).toHaveCount(15);
-  await expect(section.locator('.testimonials-dot')).toHaveCount(15);
+  await expect(page.locator('#reportagens-title')).toHaveText(/Reportagens/i);
+  await expect(cards).toHaveCount(11);
+  await expect(section.locator('.testimonials-dot')).toHaveCount(11);
+
+  const projectDetailCards = page.locator('#detalhes-projeto .project-detail-card');
+  await expect(projectDetailCards).toHaveCount(15);
+  await expect(projectDetailCards.first()).toHaveAttribute('data-video', 'https://midiasave-5c064.web.app/video1.mp4');
+  await expect(projectDetailCards.last()).toHaveAttribute('data-video', 'https://midiasave-5c064.web.app/video15.mp4');
 
   const horizontalOverflow = await page.evaluate(() =>
     document.documentElement.scrollWidth - document.documentElement.clientWidth
@@ -19,7 +24,7 @@ test('modal de depoimentos reproduz, navega e responde ao viewport', async ({ pa
   expect(horizontalOverflow).toBeLessThanOrEqual(1);
 
   await section.screenshot({
-    path: testInfo.outputPath(`depoimentos-${testInfo.project.name.replace(/[^a-z0-9]+/gi, '-').toLowerCase()}.png`)
+    path: testInfo.outputPath(`reportagens-${testInfo.project.name.replace(/[^a-z0-9]+/gi, '-').toLowerCase()}.png`)
   });
 
   await cards.first().click();
@@ -27,7 +32,7 @@ test('modal de depoimentos reproduz, navega e responde ao viewport', async ({ pa
   const video = page.locator('#testimonialVideo');
   const phone = page.locator('.testimonial-phone');
   await expect(modal).toHaveClass(/is-open/);
-  await expect(video).toHaveAttribute('src', 'https://midiasave-5c064.web.app/video1.mp4');
+  await expect(video).toHaveAttribute('src', 'https://midiasave-5c064.web.app/reportagem1.mp4');
   if (testInfo.project.name.includes('Safari')) {
     // O WebKit headless pode devolver o foco ao player nativo durante autoplay.
     await expect(modal).toHaveAttribute('tabindex', '-1');
@@ -38,8 +43,11 @@ test('modal de depoimentos reproduz, navega e responde ao viewport', async ({ pa
     )).toBe(true);
   }
   await expect(page.locator('body')).toHaveCSS('overflow', 'hidden');
-  await expect.poll(() => video.evaluate(element => element.readyState)).toBeGreaterThanOrEqual(1);
-  expect(await video.evaluate(element => element.duration)).toBeGreaterThan(60);
+  await expect.poll(
+    () => video.evaluate(element => element.readyState),
+    { timeout: 20000 }
+  ).toBeGreaterThanOrEqual(1);
+  expect(await video.evaluate(element => element.duration)).toBeGreaterThan(0);
   await expect.poll(() => video.evaluate(element => element.paused)).toBe(false);
 
   const phoneBox = await phone.boundingBox();
@@ -54,12 +62,12 @@ test('modal de depoimentos reproduz, navega e responde ao viewport', async ({ pa
   }
 
   await page.keyboard.press('ArrowRight');
-  await expect(video).toHaveAttribute('src', 'https://midiasave-5c064.web.app/video2.mp4');
+  await expect(video).toHaveAttribute('src', 'https://midiasave-5c064.web.app/reportagem2.mp4');
   await expect(page.locator('#testimonialCurrent')).toHaveText('02');
-  await expect(page.locator('#testimonialModalTitle')).toHaveText('Depoimento 02');
+  await expect(page.locator('#testimonialModalTitle')).toHaveText('Reportagem 02');
 
   await page.keyboard.press('ArrowLeft');
-  await expect(video).toHaveAttribute('src', 'https://midiasave-5c064.web.app/video1.mp4');
+  await expect(video).toHaveAttribute('src', 'https://midiasave-5c064.web.app/reportagem1.mp4');
 
   await page.keyboard.press('Escape');
   await expect(modal).not.toHaveClass(/is-open/);

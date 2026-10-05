@@ -4,6 +4,15 @@
   "main": "./worker/index.js",
   "compatibility_date": "2026-10-05",
   "keep_vars": true,
+  "vars": {
+    "RESEND_FROM_EMAIL": "Instituto BASTA <onboarding@resend.dev>",
+    "RESEND_TO_EMAIL": "chegou.email.site@gmail.com"
+  },
+  "secrets": {
+    "required": [
+      "RESEND_API_KEY"
+    ]
+  },
   "build": {
     "command": "npm run build"
   },
