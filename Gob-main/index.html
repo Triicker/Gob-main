@@ -849,13 +849,38 @@
             <div class="cron-modal-card">
                 <h2 class="cron-modal-title" data-i18n="cron.title">Conheça o cronograma</h2>
                 <form id="cronogramaForm" novalidate>
-                    <input class="cron-field" type="text" name="nome" data-i18n="cron.field.name" placeholder="Nome:" required>
-                    <input class="cron-field" type="text" name="cargo" data-i18n="cron.field.role" placeholder="Cargo:">
-                    <input class="cron-field" type="text" name="whatsapp" data-i18n="cron.field.whatsapp" placeholder="WhatsApp:">
-                    <input class="cron-field" type="text" name="instituicao" data-i18n="cron.field.institution" placeholder="Instituição:">
-                    <input class="cron-field" type="text" name="telefone" data-i18n="cron.field.phone" placeholder="Telefone da Instituição:">
-                    <input class="cron-field" type="text" name="cidade" data-i18n="cron.field.city" placeholder="Cidade:">
-                    <input class="cron-field" type="text" name="estado" data-i18n="cron.field.state" placeholder="Estado:">
+                    <div class="cron-field-group">
+                        <label for="scheduleName">Nome *</label>
+                        <input class="cron-field" id="scheduleName" type="text" name="nome" data-i18n="cron.field.name" placeholder="Nome:" minlength="2" maxlength="120" pattern=".*[^\d\s].*" required>
+                    </div>
+                    <div class="cron-field-group">
+                        <label for="scheduleRole">Cargo</label>
+                        <input class="cron-field" id="scheduleRole" type="text" name="cargo" data-i18n="cron.field.role" placeholder="Cargo:" maxlength="120">
+                    </div>
+                    <div class="cron-field-group">
+                        <label for="scheduleWhatsapp">WhatsApp *</label>
+                        <input class="cron-field" id="scheduleWhatsapp" type="tel" name="whatsapp" data-i18n="cron.field.whatsapp" placeholder="WhatsApp:" inputmode="tel" maxlength="15" pattern="\(\d{2}\) \d{4,5}-\d{4}" required>
+                    </div>
+                    <div class="cron-field-group">
+                        <label for="scheduleInstitution">Instituição *</label>
+                        <input class="cron-field" id="scheduleInstitution" type="text" name="instituicao" data-i18n="cron.field.institution" placeholder="Instituição:" minlength="2" maxlength="200" required>
+                    </div>
+                    <div class="cron-field-group">
+                        <label for="schedulePhone">Telefone da instituição</label>
+                        <input class="cron-field" id="schedulePhone" type="tel" name="telefone" data-i18n="cron.field.phone" placeholder="Telefone da Instituição:" inputmode="tel" maxlength="15" pattern="\(\d{2}\) \d{4,5}-\d{4}">
+                    </div>
+                    <div class="cron-field-group">
+                        <label for="scheduleState">Estado *</label>
+                        <select class="cron-field" id="scheduleState" name="estado" required>
+                            <option value="">Selecione o estado</option>
+                        </select>
+                    </div>
+                    <div class="cron-field-group">
+                        <label for="scheduleCity">Cidade *</label>
+                        <select class="cron-field" id="scheduleCity" name="cidade" required disabled>
+                            <option value="">Selecione a cidade</option>
+                        </select>
+                    </div>
                     
                     <!-- Campo honeypot para proteção anti-bot (não remover) -->
                     <input 
@@ -864,27 +889,29 @@
                         style="display:none;" 
                         tabindex="-1" 
                         autocomplete="off"
+                        aria-hidden="true"
                     >
-                    
+                    <div class="cron-form-feedback" id="cronogramaFeedback" role="status" aria-live="polite"></div>
                     <button type="submit" class="btn-cron-submit" data-i18n="cron.btn.submit">Solicitar acesso</button>
                 </form>
             </div>
         </div>
         <!-- Estado: Gerando acesso -->
         <div class="cron-state" id="cron-state-loading">
-            <div class="cron-loading-wrap" data-i18n="cron.loading">Gerando acesso...</div>
+            <div class="cron-loading-wrap" data-i18n="cron.loading">Enviando...</div>
         </div>
         <!-- Estado: Sucesso -->
         <div class="cron-state" id="cron-state-success">
             <div class="cron-success-card">
                 <div class="cron-success-icon"><i class="fas fa-check"></i></div>
-                <h3 data-i18n="cron.success.title">Acesso gerado com sucesso!</h3>
-                <p data-i18n-html="cron.success.text">Em breve você receberá o cronograma completo no seu WhatsApp.<br>Obrigado pelo interesse!</p>
+                <h3 data-i18n="cron.success.title">Solicitação enviada com sucesso!</h3>
+                <p data-i18n-html="cron.success.text">Nossa equipe entrará em contato em breve.</p>
                 <button onclick="closeCronogramaModal()" class="btn btn-purple" data-i18n="cron.btn.close">Fechar</button>
             </div>
         </div>
     </div>
 
+    <script src="js/brasil-localidades.js"></script>
     <script>
         // Menu Mobile Toggle
         const menuIcon = document.getElementById('menuIcon');
@@ -921,7 +948,14 @@
             document.body.style.overflow = 'hidden';
             showCronogramaState('form');
             const f = document.getElementById('cronogramaForm');
-            if (f) f.reset();
+            if (f) {
+                f.reset();
+                f.querySelectorAll('[aria-invalid="true"]').forEach(field => field.removeAttribute('aria-invalid'));
+                const feedback = document.getElementById('cronogramaFeedback');
+                if (feedback) feedback.textContent = '';
+                const submitButton = f.querySelector('button[type="submit"]');
+                if (submitButton) submitButton.disabled = false;
+            }
         }
 
         function closeCronogramaModal() {
@@ -943,34 +977,80 @@
             });
         }
 
-        // URL do backend — em produção trocar pelo domínio do Render
-        const BACKEND_URL = window.location.hostname === 'localhost'
-            ? 'http://localhost:3001'
-            : 'https://bastasite.onrender.com';
-
         const cronogramaForm = document.getElementById('cronogramaForm');
+        const scheduleFeedback = document.getElementById('cronogramaFeedback');
+        BrasilLocalidades.initStateCityPair({
+            state: '#scheduleState',
+            city: '#scheduleCity',
+            stateRequired: true,
+            cityRequired: true
+        });
+        BrasilLocalidades.bindPhoneMask('#scheduleWhatsapp');
+        BrasilLocalidades.bindPhoneMask('#schedulePhone');
+        BrasilLocalidades.bindValidationState(cronogramaForm);
+
+        function validateScheduleForm() {
+            const name = cronogramaForm.elements.nome;
+            const whatsapp = cronogramaForm.elements.whatsapp;
+            const institutionPhone = cronogramaForm.elements.telefone;
+            const cleanName = name.value.trim();
+
+            if (cronogramaForm.elements.homepage.value) {
+                scheduleFeedback.textContent = 'Não foi possível enviar. Tente novamente.';
+                return false;
+            }
+
+            name.setCustomValidity(
+                cleanName.length >= 2 && !/^\d+$/.test(cleanName.replace(/\s/g, ''))
+                    ? ''
+                    : 'Informe um nome válido.'
+            );
+            whatsapp.setCustomValidity(
+                BrasilLocalidades.isValidPhone(whatsapp.value)
+                    ? ''
+                    : 'Informe um WhatsApp com 10 ou 11 dígitos.'
+            );
+            institutionPhone.setCustomValidity(
+                !institutionPhone.value || BrasilLocalidades.isValidPhone(institutionPhone.value)
+                    ? ''
+                    : 'Informe um telefone com 10 ou 11 dígitos.'
+            );
+
+            const valid = cronogramaForm.checkValidity();
+            if (!valid) cronogramaForm.reportValidity();
+            return valid;
+        }
+
         if (cronogramaForm) {
             cronogramaForm.addEventListener('submit', async (e) => {
                 e.preventDefault();
+                const submitButton = cronogramaForm.querySelector('button[type="submit"]');
+                if (submitButton.disabled || !validateScheduleForm()) return;
+
+                submitButton.disabled = true;
+                scheduleFeedback.textContent = '';
                 showCronogramaState('loading');
                 try {
                     const fd = new FormData(cronogramaForm);
-                    const res = await fetch(BACKEND_URL + '/api/enviar-cronograma', {
+                    const res = await fetch('/api/schedule', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify(Object.fromEntries(fd))
                     });
-                    const data = await res.json();
-                    if (data.sucesso) {
+                    const contentType = res.headers.get('content-type') || '';
+                    const data = contentType.includes('application/json') ? await res.json() : null;
+                    if (res.ok && data?.success) {
                         showCronogramaState('success');
                     } else {
-                        alert(data.erro || 'Erro ao enviar. Tente novamente.');
                         showCronogramaState('form');
+                        scheduleFeedback.textContent = 'Não foi possível enviar. Tente novamente.';
+                        submitButton.disabled = false;
                     }
                 } catch (err) {
                     console.error('Erro:', err);
-                    alert('Erro de conexão. Tente novamente.');
                     showCronogramaState('form');
+                    scheduleFeedback.textContent = 'Não foi possível enviar. Tente novamente.';
+                    submitButton.disabled = false;
                 }
             });
         }

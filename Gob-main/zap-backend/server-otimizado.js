@@ -15,7 +15,7 @@ const rateLimit = require('express-rate-limit');
 // Importar novos middlewares e utils
 const { securityMiddleware, removeServerHeader } = require('./middleware/security');
 const honeypotProtection = require('./middleware/honeypot');
-const { leadSchema, cronogramaSchema, distribuidorSchema, validar } = require('./schemas/validacao');
+const { leadSchema, distribuidorSchema, validar } = require('./schemas/validacao');
 const { logger, requestLogger } = require('./utils/logger-seguro');
 
 const app = express();
@@ -169,45 +169,6 @@ app.post('/api/enviar-lead',
             return res.status(502).json({
                 sucesso: false,
                 erro: 'Não foi possível enviar a mensagem. Tente novamente mais tarde.'
-            });
-        }
-    });
-
-// ─── Endpoint: enviar cronograma (modal cronograma) ────────
-app.post('/api/enviar-cronograma',
-    limiter,
-    honeypotProtection,
-    validar(cronogramaSchema),
-    async (req, res) => {
-        try {
-            const { nome, cargo, whatsapp, instituicao, telefone, cidade, estado } = req.body;
-
-            const texto = [
-                '📅 *[CONHEÇA O CRONOGRAMA] — Site BASTA!*',
-                '━━━━━━━━━━━━━━━━━━━━━━━━━━',
-                '',
-                `👤 *Nome:* ${sanitizar(nome)}`,
-                cargo ? `💼 *Cargo:* ${sanitizar(cargo)}` : null,
-                `📱 *WhatsApp:* ${sanitizar(whatsapp)}`,
-                instituicao ? `🏫 *Instituição:* ${sanitizar(instituicao)}` : null,
-                telefone ? `📞 *Telefone Inst.:* ${sanitizar(telefone)}` : null,
-                cidade ? `🏙️ *Cidade:* ${sanitizar(cidade)}` : null,
-                estado ? `📍 *Estado:* ${sanitizar(estado)}` : null
-            ].filter(Boolean).join('\n');
-
-            await axios.post(zapiUrl(), {
-                phone: ZAP_PHONE,
-                message: texto
-            }, { headers: zapiHeaders(), timeout: 15000 });
-
-            logger.success('Cronograma enviado', { nome, cidade });
-            return res.json({ sucesso: true, mensagem: 'Solicitação enviada com sucesso!' });
-
-        } catch (err) {
-            logger.error('Erro ao enviar cronograma', err);
-            return res.status(502).json({
-                sucesso: false,
-                erro: 'Não foi possível enviar. Tente novamente mais tarde.'
             });
         }
     });

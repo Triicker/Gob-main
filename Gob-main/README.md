@@ -74,28 +74,17 @@ Os estilos estão organizados em 5 arquivos para manutenibilidade:
 
 ---
 
-## ⚙️ Backend (Z-API WhatsApp)
+## ⚙️ Formulários (Cloudflare Worker + Resend)
 
-API em **Node.js + Express** que recebe dados dos formulários e envia mensagens formatadas para o WhatsApp via [Z-API](https://z-api.io).
+Os formulários públicos são processados pelo Cloudflare Worker do mesmo domínio e enviados por e-mail pelo Resend.
 
 ### Endpoints
 
 | Método | Rota | Descrição |
 |--------|------|-----------|
-| `GET` | `/api/health` | Health check |
-| `POST` | `/api/enviar-lead` | Formulário "Fale Conosco" |
-| `POST` | `/api/enviar-cronograma` | Solicitação de cronograma |
-| `POST` | `/api/enviar-feedback` | Opinião / feedback |
-| `POST` | `/api/enviar-distribuidor` | Cadastro de distribuidor |
-
-Cada formulário envia uma mensagem com **header identificador** no WhatsApp:
-
-```
-📩 [FALE CONOSCO] — Site BASTA!
-📅 [CONHEÇA O CRONOGRAMA] — Site BASTA!
-💬 [DEIXE SUA OPINIÃO] — Site BASTA!
-🤝 [SEJA UM DISTRIBUIDOR] — Site BASTA!
-```
+| `POST` | `/api/contact` | Formulário "Fale Conosco" |
+| `POST` | `/api/schedule` | Solicitação de cronograma |
+| `POST` | `/api/distributor` | Cadastro de distribuidor |
 
 ### Dependências
 

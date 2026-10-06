@@ -143,9 +143,9 @@ const translations = {
         'cron.field.city': 'Cidade:',
         'cron.field.state': 'Estado:',
         'cron.btn.submit': 'Solicitar acesso',
-        'cron.loading': 'Gerando acesso...',
-        'cron.success.title': 'Acesso gerado com sucesso!',
-        'cron.success.text': 'Em breve você receberá o cronograma completo no seu WhatsApp.<br>Obrigado pelo interesse!',
+        'cron.loading': 'Enviando...',
+        'cron.success.title': 'Solicitação enviada com sucesso!',
+        'cron.success.text': 'Nossa equipe entrará em contato em breve.',
         'cron.btn.close': 'Fechar'
     },
     
@@ -290,9 +290,9 @@ const translations = {
         'cron.field.city': 'City:',
         'cron.field.state': 'State:',
         'cron.btn.submit': 'Request Access',
-        'cron.loading': 'Generating access...',
-        'cron.success.title': 'Access generated successfully!',
-        'cron.success.text': 'You will soon receive the full schedule on your WhatsApp.<br>Thank you for your interest!',
+        'cron.loading': 'Sending...',
+        'cron.success.title': 'Request sent successfully!',
+        'cron.success.text': 'Our team will contact you soon.',
         'cron.btn.close': 'Close'
     },
     
@@ -436,9 +436,9 @@ const translations = {
         'cron.field.city': 'Ciudad:',
         'cron.field.state': 'Estado/Provincia:',
         'cron.btn.submit': 'Solicitar acceso',
-        'cron.loading': 'Generando acceso...',
-        'cron.success.title': '¡Acceso generado con éxito!',
-        'cron.success.text': 'Pronto recibirá el cronograma completo en su WhatsApp.<br>¡Gracias por su interés!',
+        'cron.loading': 'Enviando...',
+        'cron.success.title': '¡Solicitud enviada con éxito!',
+        'cron.success.text': 'Nuestro equipo se pondrá en contacto pronto.',
         'cron.btn.close': 'Cerrar'
     },
     
@@ -581,9 +581,9 @@ const translations = {
         'cron.field.city': 'Ville :',
         'cron.field.state': 'État :',
         'cron.btn.submit': "Demander l'accès",
-        'cron.loading': "Génération de l'accès...",
-        'cron.success.title': 'Accès généré avec succès !',
-        'cron.success.text': 'Vous recevrez bientôt le calendrier complet sur votre WhatsApp.<br>Merci de votre intérêt !',
+        'cron.loading': 'Envoi...',
+        'cron.success.title': 'Demande envoyée avec succès !',
+        'cron.success.text': 'Notre équipe vous contactera prochainement.',
         'cron.btn.close': 'Fermer'
     }
 };

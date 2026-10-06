@@ -66,48 +66,6 @@ const leadSchema = z.object({
 });
 
 // ──────────────────────────────────────────────────────────
-// Schema: Cronograma
-// ──────────────────────────────────────────────────────────
-
-const cronogramaSchema = z.object({
-    nome: z.string()
-        .min(2, 'Nome obrigatório')
-        .max(100)
-        .trim(),
-    
-    cargo: z.string()
-        .max(100)
-        .optional()
-        .or(z.literal('')),
-    
-    whatsapp: z.string()
-        .regex(telefoneRegex, 'WhatsApp inválido'),
-    
-    telefone: z.string()
-        .regex(telefoneRegex, 'Telefone inválido')
-        .optional()
-        .or(z.literal('')),
-    
-    instituicao: z.string()
-        .max(200)
-        .optional()
-        .or(z.literal('')),
-    
-    cidade: z.string()
-        .max(100)
-        .optional()
-        .or(z.literal('')),
-    
-    estado: z.string()
-        .length(2, 'Estado deve ter 2 caracteres (UF)')
-        .toUpperCase()
-        .optional()
-        .or(z.literal('')),
-    
-    website: z.string().optional().refine(val => !val)
-});
-
-// ──────────────────────────────────────────────────────────
 // Schema: Distribuidor
 // ──────────────────────────────────────────────────────────
 
@@ -221,7 +179,6 @@ function validar(schema) {
 
 module.exports = {
     leadSchema,
-    cronogramaSchema,
     distribuidorSchema,
     validar
 };

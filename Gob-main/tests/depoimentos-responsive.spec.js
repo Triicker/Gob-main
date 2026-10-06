@@ -3,7 +3,7 @@ const { test, expect } = require('@playwright/test');
 const URL = 'http://localhost:3333/index.html#reportagens';
 
 test('modal de reportagens reproduz, navega e responde ao viewport', async ({ page }, testInfo) => {
-  await page.goto(URL, { waitUntil: 'networkidle' });
+  await page.goto(URL, { waitUntil: 'domcontentloaded' });
 
   const section = page.locator('#reportagens');
   const cards = section.locator('.testimonial-card');

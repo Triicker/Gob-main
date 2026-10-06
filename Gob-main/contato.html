@@ -165,6 +165,16 @@
             outline: none;
             box-shadow: 0 0 0 2px var(--magenta);
         }
+        select:disabled { color: #7f7485; background: #eeeaf0; cursor: not-allowed; }
+        [aria-invalid="true"] { box-shadow: 0 0 0 2px #e74c3c; }
+        .location-status {
+            display: block;
+            min-height: 0;
+            color: #fff;
+            font-size: 0.62rem;
+            line-height: 1.25;
+            margin-top: 3px;
+        }
         .form-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -312,31 +322,41 @@
                 <form id="contatoForm">
                     <div class="form-row">
                         <div class="form-group">
-                            <label for="contatoNome" data-i18n="contact.name">Nome completo</label>
-                            <input type="text" id="contatoNome" name="nome" placeholder="Seu nome" required>
+                            <label for="contatoNome" data-i18n="contact.name">Nome completo *</label>
+                            <input type="text" id="contatoNome" name="nome" placeholder="Seu nome" minlength="2" maxlength="120" pattern=".*[^\d\s].*" required>
                         </div>
                         <div class="form-group">
-                            <label for="contatoEmail" data-i18n="contact.email">E-mail</label>
-                            <input type="email" id="contatoEmail" name="email" placeholder="seu@email.com" required>
+                            <label for="contatoEmail" data-i18n="contact.email">E-mail *</label>
+                            <input type="email" id="contatoEmail" name="email" placeholder="seu@email.com" maxlength="254" required>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group">
-                            <label for="contatoTelefone" data-i18n="contact.phone">Telefone</label>
-                            <input type="tel" id="contatoTelefone" name="telefone" placeholder="(00) 00000-0000" required minlength="14" pattern="\(\d{2}\)\s?\d{4,5}-\d{4}">
+                            <label for="contatoTelefone" data-i18n="contact.phone">Telefone *</label>
+                            <input type="tel" id="contatoTelefone" name="telefone" placeholder="(00) 00000-0000" inputmode="tel" maxlength="15" pattern="\(\d{2}\) \d{4,5}-\d{4}" required>
                         </div>
                         <div class="form-group">
-                            <label for="contatoCidade">Cidade/UF</label>
-                            <input type="text" id="contatoCidade" name="cidade" placeholder="Sua cidade/UF">
+                            <label for="contatoEstado">Estado *</label>
+                            <select id="contatoEstado" name="estado" required>
+                                <option value="">Selecione o estado</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="contatoCidade">Cidade *</label>
+                            <select id="contatoCidade" name="cidade" required disabled>
+                                <option value="">Selecione a cidade</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="contatoInstituicao">Nome da instituição</label>
+                            <input type="text" id="contatoInstituicao" name="instituicao" placeholder="Nome da escola" maxlength="200">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="contatoInstituicao">Nome da instituição</label>
-                        <input type="text" id="contatoInstituicao" name="instituicao" placeholder="Nome da escola">
-                    </div>
-                    <div class="form-group">
-                        <label for="contatoMensagem" data-i18n="contact.message">Mensagem</label>
-                        <textarea id="contatoMensagem" name="mensagem" rows="4" placeholder="Como podemos ajudar?" required></textarea>
+                        <label for="contatoMensagem" data-i18n="contact.message">Mensagem *</label>
+                        <textarea id="contatoMensagem" name="mensagem" rows="4" placeholder="Como podemos ajudar?" minlength="3" maxlength="4000" required></textarea>
                     </div>
                     
                     <!-- Campo honeypot para proteção anti-bot (não remover) -->
@@ -368,6 +388,7 @@
         <img src="img/09.whatsapp.png" alt="WhatsApp">
     </a>
 
+    <script src="js/brasil-localidades.js"></script>
     <script>
         // Menu Mobile Toggle
         const menuIcon = document.getElementById('menuIcon');
@@ -402,22 +423,20 @@
             }
         }
 
-        // Máscara de telefone
-        const telInput = document.getElementById('contatoTelefone');
-        if (telInput) {
-            telInput.addEventListener('input', function () {
-                let v = this.value.replace(/\D/g, '').slice(0, 11);
-                if (v.length > 6) v = '(' + v.slice(0,2) + ') ' + v.slice(2,7) + '-' + v.slice(7);
-                else if (v.length > 2) v = '(' + v.slice(0,2) + ') ' + v.slice(2);
-                else if (v.length > 0) v = '(' + v;
-                this.value = v;
-            });
-        }
+        BrasilLocalidades.initStateCityPair({
+            state: '#contatoEstado',
+            city: '#contatoCidade',
+            stateRequired: true,
+            cityRequired: true
+        });
+        BrasilLocalidades.bindPhoneMask('#contatoTelefone');
+        BrasilLocalidades.bindValidationState(contatoForm);
 
         if (contatoForm) {
             contatoForm.addEventListener('submit', async (e) => {
                 e.preventDefault();
                 const btn = contatoForm.querySelector('button[type="submit"]');
+                if (btn.disabled || !contatoForm.reportValidity()) return;
                 window.clearTimeout(contatoFeedbackTimer);
                 const conteudoOriginal = btn.innerHTML;
                 btn.textContent = 'Enviando...';
@@ -433,6 +452,7 @@
                             telefone: values.telefone,
                             email: values.email,
                             instituicao: values.instituicao,
+                            estado: values.estado,
                             cidade: values.cidade,
                             mensagem: values.mensagem,
                             website: values.website

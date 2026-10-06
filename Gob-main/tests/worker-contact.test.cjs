@@ -43,6 +43,28 @@ function distributorRequest(body, method = "POST") {
   });
 }
 
+function scheduleRequest(body, method = "POST") {
+  return new Request("https://example.com/api/schedule", {
+    method,
+    headers: { "Content-Type": "application/json" },
+    body: method === "POST" ? JSON.stringify(body) : undefined
+  });
+}
+
+function validContact(overrides = {}) {
+  return {
+    nome: "Ana Souza",
+    telefone: "(71) 99999-9999",
+    email: "ana@example.com",
+    estado: "BA",
+    cidade: "Salvador",
+    instituicao: "Escola Comunidade",
+    mensagem: "Olá, mundo!",
+    website: "",
+    ...overrides
+  };
+}
+
 function validDistributor(overrides = {}) {
   return {
     tipo: ["Distribuidor", "Formador"],
@@ -51,9 +73,26 @@ function validDistributor(overrides = {}) {
     cidade: "Salvador",
     uf: "BA",
     empresa: "Educação Brasil",
+    cnpj: "04.252.011/0001-10",
     foco: "Rede pública",
+    uf_cid1: "BA",
+    cid1: "Salvador",
     mensagem: "Tenho interesse na parceria.",
     bot_field: "",
+    ...overrides
+  };
+}
+
+function validSchedule(overrides = {}) {
+  return {
+    nome: "Ana Souza",
+    cargo: "Diretora",
+    whatsapp: "(71) 99999-9999",
+    instituicao: "Escola Comunidade",
+    telefone: "(71) 3333-4444",
+    estado: "BA",
+    cidade: "Salvador",
+    homepage: "",
     ...overrides
   };
 }
@@ -76,15 +115,7 @@ test("envia o contato válido pelo Resend", async () => {
   });
 
   const response = await worker.fetch(
-    contactRequest({
-      nome: "Ana Souza",
-      telefone: "(11) 99999-9999",
-      email: "ana@example.com",
-      instituicao: "Escola Comunidade",
-      cidade: "Salvador/BA",
-      mensagem: "Olá, mundo!",
-      website: ""
-    }),
+    contactRequest(validContact()),
     environment()
   );
 
@@ -107,15 +138,11 @@ test("escapa HTML malicioso nos campos de contato", async () => {
   });
 
   const response = await worker.fetch(
-    contactRequest({
+    contactRequest(validContact({
       nome: "Ana <script>alert(1)</script>",
-      telefone: "(11) 99999-9999",
-      email: "ana@example.com",
       instituicao: "Escola & <b>Comunidade</b>",
-      cidade: "Salvador/BA",
-      mensagem: "Olá <img src=x onerror=alert(1)>",
-      website: ""
-    }),
+      mensagem: "Olá <img src=x onerror=alert(1)>"
+    })),
     environment()
   );
 
@@ -153,6 +180,24 @@ test("rejeita campos obrigatórios ausentes", async () => {
   }
 });
 
+test("rejeita validações inválidas do contato sem chamar o Resend", async () => {
+  const worker = await loadWorker(async () => {
+    throw new Error("Resend não deveria ser chamado.");
+  });
+
+  for (const body of [
+    validContact({ nome: "123456" }),
+    validContact({ email: "email-invalido" }),
+    validContact({ telefone: "(71) 1234" }),
+    validContact({ estado: "XX" }),
+    validContact({ cidade: "" }),
+    validContact({ mensagem: "Oi" })
+  ]) {
+    const response = await worker.fetch(contactRequest(body), environment());
+    assert.equal(response.status, 400);
+  }
+});
+
 test("retorna 405 para método diferente de POST", async () => {
   const worker = await loadWorker(async () => new Response());
   const response = await worker.fetch(
@@ -169,13 +214,7 @@ test("não expõe o erro retornado pelo Resend", async () => {
     Response.json({ message: "provider details" }, { status: 422 })
   );
   const response = await worker.fetch(
-    contactRequest({
-      nome: "Ana",
-      telefone: "(71) 99999-9999",
-      email: "ana@example.com",
-      mensagem: "Olá",
-      website: ""
-    }),
+    contactRequest(validContact({ nome: "Ana" })),
     environment()
   );
 
@@ -248,7 +287,14 @@ test("rejeita payload inválido de distribuidor", async () => {
     validDistributor({ tipo: [] }),
     validDistributor({ nome: "" }),
     validDistributor({ foco: "Outro" }),
-    validDistributor({ uf: "Bahia" })
+    validDistributor({ uf: "Bahia" }),
+    validDistributor({ contato: "123" }),
+    validDistributor({ cnpj: "12.345.678/0001-90" }),
+    validDistributor({ ano1: "1899" }),
+    validDistributor({ ano1: String(new Date().getUTCFullYear() + 1) }),
+    validDistributor({ uf_cid1: "", cid1: "" }),
+    validDistributor({ uf_cid2: "SP", cid2: "" }),
+    validDistributor({ uf_cid2: "", cid2: "Campinas" })
   ]) {
     const response = await worker.fetch(distributorRequest(body), environment());
     assert.equal(response.status, 400);
@@ -293,4 +339,88 @@ test("escapa HTML malicioso nos campos de distribuidor", async () => {
   assert.match(email.html, /Escola &amp; &lt;b&gt;Parceiros&lt;\/b&gt;/);
   assert.match(email.html, /&lt;img src=x onerror=alert\(1\)&gt;/);
   assert.doesNotMatch(email.html, /<script>|<b>|<img/);
+});
+
+test("aceita CNPJ válido, ano válido e pares opcionais completos", async () => {
+  const worker = await loadWorker(async () => Response.json({ id: "email-id" }));
+  const response = await worker.fetch(
+    distributorRequest(validDistributor({
+      cnpj: "04.252.011/0001-10",
+      ano1: "2024",
+      uf_cid2: "SP",
+      cid2: "Campinas"
+    })),
+    environment()
+  );
+
+  assert.equal(response.status, 200);
+});
+
+test("envia solicitação de cronograma pelo Resend com todos os campos", async () => {
+  let resendRequest;
+  const worker = await loadWorker(async (url, options) => {
+    resendRequest = { url, options };
+    return Response.json({ id: "schedule-email-id" });
+  });
+
+  const response = await worker.fetch(scheduleRequest(validSchedule()), environment());
+  assert.equal(response.status, 200);
+  assert.deepEqual(await response.json(), { success: true });
+  assert.equal(resendRequest.url, "https://api.resend.com/emails");
+
+  const email = JSON.parse(resendRequest.options.body);
+  assert.equal(email.subject, "Nova solicitação de cronograma - Ana Souza");
+  assert.equal(email.from, environment().RESEND_FROM_EMAIL);
+  assert.deepEqual(email.to, [environment().RESEND_TO_EMAIL]);
+  for (const value of ["Ana Souza", "Diretora", "99999-9999", "Escola Comunidade", "3333-4444", "BA", "Salvador"]) {
+    assert.match(email.html, new RegExp(value));
+  }
+});
+
+test("rejeita campos inválidos e honeypot do cronograma", async () => {
+  const worker = await loadWorker(async () => {
+    throw new Error("Resend não deveria ser chamado.");
+  });
+
+  for (const body of [
+    validSchedule({ nome: "" }),
+    validSchedule({ nome: "1234" }),
+    validSchedule({ whatsapp: "123" }),
+    validSchedule({ instituicao: "A" }),
+    validSchedule({ telefone: "123" }),
+    validSchedule({ estado: "XX" }),
+    validSchedule({ cidade: "" }),
+    validSchedule({ homepage: "spam.example" })
+  ]) {
+    const response = await worker.fetch(scheduleRequest(body), environment());
+    assert.equal(response.status, 400);
+  }
+});
+
+test("retorna 405 para GET no endpoint de cronograma", async () => {
+  const worker = await loadWorker(async () => new Response());
+  const response = await worker.fetch(scheduleRequest({}, "GET"), environment());
+  assert.equal(response.status, 405);
+  assert.equal(response.headers.get("allow"), "POST");
+});
+
+test("escapa HTML malicioso no e-mail do cronograma", async () => {
+  let resendRequest;
+  const worker = await loadWorker(async (url, options) => {
+    resendRequest = { url, options };
+    return Response.json({ id: "email-id" });
+  });
+  const response = await worker.fetch(
+    scheduleRequest(validSchedule({
+      nome: "Ana <script>alert(1)</script>",
+      cargo: "Diretora & <b>Gestora</b>"
+    })),
+    environment()
+  );
+
+  assert.equal(response.status, 200);
+  const email = JSON.parse(resendRequest.options.body);
+  assert.match(email.html, /Ana &lt;script&gt;alert\(1\)&lt;\/script&gt;/);
+  assert.match(email.html, /Diretora &amp; &lt;b&gt;Gestora&lt;\/b&gt;/);
+  assert.doesNotMatch(email.html, /<script>|<b>/);
 });

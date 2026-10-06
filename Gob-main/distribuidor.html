@@ -317,6 +317,7 @@
         input[type="text"],
         input[type="tel"],
         input[type="email"],
+        select,
         textarea {
             width: 100%;
             background: #f7f3ff;
@@ -338,10 +339,23 @@
         input[type="text"]:focus,
         input[type="tel"]:focus,
         input[type="email"]:focus,
+        select:focus,
         textarea:focus {
             border-color: var(--purple-light);
             background: #f2e8ff;
             box-shadow: 0 0 0 3px rgba(123,45,142,0.1);
+        }
+        select:disabled { color: #8f8299; background: #ece8ef; cursor: not-allowed; }
+        [aria-invalid="true"] { border-color: #e74c3c !important; background: #fff5f5 !important; }
+        .field-group label {
+            color: var(--purple);
+            font-size: 0.72rem;
+            font-weight: 700;
+        }
+        .location-status {
+            color: #b03232;
+            font-size: 0.72rem;
+            line-height: 1.3;
         }
         .uf-input { max-width: 90px; }
 
@@ -383,7 +397,7 @@
         /* ========== CIDADES ========== */
         .cidades-row {
             display: grid;
-            grid-template-columns: 1fr auto;
+            grid-template-columns: 1fr 1.5fr;
             gap: 10px;
             margin-bottom: 10px;
         }
@@ -593,7 +607,7 @@
         }
         @media (min-width: 769px) {
             .check-group { grid-template-columns: 1fr 1fr; }
-            .cidades-row { grid-template-columns: 1fr 90px; }
+            .cidades-row { grid-template-columns: 1fr 1.5fr; }
             .historico-sub { grid-template-columns: 1fr 120px; }
         }
     </style>
@@ -687,20 +701,30 @@
                     <div class="step" id="step-2">
                         <span class="section-label">Ficha do distribuidor</span>
                         <div class="field-row">
-                            <input type="text" name="nome" placeholder="Nome:" required>
+                            <input type="text" name="nome" placeholder="Nome:" minlength="2" maxlength="120" pattern=".*[^\d\s].*" required>
                         </div>
                         <div class="field-row">
-                            <input type="tel" name="contato" placeholder="Contato WhatsApp:">
+                            <input type="tel" name="contato" placeholder="Contato WhatsApp:" inputmode="tel" maxlength="15" pattern="\(\d{2}\) \d{4,5}-\d{4}" required>
                         </div>
-                        <div class="field-row two-col">
-                            <input type="text" name="cidade" placeholder="Cidade:">
-                            <input type="text" name="uf" placeholder="UF:" class="uf-input" maxlength="2">
+                        <div class="field-row two-col-equal">
+                            <div class="field-group">
+                                <label for="distributorUf">Estado *</label>
+                                <select id="distributorUf" name="uf" required>
+                                    <option value="">Selecione o estado</option>
+                                </select>
+                            </div>
+                            <div class="field-group">
+                                <label for="distributorCity">Cidade *</label>
+                                <select id="distributorCity" name="cidade" required disabled>
+                                    <option value="">Selecione a cidade</option>
+                                </select>
+                            </div>
                         </div>
                         <div class="field-row">
-                            <input type="text" name="empresa" placeholder="Empresa:">
+                            <input type="text" name="empresa" placeholder="Empresa:" maxlength="200">
                         </div>
                         <div class="field-row">
-                            <input type="text" name="cnpj" placeholder="CNPJ:">
+                            <input type="text" name="cnpj" placeholder="CNPJ:" inputmode="numeric" maxlength="18">
                         </div>
                         <div class="btn-nav">
                             <button type="button" class="btn btn-back" onclick="prevStep()">
@@ -716,38 +740,38 @@
                     <div class="step" id="step-3">
                         <p class="historico-desc">Histórico com resumo de vendas alcançadas por sua equipe no mercado educacional recentemente:</p>
                         <div class="historico-row">
-                            <input type="text" name="hist1" placeholder="">
+                            <input type="text" name="hist1" placeholder="" maxlength="500">
                             <div class="historico-sub">
-                                <input type="text" name="cliente1" placeholder="Cliente:">
-                                <input type="text" name="ano1" placeholder="Ano:" class="uf-input">
+                                <input type="text" name="cliente1" placeholder="Cliente:" maxlength="200">
+                                <input type="text" name="ano1" placeholder="Ano:" class="uf-input" inputmode="numeric" maxlength="4" pattern="\d{4}">
                             </div>
                         </div>
                         <div class="historico-row">
-                            <input type="text" name="hist2" placeholder="">
+                            <input type="text" name="hist2" placeholder="" maxlength="500">
                             <div class="historico-sub">
-                                <input type="text" name="cliente2" placeholder="Cliente:">
-                                <input type="text" name="ano2" placeholder="Ano:" class="uf-input">
+                                <input type="text" name="cliente2" placeholder="Cliente:" maxlength="200">
+                                <input type="text" name="ano2" placeholder="Ano:" class="uf-input" inputmode="numeric" maxlength="4" pattern="\d{4}">
                             </div>
                         </div>
                         <div class="historico-row">
-                            <input type="text" name="hist3" placeholder="">
+                            <input type="text" name="hist3" placeholder="" maxlength="500">
                             <div class="historico-sub">
-                                <input type="text" name="cliente3" placeholder="Cliente:">
-                                <input type="text" name="ano3" placeholder="Ano:" class="uf-input">
+                                <input type="text" name="cliente3" placeholder="Cliente:" maxlength="200">
+                                <input type="text" name="ano3" placeholder="Ano:" class="uf-input" inputmode="numeric" maxlength="4" pattern="\d{4}">
                             </div>
                         </div>
                         <div class="historico-row">
-                            <input type="text" name="hist4" placeholder="">
+                            <input type="text" name="hist4" placeholder="" maxlength="500">
                             <div class="historico-sub">
-                                <input type="text" name="cliente4" placeholder="Cliente:">
-                                <input type="text" name="ano4" placeholder="Ano:" class="uf-input">
+                                <input type="text" name="cliente4" placeholder="Cliente:" maxlength="200">
+                                <input type="text" name="ano4" placeholder="Ano:" class="uf-input" inputmode="numeric" maxlength="4" pattern="\d{4}">
                             </div>
                         </div>
                         <div class="historico-row">
-                            <input type="text" name="hist5" placeholder="">
+                            <input type="text" name="hist5" placeholder="" maxlength="500">
                             <div class="historico-sub">
-                                <input type="text" name="cliente5" placeholder="Cliente:">
-                                <input type="text" name="ano5" placeholder="Ano:" class="uf-input">
+                                <input type="text" name="cliente5" placeholder="Cliente:" maxlength="200">
+                                <input type="text" name="ano5" placeholder="Ano:" class="uf-input" inputmode="numeric" maxlength="4" pattern="\d{4}">
                             </div>
                         </div>
                         <div class="btn-nav">
@@ -772,26 +796,56 @@
                             </label>
                         </div>
 
-                        <span class="section-label">Cidades :</span>
+                        <span class="section-label">Cidades:</span>
                         <div class="cidades-row">
-                            <input type="text" name="cid1" placeholder="">
-                            <input type="text" name="uf_cid1" placeholder="UF:" maxlength="2">
+                            <div class="field-group">
+                                <label for="distributorUfCity1">Estado 1 *</label>
+                                <select id="distributorUfCity1" name="uf_cid1" required><option value="">Selecione o estado</option></select>
+                            </div>
+                            <div class="field-group">
+                                <label for="distributorCity1">Cidade 1 *</label>
+                                <select id="distributorCity1" name="cid1" required disabled><option value="">Selecione a cidade</option></select>
+                            </div>
                         </div>
                         <div class="cidades-row">
-                            <input type="text" name="cid2" placeholder="">
-                            <input type="text" name="uf_cid2" placeholder="UF:" maxlength="2">
+                            <div class="field-group">
+                                <label for="distributorUfCity2">Estado 2</label>
+                                <select id="distributorUfCity2" name="uf_cid2"><option value="">Selecione o estado</option></select>
+                            </div>
+                            <div class="field-group">
+                                <label for="distributorCity2">Cidade 2</label>
+                                <select id="distributorCity2" name="cid2" disabled><option value="">Selecione a cidade</option></select>
+                            </div>
                         </div>
                         <div class="cidades-row">
-                            <input type="text" name="cid3" placeholder="">
-                            <input type="text" name="uf_cid3" placeholder="UF:" maxlength="2">
+                            <div class="field-group">
+                                <label for="distributorUfCity3">Estado 3</label>
+                                <select id="distributorUfCity3" name="uf_cid3"><option value="">Selecione o estado</option></select>
+                            </div>
+                            <div class="field-group">
+                                <label for="distributorCity3">Cidade 3</label>
+                                <select id="distributorCity3" name="cid3" disabled><option value="">Selecione a cidade</option></select>
+                            </div>
                         </div>
                         <div class="cidades-row">
-                            <input type="text" name="cid4" placeholder="">
-                            <input type="text" name="uf_cid4" placeholder="UF:" maxlength="2">
+                            <div class="field-group">
+                                <label for="distributorUfCity4">Estado 4</label>
+                                <select id="distributorUfCity4" name="uf_cid4"><option value="">Selecione o estado</option></select>
+                            </div>
+                            <div class="field-group">
+                                <label for="distributorCity4">Cidade 4</label>
+                                <select id="distributorCity4" name="cid4" disabled><option value="">Selecione a cidade</option></select>
+                            </div>
                         </div>
                         <div class="cidades-row">
-                            <input type="text" name="cid5" placeholder="">
-                            <input type="text" name="uf_cid5" placeholder="UF:" maxlength="2">
+                            <div class="field-group">
+                                <label for="distributorUfCity5">Estado 5</label>
+                                <select id="distributorUfCity5" name="uf_cid5"><option value="">Selecione o estado</option></select>
+                            </div>
+                            <div class="field-group">
+                                <label for="distributorCity5">Cidade 5</label>
+                                <select id="distributorCity5" name="cid5" disabled><option value="">Selecione a cidade</option></select>
+                            </div>
                         </div>
 
                         <div class="btn-nav">
@@ -816,6 +870,7 @@
                             style="position:absolute;left:-9999px;" 
                             tabindex="-1" 
                             autocomplete="off"
+                            aria-hidden="true"
                         >
 
                         <div class="btn-nav" style="margin-top:24px;">
@@ -857,6 +912,7 @@
         <img src="img/09.whatsapp.png" alt="WhatsApp">
     </a>
 
+    <script src="js/brasil-localidades.js"></script>
     <script>
         // ========== MENU MOBILE ==========
         const menuIcon = document.getElementById('menuIcon');
@@ -892,6 +948,31 @@
         ];
 
         let currentStep = 1;
+        const distributorForm = document.getElementById('distributorForm');
+        const validUfs = new Set(BrasilLocalidades.STATES.map(state => state.sigla));
+
+        BrasilLocalidades.initStateCityPair({
+            state: '[name="uf"]',
+            city: '[name="cidade"]',
+            stateRequired: true,
+            cityRequired: true
+        });
+        for (let index = 1; index <= 5; index += 1) {
+            BrasilLocalidades.initStateCityPair({
+                state: `[name="uf_cid${index}"]`,
+                city: `[name="cid${index}"]`,
+                stateRequired: index === 1,
+                cityRequired: index === 1
+            });
+        }
+        BrasilLocalidades.bindPhoneMask('[name="contato"]');
+        BrasilLocalidades.bindCnpjMask('[name="cnpj"]');
+        BrasilLocalidades.bindValidationState(distributorForm);
+        document.querySelectorAll('[name^="ano"]').forEach(input => {
+            input.addEventListener('input', () => {
+                input.value = input.value.replace(/\D/g, '').slice(0, 4);
+            });
+        });
 
         function getStepEl(n) { return document.getElementById('step-' + n); }
         function getDots() { return document.querySelectorAll('.step-dot'); }
@@ -959,17 +1040,33 @@
             }
 
             if (step === 2) {
-                const nome = document.querySelector('#step-2 input[name="nome"]');
-                const contato = document.querySelector('#step-2 input[name="contato"]');
-                const cidade = document.querySelector('#step-2 input[name="cidade"]');
-                const uf = document.querySelector('#step-2 input[name="uf"]');
+                const nome = distributorForm.elements.nome;
+                const contato = distributorForm.elements.contato;
+                const cidade = distributorForm.elements.cidade;
+                const uf = distributorForm.elements.uf;
+                const cnpj = distributorForm.elements.cnpj;
 
-                if (!nome.value.trim()) { markInvalid(nome); valid = false; }
-                if (!contato.value.trim()) { markInvalid(contato); valid = false; }
+                const cleanName = nome.value.trim();
+                if (cleanName.length < 2 || cleanName.length > 120 || /^\d+$/.test(cleanName.replace(/\s/g, ''))) {
+                    markInvalid(nome); valid = false;
+                }
+                if (!BrasilLocalidades.isValidPhone(contato.value)) { markInvalid(contato); valid = false; }
                 if (!cidade.value.trim()) { markInvalid(cidade); valid = false; }
-                if (!uf.value.trim()) { markInvalid(uf); valid = false; }
+                if (!validUfs.has(uf.value)) { markInvalid(uf); valid = false; }
+                if (cnpj.value && !BrasilLocalidades.isValidCnpj(cnpj.value)) { markInvalid(cnpj); valid = false; }
 
-                if (!valid) showStepError('Preencha os campos obrigatórios.');
+                if (!valid) showStepError('Revise os campos obrigatórios, o telefone e o CNPJ informado.');
+            }
+
+            if (step === 3) {
+                const currentYear = new Date().getFullYear();
+                document.querySelectorAll('#step-3 [name^="ano"]').forEach(input => {
+                    if (input.value && (!/^\d{4}$/.test(input.value) || Number(input.value) < 1900 || Number(input.value) > currentYear)) {
+                        markInvalid(input);
+                        valid = false;
+                    }
+                });
+                if (!valid) showStepError(`Informe anos entre 1900 e ${currentYear}.`);
             }
 
             if (step === 4) {
@@ -979,18 +1076,35 @@
                     document.querySelectorAll('#step-4 .radio-item').forEach(el => el.style.color = '#e74c3c');
                     valid = false;
                 }
+                for (let index = 1; index <= 5; index += 1) {
+                    const state = distributorForm.elements[`uf_cid${index}`];
+                    const city = distributorForm.elements[`cid${index}`];
+                    const pairRequired = index === 1;
+                    if ((pairRequired || city.value) && !validUfs.has(state.value)) {
+                        markInvalid(state);
+                        valid = false;
+                    }
+                    if ((pairRequired || state.value) && !city.value.trim()) {
+                        markInvalid(city);
+                        valid = false;
+                    }
+                }
+                if (!valid) showStepError('Selecione o foco e complete cada par de Estado e Cidade preenchido.');
             }
 
             return valid;
         }
 
         function markInvalid(el) {
+            el.setAttribute('aria-invalid', 'true');
             el.style.borderColor = '#e74c3c';
             el.style.background = '#fff5f5';
-            el.addEventListener('input', function handler() {
+            const eventName = el.matches('select') ? 'change' : 'input';
+            el.addEventListener(eventName, function handler() {
+                el.removeAttribute('aria-invalid');
                 el.style.borderColor = '';
                 el.style.background = '';
-                el.removeEventListener('input', handler);
+                el.removeEventListener(eventName, handler);
             });
         }
 
@@ -1010,7 +1124,8 @@
         function clearErrors() {
             const err = document.getElementById('stepError');
             if (err) err.remove();
-            document.querySelectorAll('#formCard input, #formCard .check-item, #formCard .radio-item').forEach(el => {
+            document.querySelectorAll('#formCard input, #formCard select, #formCard textarea, #formCard .check-item, #formCard .radio-item').forEach(el => {
+                el.removeAttribute('aria-invalid');
                 el.style.borderColor = '';
                 el.style.background = '';
                 el.style.color = '';
@@ -1039,10 +1154,20 @@
         }
 
         // Submit
-        document.getElementById('distributorForm').addEventListener('submit', async (e) => {
+        distributorForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             const form = e.target;
             const btn = form.querySelector('button[type="submit"]');
+            if (btn.disabled) return;
+            for (let step = 1; step <= 4; step += 1) {
+                if (!validateStep(step)) {
+                    showStep(step);
+                    const hiddenError = document.getElementById('stepError');
+                    if (hiddenError) hiddenError.remove();
+                    showStepError('Revise os campos destacados antes de continuar.');
+                    return;
+                }
+            }
             const textoOriginal = btn.innerHTML;
             btn.innerHTML = 'Enviando... <i class="fas fa-spinner fa-spin"></i>';
             btn.disabled = true;
@@ -1066,13 +1191,13 @@
                     document.getElementById('successWrap').classList.add('show');
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                 } else {
-                    alert(data?.error || 'Erro ao enviar. Tente novamente.');
+                    showStepError('Não foi possível enviar. Tente novamente.');
                     btn.innerHTML = textoOriginal;
                     btn.disabled = false;
                 }
             } catch (err) {
                 console.error('Erro:', err);
-                alert('Erro de conexão. Tente novamente.');
+                showStepError('Não foi possível enviar. Tente novamente.');
                 btn.innerHTML = textoOriginal;
                 btn.disabled = false;
             }

@@ -150,44 +150,6 @@ app.post('/api/enviar-lead', limiter, async (req, res) => {
   }
 });
 
-// ─── Endpoint: enviar cronograma (modal cronograma) ────────
-app.post('/api/enviar-cronograma', limiter, async (req, res) => {
-  try {
-    const { nome, cargo, whatsapp, instituicao, telefone, cidade, estado } = req.body;
-
-    if (!nome || !whatsapp) {
-      return res.status(400).json({ sucesso: false, erro: 'Nome e WhatsApp são obrigatórios.' });
-    }
-
-    const texto = [
-      '📅 *[CONHEÇA O CRONOGRAMA] — Site BASTA!*',
-      '━━━━━━━━━━━━━━━━━━━━━━━━━━',
-      '',
-      `👤 *Nome:* ${sanitizar(nome)}`,
-      cargo ? `💼 *Cargo:* ${sanitizar(cargo)}` : null,
-      `📱 *WhatsApp:* ${sanitizar(whatsapp)}`,
-      instituicao ? `🏫 *Instituição:* ${sanitizar(instituicao)}` : null,
-      telefone ? `📞 *Telefone Inst.:* ${sanitizar(telefone)}` : null,
-      cidade ? `🏙️ *Cidade:* ${sanitizar(cidade)}` : null,
-      estado ? `📍 *Estado:* ${sanitizar(estado)}` : null
-    ].filter(Boolean).join('\n');
-
-    await axios.post(zapiUrl(), {
-      phone: ZAP_PHONE,
-      message: texto
-    }, { headers: zapiHeaders(), timeout: 15000 });
-
-    return res.json({ sucesso: true, mensagem: 'Solicitação enviada com sucesso!' });
-
-  } catch (err) {
-    console.error('Erro ao enviar cronograma:', err.response?.data || err.message);
-    return res.status(502).json({
-      sucesso: false,
-      erro: 'Não foi possível enviar. Tente novamente mais tarde.'
-    });
-  }
-});
-
 // ─── Endpoint: enviar distribuidor (formulário multi-step) ─
 app.post('/api/enviar-distribuidor', limiter, async (req, res) => {
   try {

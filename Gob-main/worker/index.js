@@ -4,12 +4,19 @@ const JSON_HEADERS = {
 };
 
 const MAX_BODY_BYTES = 25_000;
-const FIELD_LIMITS = {
+const VALID_UFS = new Set([
+  "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT",
+  "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO",
+  "RR", "SC", "SP", "SE", "TO"
+]);
+
+const CONTACT_FIELD_LIMITS = {
   nome: 120,
   telefone: 40,
   email: 254,
-  instituicao: 200,
+  estado: 2,
   cidade: 160,
+  instituicao: 200,
   mensagem: 4_000,
   website: 200
 };
@@ -23,19 +30,19 @@ const DISTRIBUTOR_FIELD_LIMITS = {
   cnpj: 30,
   hist1: 500,
   cliente1: 200,
-  ano1: 20,
+  ano1: 4,
   hist2: 500,
   cliente2: 200,
-  ano2: 20,
+  ano2: 4,
   hist3: 500,
   cliente3: 200,
-  ano3: 20,
+  ano3: 4,
   hist4: 500,
   cliente4: 200,
-  ano4: 20,
+  ano4: 4,
   hist5: 500,
   cliente5: 200,
-  ano5: 20,
+  ano5: 4,
   foco: 30,
   cid1: 160,
   uf_cid1: 2,
@@ -51,6 +58,17 @@ const DISTRIBUTOR_FIELD_LIMITS = {
   bot_field: 200
 };
 
+const SCHEDULE_FIELD_LIMITS = {
+  nome: 120,
+  cargo: 120,
+  whatsapp: 40,
+  instituicao: 200,
+  telefone: 40,
+  estado: 2,
+  cidade: 160,
+  homepage: 200
+};
+
 const DISTRIBUTOR_TYPE_OPTIONS = new Set([
   "Representante",
   "Distribuidor",
@@ -61,28 +79,19 @@ const DISTRIBUTOR_FOCUS_OPTIONS = new Set(["Rede pública", "Rede privada"]);
 
 export default {
   async fetch(request, env) {
-    const url = new URL(request.url);
+    const pathname = new URL(request.url).pathname;
+    const handlers = {
+      "/api/contact": handleContact,
+      "/api/distributor": handleDistributor,
+      "/api/schedule": handleSchedule
+    };
+    const handler = handlers[pathname];
 
-    if (url.pathname === "/api/contact") {
+    if (handler) {
       if (request.method !== "POST") {
-        return jsonResponse({ error: "Método não permitido." }, 405, {
-          Allow: "POST"
-        });
+        return jsonResponse({ error: "Método não permitido." }, 405, { Allow: "POST" });
       }
-
-      return handleContact(request, env);
-    }
-
-    if (url.pathname === "/api/distributor") {
-      if (request.method !== "POST") {
-        return jsonResponse(
-          { error: "Método não permitido." },
-          405,
-          { Allow: "POST" }
-        );
-      }
-
-      return handleDistributor(request, env);
+      return handler(request, env);
     }
 
     return env.ASSETS.fetch(request);
@@ -94,47 +103,17 @@ async function handleContact(request, env) {
     const parsedBody = await readLimitedJson(request);
     if (parsedBody.response) return parsedBody.response;
 
-    const fields = normalizeFields(parsedBody.payload);
-    if (!fields || !isValidEmail(fields.email)) {
-      return jsonResponse({ error: "Preencha os campos obrigatórios." }, 400);
-    }
+    const fields = normalizeContactFields(parsedBody.payload);
+    if (!fields) return invalidFieldsResponse();
 
-    if (!env.RESEND_API_KEY || !env.RESEND_FROM_EMAIL || !env.RESEND_TO_EMAIL) {
-      console.error("Contact configuration error: missing Resend environment variables.");
-      return jsonResponse({ error: "Erro interno." }, 500);
-    }
-
-    const resendPayload = {
+    const emailError = await sendResendEmail(env, {
       from: env.RESEND_FROM_EMAIL,
       to: [env.RESEND_TO_EMAIL],
       reply_to: fields.email,
       subject: `Novo contato pelo site - ${sanitizeSubject(fields.nome)}`,
-      html: buildEmailHtml(fields)
-    };
-
-    let resendResponse;
-    try {
-      resendResponse = await fetch("https://api.resend.com/emails", {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${env.RESEND_API_KEY}`,
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(resendPayload)
-      });
-    } catch (error) {
-      console.error("Resend request error:", safeErrorMessage(error));
-      return jsonResponse({ error: "Erro ao enviar e-mail." }, 500);
-    }
-
-    const resendData = await readJsonSafely(resendResponse);
-    if (!resendResponse.ok) {
-      console.error("Resend error:", {
-        status: resendResponse.status,
-        data: resendData
-      });
-      return jsonResponse({ error: "Erro ao enviar e-mail." }, 500);
-    }
+      html: buildContactEmailHtml(fields)
+    }, "Contact");
+    if (emailError) return emailError;
 
     return jsonResponse({ success: true }, 200);
   } catch (error) {
@@ -149,45 +128,15 @@ async function handleDistributor(request, env) {
     if (parsedBody.response) return parsedBody.response;
 
     const fields = normalizeDistributorFields(parsedBody.payload);
-    if (!fields) {
-      return jsonResponse({ error: "Preencha os campos obrigatórios." }, 400);
-    }
+    if (!fields) return invalidFieldsResponse();
 
-    if (!env.RESEND_API_KEY || !env.RESEND_FROM_EMAIL || !env.RESEND_TO_EMAIL) {
-      console.error("Distributor configuration error: missing Resend environment variables.");
-      return jsonResponse({ error: "Erro interno." }, 500);
-    }
-
-    const resendPayload = {
+    const emailError = await sendResendEmail(env, {
       from: env.RESEND_FROM_EMAIL,
       to: [env.RESEND_TO_EMAIL],
       subject: `Nova solicitação de distribuidor - ${sanitizeSubject(fields.nome)}`,
       html: buildDistributorEmailHtml(fields)
-    };
-
-    let resendResponse;
-    try {
-      resendResponse = await fetch("https://api.resend.com/emails", {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${env.RESEND_API_KEY}`,
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(resendPayload)
-      });
-    } catch (error) {
-      console.error("Resend request error:", safeErrorMessage(error));
-      return jsonResponse({ error: "Erro ao enviar e-mail." }, 500);
-    }
-
-    const resendData = await readJsonSafely(resendResponse);
-    if (!resendResponse.ok) {
-      console.error("Resend error:", {
-        status: resendResponse.status,
-        data: resendData
-      });
-      return jsonResponse({ error: "Erro ao enviar e-mail." }, 500);
-    }
+    }, "Distributor");
+    if (emailError) return emailError;
 
     return jsonResponse({ success: true }, 200);
   } catch (error) {
@@ -196,29 +145,40 @@ async function handleDistributor(request, env) {
   }
 }
 
-function normalizeFields(payload) {
-  if (!payload || typeof payload !== "object" || Array.isArray(payload)) {
-    return null;
-  }
+async function handleSchedule(request, env) {
+  try {
+    const parsedBody = await readLimitedJson(request);
+    if (parsedBody.response) return parsedBody.response;
 
-  const fields = {};
-  for (const [name, limit] of Object.entries(FIELD_LIMITS)) {
-    const value = payload[name];
-    if (value !== undefined && typeof value !== "string") {
-      return null;
-    }
+    const fields = normalizeScheduleFields(parsedBody.payload);
+    if (!fields) return invalidFieldsResponse();
 
-    fields[name] = String(value || "").trim();
-    if (fields[name].length > limit) {
-      return null;
-    }
+    const emailError = await sendResendEmail(env, {
+      from: env.RESEND_FROM_EMAIL,
+      to: [env.RESEND_TO_EMAIL],
+      subject: `Nova solicitação de cronograma - ${sanitizeSubject(fields.nome)}`,
+      html: buildScheduleEmailHtml(fields)
+    }, "Schedule");
+    if (emailError) return emailError;
+
+    return jsonResponse({ success: true }, 200);
+  } catch (error) {
+    console.error("Schedule endpoint error:", safeErrorMessage(error));
+    return jsonResponse({ error: "Erro interno." }, 500);
   }
+}
+
+function normalizeContactFields(payload) {
+  const fields = normalizeStringFields(payload, CONTACT_FIELD_LIMITS);
+  if (!fields) return null;
 
   if (
-    !fields.nome ||
-    !fields.telefone ||
-    !fields.email ||
-    !fields.mensagem ||
+    !isValidName(fields.nome) ||
+    !isValidEmail(fields.email) ||
+    !isValidBrazilianPhone(fields.telefone) ||
+    !VALID_UFS.has(fields.estado) ||
+    !fields.cidade ||
+    fields.mensagem.length < 3 ||
     fields.website
   ) {
     return null;
@@ -228,13 +188,8 @@ function normalizeFields(payload) {
 }
 
 function normalizeDistributorFields(payload) {
-  if (!payload || typeof payload !== "object" || Array.isArray(payload)) {
-    return null;
-  }
-
-  if (!Array.isArray(payload.tipo) || payload.tipo.length === 0) {
-    return null;
-  }
+  if (!payload || typeof payload !== "object" || Array.isArray(payload)) return null;
+  if (!Array.isArray(payload.tipo) || payload.tipo.length === 0) return null;
 
   const tipo = [];
   for (const value of payload.tipo) {
@@ -248,46 +203,132 @@ function normalizeDistributorFields(payload) {
     tipo.push(value);
   }
 
-  const fields = { tipo };
-  for (const [name, limit] of Object.entries(DISTRIBUTOR_FIELD_LIMITS)) {
-    const value = payload[name];
-    if (value !== undefined && typeof value !== "string") {
-      return null;
-    }
-
-    fields[name] = String(value || "").trim();
-    if (fields[name].length > limit) {
-      return null;
-    }
-  }
+  const normalized = normalizeStringFields(payload, DISTRIBUTOR_FIELD_LIMITS);
+  if (!normalized) return null;
+  const fields = { tipo, ...normalized };
 
   if (
-    !fields.nome ||
-    !fields.contato ||
+    !isValidName(fields.nome) ||
+    !isValidBrazilianPhone(fields.contato) ||
+    !VALID_UFS.has(fields.uf) ||
     !fields.cidade ||
-    !fields.uf ||
     !DISTRIBUTOR_FOCUS_OPTIONS.has(fields.foco) ||
-    fields.bot_field
+    fields.bot_field ||
+    (fields.cnpj && !isValidCnpj(fields.cnpj))
   ) {
     return null;
   }
 
-  if (!/^[A-Za-z]{2}$/.test(fields.uf)) {
-    return null;
-  }
-
+  const currentYear = new Date().getUTCFullYear();
   for (let index = 1; index <= 5; index += 1) {
-    const state = fields[`uf_cid${index}`];
-    if (state && !/^[A-Za-z]{2}$/.test(state)) {
+    const year = fields[`ano${index}`];
+    if (year && (!/^\d{4}$/.test(year) || Number(year) < 1900 || Number(year) > currentYear)) {
       return null;
     }
+
+    const state = fields[`uf_cid${index}`];
+    const city = fields[`cid${index}`];
+    const pairRequired = index === 1;
+    if ((pairRequired || city) && !VALID_UFS.has(state)) return null;
+    if ((pairRequired || state) && !city) return null;
   }
 
   return fields;
 }
 
+function normalizeScheduleFields(payload) {
+  const fields = normalizeStringFields(payload, SCHEDULE_FIELD_LIMITS);
+  if (!fields) return null;
+
+  if (
+    !isValidName(fields.nome) ||
+    !isValidBrazilianPhone(fields.whatsapp) ||
+    fields.instituicao.length < 2 ||
+    (fields.telefone && !isValidBrazilianPhone(fields.telefone)) ||
+    !VALID_UFS.has(fields.estado) ||
+    !fields.cidade ||
+    fields.homepage
+  ) {
+    return null;
+  }
+
+  return fields;
+}
+
+function normalizeStringFields(payload, limits) {
+  if (!payload || typeof payload !== "object" || Array.isArray(payload)) return null;
+
+  const fields = {};
+  for (const [name, limit] of Object.entries(limits)) {
+    const value = payload[name];
+    if (value !== undefined && typeof value !== "string") return null;
+    fields[name] = String(value || "").trim();
+    if (fields[name].length > limit) return null;
+  }
+  return fields;
+}
+
+function isValidName(value) {
+  const compact = value.replace(/\s/g, "");
+  return value.length >= 2 && compact.length >= 2 && !/^\d+$/.test(compact);
+}
+
 function isValidEmail(value) {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+  return value.length <= 254 && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+}
+
+function isValidBrazilianPhone(value) {
+  return /^\d{10,11}$/.test(value.replace(/\D/g, ""));
+}
+
+function isValidCnpj(value) {
+  const digits = value.replace(/\D/g, "");
+  if (!/^\d{14}$/.test(digits) || /^(\d)\1{13}$/.test(digits)) return false;
+
+  const calculateDigit = (length) => {
+    let factor = length - 7;
+    let sum = 0;
+    for (let index = 0; index < length; index += 1) {
+      sum += Number(digits[index]) * factor;
+      factor -= 1;
+      if (factor < 2) factor = 9;
+    }
+    const remainder = sum % 11;
+    return remainder < 2 ? 0 : 11 - remainder;
+  };
+
+  return calculateDigit(12) === Number(digits[12]) &&
+    calculateDigit(13) === Number(digits[13]);
+}
+
+async function sendResendEmail(env, payload, context) {
+  if (!env.RESEND_API_KEY || !env.RESEND_FROM_EMAIL || !env.RESEND_TO_EMAIL) {
+    console.error(`${context} configuration error: missing Resend environment variables.`);
+    return jsonResponse({ error: "Erro interno." }, 500);
+  }
+
+  let resendResponse;
+  try {
+    resendResponse = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${env.RESEND_API_KEY}`,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(payload)
+    });
+  } catch (error) {
+    console.error("Resend request error:", safeErrorMessage(error));
+    return jsonResponse({ error: "Erro ao enviar e-mail." }, 500);
+  }
+
+  const resendData = await readJsonSafely(resendResponse);
+  if (!resendResponse.ok) {
+    console.error("Resend error:", { status: resendResponse.status, data: resendData });
+    return jsonResponse({ error: "Erro ao enviar e-mail." }, 500);
+  }
+
+  return null;
 }
 
 function escapeHtml(value) {
@@ -303,18 +344,34 @@ function sanitizeSubject(value) {
   return String(value).replace(/[\r\n]+/g, " ").trim();
 }
 
-function buildEmailHtml(fields) {
-  const optional = (value) => escapeHtml(value || "Não informado");
+function optional(value) {
+  return escapeHtml(value || "Não informado");
+}
 
+function buildContactEmailHtml(fields) {
   return `
     <h1>Novo contato pelo site</h1>
     <p><strong>Nome:</strong> ${escapeHtml(fields.nome)}</p>
     <p><strong>E-mail:</strong> ${escapeHtml(fields.email)}</p>
-    <p><strong>Telefone:</strong> ${optional(fields.telefone)}</p>
+    <p><strong>Telefone:</strong> ${escapeHtml(fields.telefone)}</p>
+    <p><strong>Estado:</strong> ${escapeHtml(fields.estado)}</p>
+    <p><strong>Cidade:</strong> ${escapeHtml(fields.cidade)}</p>
     <p><strong>Instituição:</strong> ${optional(fields.instituicao)}</p>
-    <p><strong>Cidade:</strong> ${optional(fields.cidade)}</p>
     <p><strong>Mensagem:</strong></p>
     <p>${escapeHtml(fields.mensagem).replaceAll("\n", "<br>")}</p>
+  `;
+}
+
+function buildScheduleEmailHtml(fields) {
+  return `
+    <h1>Nova solicitação de cronograma</h1>
+    <p><strong>Nome:</strong> ${escapeHtml(fields.nome)}</p>
+    <p><strong>Cargo:</strong> ${optional(fields.cargo)}</p>
+    <p><strong>WhatsApp:</strong> ${escapeHtml(fields.whatsapp)}</p>
+    <p><strong>Instituição:</strong> ${escapeHtml(fields.instituicao)}</p>
+    <p><strong>Telefone da instituição:</strong> ${optional(fields.telefone)}</p>
+    <p><strong>Estado:</strong> ${escapeHtml(fields.estado)}</p>
+    <p><strong>Cidade:</strong> ${escapeHtml(fields.cidade)}</p>
   `;
 }
 
@@ -355,27 +412,19 @@ function buildDistributorEmailHtml(fields) {
     mensagem: "Mensagem"
   };
 
-  const rows = [
-    `<p><strong>Tipo:</strong> ${fields.tipo.map(escapeHtml).join(", ")}</p>`
-  ];
-
+  const rows = [`<p><strong>Tipo:</strong> ${fields.tipo.map(escapeHtml).join(", ")}</p>`];
   for (const [name, label] of Object.entries(labels)) {
     if (fields[name]) {
-      rows.push(
-        `<p><strong>${label}:</strong> ${escapeHtml(fields[name]).replaceAll("\n", "<br>")}</p>`
-      );
+      rows.push(`<p><strong>${label}:</strong> ${escapeHtml(fields[name]).replaceAll("\n", "<br>")}</p>`);
     }
   }
-
   return `<h1>Nova solicitação de distribuidor</h1>${rows.join("")}`;
 }
 
 async function readLimitedJson(request) {
   const contentLength = Number(request.headers.get("content-length") || 0);
   if (Number.isFinite(contentLength) && contentLength > MAX_BODY_BYTES) {
-    return {
-      response: jsonResponse({ error: "Requisição muito grande." }, 413)
-    };
+    return { response: jsonResponse({ error: "Requisição muito grande." }, 413) };
   }
 
   let rawBody;
@@ -386,9 +435,7 @@ async function readLimitedJson(request) {
   }
 
   if (new TextEncoder().encode(rawBody).byteLength > MAX_BODY_BYTES) {
-    return {
-      response: jsonResponse({ error: "Requisição muito grande." }, 413)
-    };
+    return { response: jsonResponse({ error: "Requisição muito grande." }, 413) };
   }
 
   try {
@@ -406,6 +453,10 @@ async function readJsonSafely(response) {
   }
 }
 
+function invalidFieldsResponse() {
+  return jsonResponse({ error: "Preencha os campos obrigatórios." }, 400);
+}
+
 function safeErrorMessage(error) {
   return error instanceof Error ? error.message : "Unknown error";
 }
@@ -413,9 +464,6 @@ function safeErrorMessage(error) {
 function jsonResponse(body, status, extraHeaders = {}) {
   return new Response(JSON.stringify(body), {
     status,
-    headers: {
-      ...JSON_HEADERS,
-      ...extraHeaders
-    }
+    headers: { ...JSON_HEADERS, ...extraHeaders }
   });
 }

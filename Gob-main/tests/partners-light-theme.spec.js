@@ -6,7 +6,7 @@ test.describe('Parceiros e clientes com preferência escura do sistema', () => {
   test.use({ colorScheme: 'dark' });
 
   test('preserva as cores claras e os logos sem filtros', async ({ page }) => {
-    await page.goto(URL, { waitUntil: 'networkidle' });
+    await page.goto(URL, { waitUntil: 'domcontentloaded' });
 
     const wrapper = page.locator('.partners-clientes-wrapper');
     const whitePartnerFace = page.locator('.partner-card:nth-child(1) .partner-card-front');
