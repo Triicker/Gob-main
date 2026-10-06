@@ -7,6 +7,10 @@ const workerSourcePath = require("node:path").resolve(
   __dirname,
   "../worker/index.js"
 );
+const wranglerConfigPath = require("node:path").resolve(
+  __dirname,
+  "../wrangler.jsonc"
+);
 
 async function loadWorker(fetchImplementation) {
   const source = await readFile(workerSourcePath, "utf8");
@@ -106,6 +110,12 @@ function environment(overrides = {}) {
     ...overrides
   };
 }
+
+test("configura remetente de produção no domínio verificado", async () => {
+  const config = JSON.parse(await readFile(wranglerConfigPath, "utf8"));
+  assert.match(config.vars.RESEND_FROM_EMAIL, /@basta\.app\.br>/);
+  assert.doesNotMatch(config.vars.RESEND_FROM_EMAIL, /@resend\.dev/);
+});
 
 test("envia o contato válido pelo Resend", async () => {
   let resendRequest;
