@@ -5,6 +5,28 @@
 
 /* ========== TOKENS DE DESIGN ========== */
 :root {
+    /* PDF v2: opt-in tokens for projeto.html; existing pages retain their theme. */
+    --pdf-font-display: 'Poppins', sans-serif;
+    --pdf-font-body: 'Poppins', sans-serif;
+    --pdf-purple: #280163;
+    --pdf-ink: #43005d;
+    --pdf-pink: #fc1c85;
+    --pdf-muted: #707070;
+    --pdf-paper: #fafaf7;
+    --pdf-lilac: #f0eafa;
+    --pdf-night: #240031;
+    --pdf-container: 1340px;
+    --pdf-gutter: 8.64%;
+    --pdf-fs-hero: clamp(40px, 4.444vw, 72px);
+    --pdf-fs-h1: clamp(32px, 3.148vw, 51px);
+    --pdf-fs-h2: clamp(26px, 2.469vw, 40px);
+    --pdf-fs-h3: clamp(18px, 1.605vw, 26px);
+    --pdf-fs-body: clamp(15px, 1.235vw, 20px);
+    --pdf-fs-small: clamp(13px, .988vw, 16px);
+    --pdf-space-section: clamp(40px, 4.938vw, 80px);
+    --pdf-radius: 12px;
+    --pdf-shadow: 0 2px 10px #0005;
+    /* PDF breakpoints: 1100px menu; 900px composition; 600px phone; 380px narrow. */
     --purple-dark:  #5B1A6E;
     --purple:       #7B2D8E;
     --purple-light: #9B4DB0;
