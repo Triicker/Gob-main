@@ -1,3 +1,92 @@
+/* PDF v2 — page-specific composition. Values follow the 1620px PDF artboard. */
+.pdf-project main, .pdf-project .pdf-footer {
+    font-family: var(--pdf-font-body);
+    font-size: var(--pdf-fs-body);
+    line-height: 1.45;
+    color: var(--pdf-muted);
+    background: var(--pdf-paper);
+}
+.pdf-project { --pdf-header-height: 102px; background: var(--pdf-paper); }
+.pdf-project main { padding-top: var(--pdf-header-height); }
+.pdf-project main section { position: relative; scroll-margin-top: calc(var(--pdf-header-height) + 20px); }
+.pdf-project .pdf-container { width: calc(100% - 2 * var(--pdf-gutter)); max-width: var(--pdf-container); margin-inline: auto; position: relative; }
+.pdf-project main h1, .pdf-project main h2, .pdf-project main h3 { font-family: var(--pdf-font-display); color: var(--pdf-purple); line-height: 1.25; }
+.pdf-project main h2 { font-size: var(--pdf-fs-h2); font-weight: 900; }
+.pdf-project main h3 { font-size: var(--pdf-fs-h3); font-weight: 700; }
+.pdf-project em { font-style: normal; color: var(--pdf-pink); }
+.pdf-project .pdf-icon { display: block; width: 64px; height: 64px; fill: none; stroke: currentColor; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+.pdf-project .pdf-project-hero { background: #34003f url('../img/homeimage.png') center 46% / cover no-repeat; padding-block: clamp(28px, 3.1vw, 50px); min-height: min(29.63vw, 480px); display: flex; align-items: center; }
+.pdf-project .pdf-hero-copy { width: 48%; max-width: 650px; color: #ffdae7; }
+.pdf-project .pdf-hero-copy h1 { font-size: var(--pdf-fs-hero); font-weight: 600; color: white; margin-bottom: clamp(16px, 1.54vw, 25px); }
+.pdf-project .pdf-hero-lead { font-size: clamp(22px, 2.037vw, 33px); color: white; font-weight: 600; line-height: 1.5; margin-bottom: 20px; }
+.pdf-project .pdf-objectives { padding-block: var(--pdf-space-section); text-align: center; }
+.pdf-project .pdf-objectives h2 { font-weight: 700; }
+.pdf-project .pdf-section-intro { max-width: 885px; width: 68%; margin: 24px auto 46px; }
+.pdf-project .pdf-objective-list { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 3.5%; width: 93%; margin-inline: auto; }
+.pdf-project .pdf-objective-list li { background: white; border-radius: var(--pdf-radius); box-shadow: var(--pdf-shadow); padding: clamp(18px, 1.5vw, 24px) 14px; min-height: min(13.5vw, 220px); display: flex; flex-direction: column; align-items: center; justify-content: center; color: var(--pdf-purple); }
+.pdf-project .pdf-objective-list .pdf-icon { color: var(--pdf-pink); width: clamp(68px, 7.4vw, 120px); height: clamp(68px, 7.4vw, 120px); margin-bottom: 8px; }
+.pdf-project .pdf-objective-list h3, .pdf-project .pdf-process-list h3 { font-size: var(--pdf-fs-body); }
+.pdf-project .pdf-objective-list p { font-size: var(--pdf-fs-small); max-width: 220px; line-height: 1.2; }
+.pdf-project .pdf-objectives::before { content: ''; position: absolute; left: 0; top: 24px; width: 10.6%; height: 72%; background: url('../img/Grupo-92-1.png') right center / contain no-repeat; transform: scaleX(-1); pointer-events: none; }
+.pdf-project .pdf-method { background: var(--pdf-lilac); padding-block: clamp(44px, 4.15vw, 67px) var(--pdf-space-section); }
+.pdf-project .pdf-method-top { display: grid; grid-template-columns: 57% 36%; gap: 7%; align-items: start; }
+.pdf-project .pdf-method-top h2 { font-size: var(--pdf-fs-h1); max-width: 620px; line-height: 1.25; margin-bottom: 28px; }
+.pdf-project .pdf-method-top p { font-size: clamp(16px, 1.358vw, 22px); line-height: 1.4; }
+.pdf-project .pdf-checks { padding-top: 15px; color: var(--pdf-ink); }
+.pdf-project .pdf-checks li { display: flex; align-items: center; gap: clamp(20px, 2.7vw, 44px); margin-bottom: 25px; min-height: 48px; font-size: clamp(15px, 1.358vw, 22px); }
+.pdf-project .pdf-checks li > span:first-child { width: clamp(34px, 3.1vw, 50px); height: clamp(34px, 3.1vw, 50px); border: 4px solid currentColor; border-radius: 50%; display: grid; place-items: center; font-size: 30px; flex-shrink: 0; line-height: 1; }
+.pdf-project .pdf-knowledge { background: white; border-radius: var(--pdf-radius); margin: clamp(48px, 6.2vw, 100px) -22px 0; padding: clamp(22px, 1.73vw, 28px); }
+.pdf-project .pdf-knowledge h2 { font-size: clamp(26px, 2.84vw, 46px); margin-bottom: 20px; }
+.pdf-project .pdf-knowledge dl > div { display: grid; grid-template-columns: 8% 42% 50%; align-items: center; min-height: clamp(80px, 6.1vw, 99px); padding-block: 12px; border-bottom: 1px solid #bbb; }
+.pdf-project .pdf-knowledge dl > div:last-child { border: 0; }
+.pdf-project .pdf-knowledge .pdf-icon { width: clamp(40px, 4.3vw, 70px); height: clamp(40px, 4.3vw, 70px); color: #692d86; margin-inline: auto; stroke-width: 1.6; }
+.pdf-project .pdf-knowledge dt { font-size: var(--pdf-fs-h3); font-weight: 700; color: var(--pdf-ink); padding: 0 18px; }
+.pdf-project .pdf-knowledge dd { padding: 4px 18px 4px 36px; border-left: 1px solid #bbb; }
+.pdf-project .pdf-pillars { padding-block: var(--pdf-space-section) clamp(45px, 4vw, 65px); }
+.pdf-project .pdf-pillars::before { content: ''; position: absolute; right: 0; top: 0; width: 11%; height: 56%; background: url('../img/Grupo-92-1.png') left top / contain no-repeat; pointer-events: none; }
+.pdf-project .pdf-pillar-list { margin-top: 50px; }
+.pdf-project .pdf-pillar-list article { display: grid; grid-template-columns: 49% 49%; gap: 2%; margin-bottom: 20px; }
+.pdf-project .pdf-pillar-list article:last-child { margin-bottom: 0; }
+.pdf-project .pdf-pillar-list article > img { width: 100%; height: auto; aspect-ratio: 657 / 210; object-fit: cover; object-position: center; border-radius: 16px; }
+.pdf-project .pdf-pillar-copy { display: flex; gap: 28px; align-items: center; border-bottom: 1px solid #bbb; padding-block: 15px; }
+.pdf-project .pdf-pillar-list article:last-child .pdf-pillar-copy { border: 0; }
+.pdf-project .pdf-pillar-icon { background: var(--pdf-pink); color: white; width: clamp(70px, 8vw, 130px); height: clamp(70px, 8vw, 130px); border-radius: 50%; flex: 0 0 auto; display: grid; place-items: center; }
+.pdf-project .pdf-pillar-icon .pdf-icon { width: 62%; height: 62%; stroke-width: 1.5; }
+.pdf-project .pdf-pillar-copy p { font-size: clamp(16px, 1.543vw, 25px); line-height: 1.2; }
+.pdf-project .pdf-process { background: var(--pdf-lilac); padding-block: var(--pdf-space-section) clamp(54px, 4.3vw, 70px); text-align: center; }
+.pdf-project .pdf-process .pdf-section-intro { margin-top: 10px; margin-bottom: 58px; }
+.pdf-project .pdf-process-list { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 4.5%; list-style: none; }
+.pdf-project .pdf-process-list li { position: relative; background: white; border-radius: var(--pdf-radius); box-shadow: var(--pdf-shadow); padding: 38px 16px 32px; color: var(--pdf-purple); }
+.pdf-project .pdf-process-list li:not(:last-child)::after { content: '→'; position: absolute; top: 40%; left: calc(100% + 8px); font-size: 36px; color: #830c70; }
+.pdf-project .pdf-step-number { position: absolute; left: 13%; top: 18%; width: 42px; height: 42px; display: grid; place-items: center; background: #810968; color: white; border-radius: 50%; font-size: 24px; font-weight: 700; }
+.pdf-project .pdf-process-list .pdf-icon { width: clamp(65px, 5.4vw, 88px); height: clamp(65px, 5.4vw, 88px); margin: 0 auto 18px; color: #810968; stroke-width: 2; }
+.pdf-project .pdf-process-list p { font-size: var(--pdf-fs-small); line-height: 1.25; }
+.pdf-project .pdf-news { padding-block: clamp(50px, 5.3vw, 86px) clamp(50px, 4.6vw, 75px); }
+.pdf-project .pdf-news h2 { font-size: clamp(23px, 1.852vw, 30px); font-weight: 700; margin-bottom: 8px; }
+.pdf-project .pdf-news-list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; margin-top: 16px; }
+.pdf-project .pdf-news-list a { display: block; background: white; border-radius: 16px; overflow: hidden; }
+.pdf-project .pdf-news-list img { width: 100%; height: auto; aspect-ratio: 430 / 160; object-fit: cover; }
+.pdf-project .pdf-news-list h3 { font-size: clamp(16px, 1.358vw, 22px); padding: 16px 24px 20px; line-height: 1.35; }
+.pdf-project .pdf-news-list a:hover { box-shadow: var(--pdf-shadow); }
+.pdf-project .pdf-cta { background: var(--pdf-night) url('../img/conosco.png') left center / auto 100% no-repeat; min-height: min(22.47vw, 364px); padding-block: clamp(32px, 3.7vw, 60px); }
+.pdf-project .pdf-cta-copy { width: 56%; margin-left: auto; text-align: center; color: white; }
+.pdf-project .pdf-cta-copy h2 { font-size: var(--pdf-fs-h2); color: white; font-weight: 400; line-height: 1.5; }
+.pdf-project .pdf-cta-copy p { line-height: 1.3; margin: 10px 0 38px; }
+.pdf-project .pdf-button { display: inline-flex; align-items: center; justify-content: center; gap: 30px; color: white; background: var(--pdf-pink); border-radius: 50px; padding: 12px 30px; min-height: 46px; }
+.pdf-project .pdf-button > span:last-child { font-size: 30px; line-height: 1; }
+.pdf-project .pdf-footer { padding: 16px 0 20px; background: #430052 url('../img/headerdeep.png') center / cover; color: #fffbea; }
+.pdf-project .pdf-footer-brand { display: flex; align-items: center; gap: 30px; }
+.pdf-project .pdf-footer-logo { width: 130px; }
+.pdf-project .pdf-social { display: flex; gap: 18px; font-size: 28px; }
+.pdf-project .pdf-social a { min-width: 44px; min-height: 44px; display: grid; place-items: center; }
+.pdf-project .pdf-accreditation { width: 58%; max-width: 780px; margin-left: auto; }
+.pdf-project .pdf-footer-links { display: flex; flex-wrap: wrap; gap: 12px 24px; font-size: 12px; padding-top: 14px; }
+.pdf-project .pdf-footer a:hover { text-decoration: underline; }
+.pdf-project .pdf-skip { position: fixed; z-index: 2000; top: 8px; left: 8px; transform: translateY(-160%); background: white; color: var(--pdf-purple); padding: 12px 20px; }
+.pdf-project .pdf-skip:focus { transform: none; }
+.pdf-project :focus-visible { outline: 3px solid var(--pdf-pink); outline-offset: 5px; }
+.pdf-project .mobile-menu-icon, .pdf-project .mobile-menu-close { border: 0; background: transparent; }
+
 /* ================================================================
    layout.css — Header, Hero e seções de conteúdo
    Projeto: BASTA! Landing Page
@@ -1114,7 +1203,6 @@ footer {
     height: 100%;
 }
 .testimonial-card {
-    position: relative;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -1132,15 +1220,23 @@ footer {
     opacity: 0;
     pointer-events: none;
     transform: translate(-50%, -50%) translateX(0) scale(0.72);
-    transition: transform 0.52s cubic-bezier(0.22, 0.75, 0.25, 1), opacity 0.42s ease, filter 0.42s ease, box-shadow 0.42s ease;
+    transition:
+        transform 0.52s cubic-bezier(0.22, 0.75, 0.25, 1),
+        opacity 0.42s ease,
+        filter 0.42s ease,
+        box-shadow 0.42s ease;
 }
+
 .testimonial-card.is-active {
     z-index: 3;
     opacity: 1;
     pointer-events: auto;
     transform: translate(-50%, -50%) scale(1);
-    box-shadow: 0 28px 62px rgba(61,10,69,0.30), 0 0 0 1px rgba(255,255,255,0.18);
+    box-shadow:
+        0 28px 62px rgba(61,10,69,0.30),
+        0 0 0 1px rgba(255,255,255,0.18);
 }
+
 .testimonial-card.is-prev,
 .testimonial-card.is-next {
     z-index: 2;
@@ -1148,23 +1244,36 @@ footer {
     pointer-events: auto;
     filter: saturate(0.72);
 }
+
 .testimonial-card.is-prev {
-    transform: translate(-50%, -50%) translateX(calc(-1 * clamp(220px, 24vw, 325px))) scale(0.78);
+    transform: translate(-50%, -50%)
+        translateX(calc(-1 * clamp(220px, 24vw, 325px)))
+        scale(0.78);
 }
+
 .testimonial-card.is-next {
-    transform: translate(-50%, -50%) translateX(clamp(220px, 24vw, 325px)) scale(0.78);
+    transform: translate(-50%, -50%)
+        translateX(clamp(220px, 24vw, 325px))
+        scale(0.78);
 }
+
 .testimonial-card.is-hidden {
     z-index: 1;
     opacity: 0;
     transform: translate(-50%, -50%) scale(0.68);
 }
+
 .testimonial-card.is-active:hover,
 .testimonial-card.is-active:focus-visible {
     transform: translate(-50%, -50%) scale(1.02);
     box-shadow: 0 24px 48px rgba(91,26,110,0.28);
 }
-.testimonial-card:focus-visible { outline: 4px solid var(--gold); outline-offset: 4px; }
+
+.testimonial-card:focus-visible {
+    outline: 4px solid var(--gold);
+    outline-offset: 4px;
+}
+
 .testimonial-card::before {
     position: absolute;
     top: 7px;
@@ -1179,22 +1288,39 @@ footer {
     pointer-events: none;
     transform: translateX(-50%);
 }
-.testimonial-card > img {
+
+/* A mesma geometria serve tanto para os posters de "Detalhes do projeto"
+   quanto para os vídeos usados como capa em "Reportagens". */
+.testimonial-card > img,
+.testimonial-card > .testimonial-cover-video {
     position: absolute;
     inset: 0;
+    z-index: 0;
+    display: block;
     width: 100%;
     height: 100%;
     object-fit: cover;
     object-position: center top;
-    z-index: 0;
+    background: #1b071e;
     transform: scale(1.02);
 }
+
+.testimonial-card > .testimonial-cover-video {
+    pointer-events: none;
+}
+
 .testimonial-card-shade {
     position: absolute;
     inset: 0;
     z-index: 1;
-    background: linear-gradient(180deg, rgba(60,4,57,0.05) 28%, rgba(83,6,78,0.42) 58%, rgba(91,0,83,0.98) 100%);
+    background: linear-gradient(
+        180deg,
+        rgba(60,4,57,0.05) 28%,
+        rgba(83,6,78,0.42) 58%,
+        rgba(91,0,83,0.98) 100%
+    );
 }
+
 .testimonial-quote {
     position: absolute;
     top: 7%;

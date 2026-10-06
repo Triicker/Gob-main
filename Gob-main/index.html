@@ -673,7 +673,7 @@
                 <div class="testimonials-viewport" tabindex="0">
                     <div class="testimonials-track">
                         <button class="testimonial-card" type="button" data-video="https://midiasave-5c064.web.app/reportagem1.mp4" data-video-title="Reportagem 01" aria-label="Reproduzir reportagem 01">
-                            <img src="videos/poster1.jpg" alt="Capa do vídeo da reportagem 01" loading="lazy">
+                            <video class="testimonial-cover-video" src="https://midiasave-5c064.web.app/reportagem1.mp4" muted playsinline preload="metadata" aria-hidden="true"></video>
                             <span class="testimonial-card-shade" aria-hidden="true"></span>
                             <span class="testimonial-quote" data-i18n="testimonials.quote">“BASTA! na mídia”</span>
                             <span class="testimonial-play" aria-hidden="true"><i class="fas fa-play"></i></span>
@@ -685,7 +685,7 @@
                         </button>
 
                         <button class="testimonial-card" type="button" data-video="https://midiasave-5c064.web.app/reportagem2.mp4" data-video-title="Reportagem 02" aria-label="Reproduzir reportagem 02">
-                            <img src="videos/poster2.jpg" alt="Capa do vídeo da reportagem 02" loading="lazy">
+                            <video class="testimonial-cover-video" src="https://midiasave-5c064.web.app/reportagem2.mp4" muted playsinline preload="metadata" aria-hidden="true"></video>
                             <span class="testimonial-card-shade" aria-hidden="true"></span>
                             <span class="testimonial-quote" data-i18n="testimonials.quote">“BASTA! na mídia”</span>
                             <span class="testimonial-play" aria-hidden="true"><i class="fas fa-play"></i></span>
@@ -697,7 +697,7 @@
                         </button>
 
                         <button class="testimonial-card" type="button" data-video="https://midiasave-5c064.web.app/reportagem3.mp4" data-video-title="Reportagem 03" aria-label="Reproduzir reportagem 03">
-                            <img src="videos/poster3.jpg" alt="Capa do vídeo da reportagem 03" loading="lazy">
+                            <video class="testimonial-cover-video" src="https://midiasave-5c064.web.app/reportagem3.mp4" muted playsinline preload="metadata" aria-hidden="true"></video>
                             <span class="testimonial-card-shade" aria-hidden="true"></span>
                             <span class="testimonial-quote" data-i18n="testimonials.quote">“BASTA! na mídia”</span>
                             <span class="testimonial-play" aria-hidden="true"><i class="fas fa-play"></i></span>
@@ -709,7 +709,7 @@
                         </button>
 
                         <button class="testimonial-card" type="button" data-video="https://midiasave-5c064.web.app/reportagem4.mp4" data-video-title="Reportagem 04" aria-label="Reproduzir reportagem 04">
-                            <img src="videos/poster4.jpg" alt="Capa do vídeo da reportagem 04" loading="lazy">
+                            <video class="testimonial-cover-video" src="https://midiasave-5c064.web.app/reportagem4.mp4" muted playsinline preload="metadata" aria-hidden="true"></video>
                             <span class="testimonial-card-shade" aria-hidden="true"></span>
                             <span class="testimonial-quote" data-i18n="testimonials.quote">“BASTA! na mídia”</span>
                             <span class="testimonial-play" aria-hidden="true"><i class="fas fa-play"></i></span>
@@ -1312,15 +1312,21 @@
                 const posterNumber = ((videoNumber - 1) % 5) + 1;
                 const title = (isDetails ? 'Detalhe ' : 'Reportagem ') + number;
                 const quote = isDetails ? '“Por que este projeto existe”' : '“BASTA! na mídia”';
+                const videoUrl = 'https://midiasave-5c064.web.app/' + videoFilePrefix + videoNumber + '.mp4';
                 const card = document.createElement('button');
 
                 card.className = isDetails ? 'testimonial-card project-detail-card' : 'testimonial-card';
                 card.type = 'button';
-                card.dataset.video = 'https://midiasave-5c064.web.app/' + videoFilePrefix + videoNumber + '.mp4';
+                card.dataset.video = videoUrl;
                 card.dataset.videoTitle = title;
                 card.setAttribute('aria-label', 'Reproduzir ' + title.toLowerCase());
+
+                const coverMarkup = isDetails
+                    ? `<img src="videos/poster${posterNumber}.jpg" alt="Capa do vídeo de ${title.toLowerCase()}" loading="lazy">`
+                    : `<video class="testimonial-cover-video" src="${videoUrl}" muted playsinline preload="metadata" aria-hidden="true"></video>`;
+
                 card.innerHTML = `
-                    <img src="videos/poster${posterNumber}.jpg" alt="Capa do vídeo de ${title.toLowerCase()}" loading="lazy">
+                    ${coverMarkup}
                     <span class="testimonial-card-shade" aria-hidden="true"></span>
                     <span class="testimonial-quote"${isDetails ? '' : ' data-i18n="testimonials.quote"'}>${quote}</span>
                     <span class="testimonial-play" aria-hidden="true"><i class="fas fa-play"></i></span>
@@ -1333,6 +1339,47 @@
 
         appendAdditionalVideoCards('.project-details-carousel .testimonials-track', 'details');
         appendAdditionalVideoCards('#reportagens .testimonials-track', 'reports');
+
+        // Cada reportagem usa um frame do próprio MP4 como capa.
+        // Os posters poster1.jpg...poster5.jpg continuam exclusivos de
+        // "Detalhes do projeto".
+        function prepareReportCoverVideos() {
+            const coverVideos = document.querySelectorAll('#reportagens .testimonial-cover-video');
+
+            coverVideos.forEach((video) => {
+                const seekPreviewFrame = () => {
+                    const duration = Number.isFinite(video.duration) && video.duration > 0
+                        ? video.duration
+                        : 0;
+
+                    // Procura um frame inicial representativo sem ficar preso ao frame 0.
+                    const targetTime = duration > 0
+                        ? Math.min(2, Math.max(0.5, duration * 0.04))
+                        : 1;
+
+                    try {
+                        if (Math.abs(video.currentTime - targetTime) > 0.1) {
+                            video.currentTime = targetTime;
+                        }
+                    } catch (_) {
+                        // Alguns navegadores só permitem seek depois do metadata.
+                    }
+                };
+
+                if (video.readyState >= 1) {
+                    seekPreviewFrame();
+                } else {
+                    video.addEventListener('loadedmetadata', seekPreviewFrame, { once: true });
+                }
+
+                video.addEventListener('seeked', () => {
+                    video.pause();
+                    video.classList.add('is-preview-ready');
+                }, { once: true });
+            });
+        }
+
+        prepareReportCoverVideos();
 
         // ========== CARROSSEL DE REPORTAGENS ==========
         const testimonialsViewport = document.querySelector('#reportagens .testimonials-viewport');
