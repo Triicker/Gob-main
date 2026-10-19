@@ -1,138 +1,72 @@
 # BASTA! — Escolas Unidas contra a Violência Doméstica
 
-Landing page institucional do programa **BASTA!**, o maior ecossistema de educação, prevenção e formação contra violência doméstica do Brasil. O projeto atua em escolas com livros didáticos, aplicativo de segurança e formação especializada para profissionais da educação.
+Site institucional do programa **BASTA!**, ecossistema de educação, prevenção e formação contra a violência doméstica: livros didáticos, aplicativo de segurança e formação para profissionais da educação.
 
-🔗 **Site:** [basta.app.br](https://basta.app.br)
+- **Produção:** [basta.app.br](https://basta.app.br) — Cloudflare Worker `gob-main` (páginas estáticas + API dos formulários).
+- **Site irmão:** Instituto BASTA! (repositório `Triicker/instituto-basta`, Worker `instituto-basta`), com a mesma configuração de e-mail.
 
----
+## Páginas
 
-## 📋 Visão Geral
+| Arquivo | Conteúdo |
+|---|---|
+| `index.html` | Página principal; modal de solicitação de cronograma |
+| `projeto.html` | O projeto |
+| `embaixadoras.html` | Programa de embaixadoras |
+| `contato.html` | Fale conosco |
+| `distribuidor.html` | Cadastro de distribuidor (formulário em etapas) |
+| `mapas.html` / `mapasMobile.html` | Mapa de cobertura (computador / celular) |
+| `termos.html` | Termos de uso |
 
-| Recurso | Descrição |
-|---------|-----------|
-| **O Projeto** | Apresentação da coleção didática BASTA! para escolas |
-| **O Aplicativo** | App de segurança com botão de pânico e rede de apoio |
-| **Embaixadoras** | Programa de embaixadoras do movimento |
-| **Distribuidor** | Formulário multi-step para novos distribuidores |
-| **Contato** | Formulário de contato integrado ao WhatsApp |
-| **Cronograma** | Modal para solicitação de cronograma de atividades |
-| **Mapas** | Visualização geográfica de cobertura do programa |
-
----
-
-## 🗂️ Estrutura do Projeto
+## Estrutura
 
 ```
-├── index.html              # Página principal (landing page)
-├── contato.html             # Página de contato (Fale Conosco)
-├── distribuidor.html        # Formulário para distribuidores
-├── embaixadoras.html        # Programa de embaixadoras
-├── termos.html              # Termos de uso
-├── mapas.html               # Mapas (desktop)
-├── mapasMobile.html         # Mapas (mobile)
-├── render.yaml              # Blueprint de deploy no Render
-│
-├── css/
-│   ├── variables.css        # Variáveis CSS (cores, fontes, espaçamentos)
-│   ├── base.css             # Reset, tipografia e estilos globais
-│   ├── layout.css           # Grid, seções e estrutura de página
-│   ├── components.css       # Cards, modais, botões, formulários
-│   └── responsive.css       # Media queries e ajustes mobile/tablet
-│
-└── zap-backend/
-    ├── server.js            # API Express (proxy Z-API WhatsApp)
-    ├── package.json         # Dependências do backend
-    ├── .env.example         # Modelo de variáveis de ambiente
-    └── .gitignore           # Ignora node_modules e .env
+├── *.html                 páginas
+├── css/                   variables, base, layout, components, language-system, responsive
+├── js/                    scripts (inclui busca de municípios no IBGE)
+├── img/, videos/          imagens e pôsteres
+├── worker/index.js        Worker: entrega as páginas (binding ASSETS) e atende /api/*
+├── scripts/build-static.mjs   copia páginas, css, img, js e videos para dist/
+├── tests/                 teste do Worker (node:test) e testes de tela (Playwright)
+└── wrangler.jsonc         configuração do Worker gob-main
 ```
 
----
+## Formulários (Worker + Resend)
 
-## 🚀 Frontend
+O Worker atende só `/api/*` (`run_worker_first`); o resto vem dos arquivos estáticos em `dist/`. Cada envio é validado (tamanho, campos, UF, telefone, CNPJ) e enviado por e-mail pelo [Resend](https://resend.com), com o domínio `basta.app.br` verificado.
 
-Site estático em HTML, CSS e JavaScript vanilla. Todas as imagens são servidas localmente na pasta `img/`.
+| Método | Rota | Origem |
+|---|---|---|
+| `POST` | `/api/contact` | `contato.html` — Fale conosco |
+| `POST` | `/api/schedule` | `index.html` — solicitação de cronograma |
+| `POST` | `/api/distributor` | `distribuidor.html` — cadastro de distribuidor |
 
-### CSS Modular
+| Variável | Onde fica | Valor |
+|---|---|---|
+| `RESEND_FROM_EMAIL` | `wrangler.jsonc` (`vars`) | `Instituto BASTA <contato@basta.app.br>` |
+| `RESEND_TO_EMAIL` | `wrangler.jsonc` (`vars`) | caixa que recebe os contatos |
+| `RESEND_API_KEY` | segredo do Worker | nunca em arquivo; cadastrar com o comando abaixo |
 
-Os estilos estão organizados em 5 arquivos para manutenibilidade:
-
-- **variables.css** — Design tokens (cores, fontes, sombras)
-- **base.css** — Reset CSS, tipografia global, animações base
-- **layout.css** — Estrutura de seções (hero, projeto, aplicativo, etc.)
-- **components.css** — Componentes reutilizáveis (cards, modais, formulários, botão WhatsApp)
-- **responsive.css** — Breakpoints para mobile (≤768px) e tablet (≤1024px)
-
-### Funcionalidades do Frontend
-
-- Design responsivo (mobile-first)
-- Cards com animação de flip (clique no mobile, hover no desktop)
-- Botão flutuante de WhatsApp com animação de pulso
-- Modais de cronograma e feedback
-- Formulário multi-step para distribuidores (5 etapas)
-- Lazy loading de imagens
-- Integração com backend via `fetch` API
-
----
-
-## ⚙️ Formulários (Cloudflare Worker + Resend)
-
-Os formulários públicos são processados pelo Cloudflare Worker do mesmo domínio e enviados por e-mail pelo Resend.
-
-### Endpoints
-
-| Método | Rota | Descrição |
-|--------|------|-----------|
-| `POST` | `/api/contact` | Formulário "Fale Conosco" |
-| `POST` | `/api/schedule` | Solicitação de cronograma |
-| `POST` | `/api/distributor` | Cadastro de distribuidor |
-
-### Dependências
-
-- `express` — Servidor HTTP
-- `axios` — Requisições à Z-API
-- `cors` — Controle de origens
-- `dotenv` — Variáveis de ambiente
-- `express-rate-limit` — Limite de 10 envios/15min por IP
-
-### Rodando localmente
+## Rodar e publicar
 
 ```bash
-cd zap-backend
-cp .env.example .env
-# Preencha as variáveis no .env
 npm install
-npm start
+npm run dev              # wrangler dev (para testar formulários, crie .dev.vars a partir de .dev.vars.example)
+npm test                 # testes do Worker
+npm run test:e2e         # testes de tela (Playwright)
+npm run deploy:dry-run   # confere o pacote sem publicar
+npm run deploy           # build + publica o Worker gob-main
 ```
 
-### Variáveis de Ambiente
+Segredo do Resend (uma vez, ou ao trocar a chave):
 
-| Variável | Descrição |
-|----------|-----------|
-| `ZAPI_INSTANCE_ID` | ID da instância Z-API |
-| `ZAPI_INSTANCE_TOKEN` | Token da instância Z-API |
-| `ZAPI_CLIENT_TOKEN` | Token de cliente Z-API |
-| `ZAP_PHONE` | Número do WhatsApp destino (ex: `5571999999999`) |
-| `PORT` | Porta do servidor (padrão: `3001`) |
-| `ALLOWED_ORIGINS` | Origens permitidas pelo CORS (separadas por vírgula) |
+```bash
+npx wrangler secret put RESEND_API_KEY
+```
 
----
+## Legado
 
-## 🌐 Deploy (Render)
+`zap-backend/` (API Express + Z-API para WhatsApp) e `render.yaml` (Blueprint do Render) são da versão anterior. O site atual não chama esse backend: os formulários vão pelo Worker. Podem ser removidos quando não forem mais necessários como referência.
 
-O backend está configurado para deploy no [Render](https://render.com) via `render.yaml`:
-
-1. Conecte o repositório GitHub ao Render
-2. Use **Blueprint** ou crie um **Web Service** manualmente:
-   - **Root Directory:** `zap-backend`
-   - **Build Command:** `npm install`
-   - **Start Command:** `node server.js`
-3. Configure as **Environment Variables** no dashboard do Render (mesmas da tabela acima)
-4. Atualize `ALLOWED_ORIGINS` com o domínio do frontend em produção
-
-O frontend pode ser hospedado como **Static Site** no Render ou em qualquer hosting estático.
-
----
-
-## 📄 Licença
+## Licença
 
 Projeto proprietário — **BASTA! Educação**. Todos os direitos reservados.
